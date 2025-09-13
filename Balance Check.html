@@ -60,7 +60,7 @@
     <!-- Customer Login -->
     <div id="customerLogin" class="panel active">
       <div class="heading">🔑 Customer Login</div>
-      <input id="cAccount" placeholder="Account Number" required>
+      <input id="cAccount" placeholder="Account Number (e.g. SRC1234)" required>
       <input id="cPass" placeholder="Password (Last 4 digits)" required>
       <button id="cLoginBtn" onclick="customerLogin()">Check Account Balance</button>
     </div>
@@ -83,14 +83,33 @@
     <!-- Agent Panel -->
     <div id="agentPanel" class="panel">
       <div class="heading">💼 Agent Transaction</div>
-      <input id="aAccount" placeholder="Account Number" required>
+
+      <!-- Account Number with SRC prefix -->
+      <label for="aAccount">Account Number</label>
+      <div style="display:flex;align-items:center;">
+        <span style="padding:12px;background:#eee;border:1px solid #ccc;border-right:none;border-radius:10px 0 0 10px;font-weight:bold;">SRC</span>
+        <input id="aAccount" maxlength="4" pattern="[0-9]{4}" placeholder="Enter 4 digits" style="flex:1;border-radius:0 10px 10px 0;" required>
+      </div>
+
+      <!-- Amount -->
       <input id="aAmount" type="number" placeholder="Amount" required>
+
+      <!-- Transaction Type -->
       <select id="aType" required>
         <option value="">--Select Transaction--</option>
         <option value="credit">Credit</option>
         <option value="debit">Debit</option>
       </select>
-      <input id="aID" placeholder="Agent ID" required>
+
+      <!-- Agent ID Dropdown -->
+      <select id="aID" required>
+        <option value="">--Select Agent ID--</option>
+        <option value="SH7333">SH7333</option>
+        <option value="KA4564">KA4564</option>
+        <option value="UR4948">UR4948</option>
+        <option value="SRCCS1432">SRCCS1432</option>
+      </select>
+
       <button id="aSubmitBtn" onclick="saveTransaction()">Submit</button>
       <p id="msg" style="text-align:center;color:green;font-weight:600;"></p>
       <p><b>Provided by: Shree Radha Credit Co-operative Society Ltd.</b></p>
@@ -113,7 +132,7 @@
     }
 
     function customerLogin(){
-      let acc=document.getElementById("cAccount").value;
+      let acc=document.getElementById("cAccount").value.trim();
       let pass=document.getElementById("cPass").value;
       if(!acc||!pass){alert("⚠️ Please fill all fields!");return;}
       let btn=document.getElementById("cLoginBtn");
@@ -135,7 +154,7 @@
     }
 
     async function downloadStatement(){
-      let acc=document.getElementById("cAccount").value;
+      let acc=document.getElementById("cAccount").value.trim();
       let pass=document.getElementById("cPass").value;
       let btn=document.getElementById("downloadBtn");
       btn.disabled=true;btn.innerText="⏳ Please wait...";
@@ -171,14 +190,29 @@
     }
 
     function saveTransaction(){
-      let acc=document.getElementById("aAccount").value;
+      let accSuffix=document.getElementById("aAccount").value.trim();
       let amt=document.getElementById("aAmount").value;
       let type=document.getElementById("aType").value;
       let id=document.getElementById("aID").value;
-      if(!acc||!amt||!type||!id){alert("⚠️ Please fill all fields!");return;}
+
+      if(accSuffix.length!==4 || isNaN(accSuffix)){
+        alert("⚠️ कृपया 4 अंकों का Account Number डालें!");
+        return;
+      }
+      if(!amt||!type||!id){
+        alert("⚠️ Please fill all fields!");
+        return;
+      }
+
+      let acc="SRC"+accSuffix; // Final Account Number
+
       let btn=document.getElementById("aSubmitBtn");
       btn.disabled=true;btn.innerText="⏳ Saving...";
-      fetch(API_URL,{method:"POST",body:JSON.stringify({fn:"transaction",account:acc,amount:amt,type:type,agent:id})})
+
+      fetch(API_URL,{
+        method:"POST",
+        body:JSON.stringify({fn:"transaction",account:acc,amount:amt,type:type,agent:id})
+      })
       .then(res=>res.json())
       .then(data=>{
         document.getElementById("msg").innerText=data.message;
@@ -203,4 +237,3 @@
   </script>
 </body>
 </html>
-

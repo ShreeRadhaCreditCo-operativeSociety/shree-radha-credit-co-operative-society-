@@ -5,169 +5,94 @@
 <title>Shree Radha Credit Co-operative Society - Home</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Swiper CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-
 <style>
 :root{
   --maroon:#800000;
   --light:#a55252;
-  --gold:#ffcc00;
-  --paper:#fff;
-  --muted:#666;
 }
 body{
   margin:0;
-  font-family:Inter, Poppins, Arial, sans-serif;
-  background:linear-gradient(180deg,#fff,#fffaf2);
+  font-family:Poppins, Arial, sans-serif;
+  background:#fffdf8;
   color:#222;
-  overflow-x:hidden;
 }
 
-/* --- Ambient Glow --- */
-.ambient-light{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:-3;
-  background: radial-gradient(circle at center, rgba(255,245,200,0.05) 0%, transparent 70%);
-  animation:twinkle 3s infinite alternate;
+/* Header */
+header{
+  background:linear-gradient(90deg,var(--maroon),var(--light));
+  color:white;
+  padding:18px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
 }
-@keyframes twinkle{
-  0%{opacity:0.2;}
-  50%{opacity:0.35;}
-  100%{opacity:0.2;}
+.brand{display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+.logo{
+  width:70px;height:70px;
+  background:white;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--maroon);
+  font-weight:700;
+}
+.titles h1{margin:0;font-size:20px;}
+.titles p{margin:3px 0 0;font-size:13px;}
+
+/* Navigation */
+nav{
+  display:flex;
+  justify-content:center;
+  background:var(--maroon);
+  flex-wrap:wrap;
+}
+nav a{
+  color:white;
+  text-decoration:none;
+  padding:14px 20px;
+  display:block;
+  font-weight:500;
+}
+nav a:hover{
+  background:#b30000;
+  transition:0.3s;
 }
 
-/* --- Floating Diyas --- */
-.diya-bg{position:fixed;inset:0;z-index:-1;overflow:hidden;}
-.diya{
-  position:absolute;
-  bottom:-100px;
-  width:40px;height:40px;
-  background:url('https://cdn-icons-png.flaticon.com/512/992/992740.png') no-repeat center/contain;
-  animation:floatUp 12s linear infinite;
-  opacity:0.9;
-  filter: drop-shadow(0 0 18px #ffdd55);
+/* Main Container */
+.container{
+  max-width:1100px;
+  margin:30px auto;
+  padding:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
 }
-@keyframes floatUp{
-  0%{transform:translateY(0) rotate(0deg);}
-  100%{transform:translateY(-120vh) rotate(360deg);}
-}
-
-/* --- Fireworks / Sparkles --- */
-.light-effect{
-  position:fixed;inset:0;
-  pointer-events:none;
-  z-index:-2;
-}
-.sparkle{
-  position:absolute;
-  font-size:16px;
-  animation:fireworks 1.5s forwards;
-  opacity:0;
-}
-@keyframes fireworks{
-  0%{transform:scale(0.3) translate(0,0); opacity:1;}
-  50%{opacity:1;}
-  100%{transform:scale(1.8) translate(var(--x), var(--y)); opacity:0;}
-}
-
-/* --- Fataka Explosions --- */
-.fataka{
-  position:absolute;
-  width:4px;
-  height:4px;
-  border-radius:50%;
-  background:orange;
-  animation:explode 0.8s forwards;
-  pointer-events:none;
-}
-@keyframes explode{
-  0%{transform:translate(0,0) scale(1); opacity:1;}
-  100%{transform:translate(var(--fx), var(--fy)) scale(0.5); opacity:0;}
-}
-
-/* --- Top Header --- */
-header{background:linear-gradient(90deg,var(--maroon),var(--light));color:white;padding:18px 20px;display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;gap:16px;align-items:center}
-.logo{width:72px;height:72px;background:white;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--maroon);font-weight:700;box-shadow:0 0 20px rgba(255,200,0,0.5);}
-.titles{line-height:1}
-.titles h1{margin:0;font-size:20px}
-.titles p{margin:2px 0 0;font-size:13px;opacity:0.95}
-.actions{font-size:13px}
-nav{display:flex;justify-content:center;background:var(--maroon);flex-wrap:wrap}
-nav a{color:white;text-decoration:none;padding:14px 20px;display:block;font-weight:500}
-nav a:hover{background:#b30000;transition:0.3s}
-
-/* --- Container Cards --- */
-.container{max-width:1100px;margin:20px auto;padding:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
 .card{
   background:#fff;
   padding:20px;
-  border-radius:12px;
+  border-radius:10px;
   box-shadow:0 3px 6px rgba(128,0,0,0.15);
   text-align:center;
   transition:transform 0.2s,box-shadow 0.2s;
-  position:relative;
-  overflow:hidden;
 }
-.card:hover{transform:translateY(-5px);box-shadow:0 6px 12px rgba(128,0,0,0.25);}
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 6px 12px rgba(128,0,0,0.25);
+}
+.card h2{margin-top:0;font-size:18px;color:var(--maroon);}
+.card p{font-size:14px;color:#333;}
 
-/* --- Golden Shimmer Overlay on Cards --- */
-.card::before{
-  content:"";
-  position:absolute;
-  top:0; left:-75%;
-  width:50%; height:100%;
-  background:linear-gradient(120deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.2) 100%);
-  transform:skewX(-25deg);
-  animation:shimmer 2.5s infinite;
-  pointer-events:none;
+/* Footer */
+footer{
+  text-align:center;
+  padding:15px;
+  background:var(--light);
+  color:white;
+  margin-top:40px;
+  font-size:13px;
 }
-@keyframes shimmer{
-  0%{left:-75%;}
-  100%{left:125%;}
-}
-
-/* Card Text */
-.card h2{margin-top:0;font-size:18px;color:var(--maroon)}
-.card p{font-size:14px;color:#330000}
-
-/* --- Diwali Offer Slider --- */
-.offer-section{width:90%;max-width:900px;margin:20px auto;position:relative}
-.diwali-offer{
-  background:linear-gradient(135deg,#fff4d6,#ffeab8,#fff4d6);
-  border:3px solid #ffb300;border-radius:16px;
-  box-shadow:0 0 20px rgba(255,174,0,0.6);
-  padding:15px;text-align:center;
-  animation:glow 2s ease-in-out infinite alternate;
-  height:220px;display:flex;flex-direction:column;justify-content:center;
-  position:relative;
-  overflow:hidden;
-}
-.diwali-offer::before{
-  content:"";
-  position:absolute;
-  top:0; left:-100%;
-  width:50%; height:100%;
-  background:linear-gradient(120deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.2) 100%);
-  transform:skewX(-25deg);
-  animation:shimmer 3s infinite;
-  pointer-events:none;
-}
-@keyframes glow{
-  from{box-shadow:0 0 10px #ffd500;}
-  to{box-shadow:0 0 25px #ff8800;}
-}
-.diwali-offer h2{color:#b30000;font-size:18px;margin-bottom:6px;}
-.diwali-offer p{font-size:13px;line-height:1.4;color:#333;margin:2px 0;}
-.apply-btn{
-  background:#b30000;color:white;padding:6px 14px;border:none;border-radius:6px;cursor:pointer;font-weight:600;margin-top:6px;font-size:13px;align-self:center;
-}
-.apply-btn:hover{background:#ff6600;transform:scale(1.05);}
-
-footer{text-align:center;padding:15px;background:var(--light);color:white;margin-top:30px;font-size:13px}
 
 @media(max-width:720px){
   .brand{flex-direction:column;align-items:flex-start}
@@ -179,12 +104,6 @@ footer{text-align:center;padding:15px;background:var(--light);color:white;margin
 </head>
 <body>
 
-<!-- Diwali Effects -->
-<div class="ambient-light"></div>
-<div class="light-effect" id="light"></div>
-<div class="diya-bg" id="bg"></div>
-
-<!-- Header -->
 <header>
   <div class="brand">
     <div class="logo">SRCCS</div>
@@ -192,104 +111,84 @@ footer{text-align:center;padding:15px;background:var(--light);color:white;margin
       <h1>Shree Radha Credit Co-operative Society Ltd.</h1>
       <p>In front of Chatrawas, Gram Panchayat Gujri — Gujri (Dhamnod), Sub district Dharmapuri, District Dhar - 454552</p>
       <p style="font-size:12px;margin-top:6px;opacity:0.92">
-        Reg. No: DR/DHR/151716 · Phone: +91 83700 22176 · 
-        <span style="text-decoration:underline;">Customer Digital Portal</span>
+        Reg. No: DR/DHR/151716 · Phone: +91 83700 22176 · Customer Digital Portal
       </p>
     </div>
   </div>
-  <div class="actions muted">Home Page</div>
+  <div class="actions">Home Page</div>
 </header>
 
-<!-- Navigation -->
 <nav>
   <a href="Address.html">📍 Address</a>
   <a href="Contect.html">📞 Contact</a>
-  <a href="Daily intrest calulation.html">ℹ️ Dairy Intrest Calulation</a>
+  <a href="Daily intrest calulation.html">ℹ️ Daily Interest Calculation</a>
   <a href="Daity Loan.html">📔 Loan Details</a>
 </nav>
 
-<!-- Diwali Offers Slider -->
-<div class="offer-section swiper mySwiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide diwali-offer">
-      <h2>🪔 DIWALI ACCOUNT OPENING OFFER 2025</h2>
-      <p><b>Shree Radha Credit Co-operative Society Limited, Gujri</b></p>
-      <p>🎁 नया खाता खोलने पर ₹100 बोनस बैलेंस</p>
-      <p>🎉 ₹5000 या उससे अधिक जमा पर 0.5% अतिरिक्त ब्याज</p>
-      <p>🎯 Lucky Draw: हर 25 नए खातों में से 1 को स्पेशल गिफ्ट हेम्पर</p>
-      <p>📅 ऑफर वैध: 15 अक्टूबर – 15 नवम्बर 2025</p>
-      <button class="apply-btn" onclick="location.href='Online Account Opening.html'">Apply Now</button>
-    </div>
-    <div class="swiper-slide diwali-offer">
-      <h2>🪔 DIWALI LOAN UTSAV 2025</h2>
-      <p><b>Shree Radha Credit Co-operative Society Limited, Gujri</b></p>
-      <p>💰 Loan Processing Fees पर 50% की छूट</p>
-      <p>📉 ब्याज दर में 0.5% की कमी</p>
-      <p>🎯 समय पर EMI भरने वालों को बोनस रिवार्ड</p>
-      <p>🏠 गृह ऋण 🚜 कृषि ऋण 💼 व्यवसाय ऋण 🎓 शिक्षा ऋण</p>
-      <p>📅 ऑफर वैध: 15 अक्टूबर – 15 नवम्बर 2025</p>
-      <button class="apply-btn" onclick="location.href='Online Loan Apply.html'">Apply for Loan</button>
-    </div>
-  </div>
-  <div class="swiper-pagination"></div>
-</div>
-
-<!-- Service Cards -->
 <div class="container">
   <a href="Balance Check.html" style="text-decoration:none; color:inherit;">
     <div class="card">
-      <h2>💳 Balance Check/ Statement Download</h2>
-      <p>Check your account balance instantly/Download or view your account statement anytime.</p>
+      <h2>💳 Balance Check / Statement Download</h2>
+      <p>Check your account balance instantly or download your statement anytime.</p>
     </div>
   </a>
+
   <a href="Online Account Opening.html" style="text-decoration:none; color:inherit;">
     <div class="card">
       <h2>📂 Online Account Opening</h2>
       <p>Open a new account easily with SRCCS.</p>
     </div>
   </a>
+
   <a href="CLR_Terms_and_Conditions_Shree_Radha_Cooperative.html" style="text-decoration:none; color:inherit;">
     <div class="card">
-      <h2>📔 LOAN TERMS & CONDITIONS</h2>
-      <p>View your transactions in a smart digital passbook.</p>
+      <h2>📔 Loan Terms & Conditions</h2>
+      <p>View important loan details and guidelines.</p>
     </div>
   </a>
+
   <a href="loan.html" style="text-decoration:none; color:inherit;">
     <div class="card">
       <h2>🏦 Loan Services</h2>
       <p>Apply, track, and manage your loans online.</p>
     </div>
   </a>
+
   <a href="QR Code.html" style="text-decoration:none; color:inherit;">
     <div class="card">
       <h2>🔗 QR Code System</h2>
       <p>Generate QR with SRCCS logo for quick access.</p>
     </div>
   </a>
+
   <a href="Whatsapp Banking.html" style="text-decoration:none; color:inherit;">
     <div class="card">
       <h2>💬 WhatsApp Banking</h2>
       <p>Banking support at <b>+91 83700 22176</b>.</p>
     </div>
   </a>
+
   <a href="Fround Protection.html" style="text-decoration:none; color:inherit;">
     <div class="card">
       <h2>🛡️ Fraud Protection</h2>
-      <p>Stay safe from online cheating & fraud.</p>
+      <p>Stay safe from online fraud and scams.</p>
     </div>
   </a>
+
   <a href="Online Loan Apply.html" style="text-decoration:none; color:inherit;">
     <div class="card">
       <h2>📝 Online Loan Apply</h2>
-      <p>Submit your loan application online.</p>
+      <p>Submit your loan application easily online.</p>
     </div>
   </a>
+
   <a href="deposit.html" style="text-decoration:none; color:inherit;">
     <div class="card">
       <h2>💰 Deposit Request</h2>
       <p>Request deposits directly online.</p>
     </div>
   </a>
+
   <a href="withdraw.html" style="text-decoration:none; color:inherit;">
     <div class="card">
       <h2>🏧 Withdraw Request</h2>
@@ -302,64 +201,5 @@ footer{text-align:center;padding:15px;background:var(--light);color:white;margin
   © 2025 Shree Radha Credit Co-operative Society | Reg. No: DR/DHR/151716
 </footer>
 
-<!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-<script>
-  // --- Floating Diyas ---
-  const bg = document.getElementById('bg');
-  for(let i=0;i<20;i++){
-    let d=document.createElement('div');
-    d.className='diya';
-    d.style.left=Math.random()*100+'vw';
-    d.style.animationDuration=10+Math.random()*10+'s';
-    d.style.transform=`rotate(${Math.random()*360}deg)`;
-    bg.appendChild(d);
-  }
-
-  // --- Swiper Initialization ---
-  const swiper = new Swiper('.mySwiper', {
-    loop:true,
-    autoplay:{delay:4000, disableOnInteraction:false},
-    pagination:{el:'.swiper-pagination', clickable:true},
-  });
-
-  // --- Sparkles ---
-  const light = document.getElementById('light');
-  const emojis=['✨','🎇','🎆','💥','🌟'];
-  setInterval(()=>{
-    const count = Math.floor(Math.random()*3)+1;
-    for(let i=0;i<count;i++){
-      const span = document.createElement('div');
-      span.className='sparkle';
-      span.innerText=emojis[Math.floor(Math.random()*emojis.length)];
-      span.style.left=Math.random()*100+'vw';
-      span.style.top=Math.random()*50+'vh';
-      span.style.setProperty('--x',(Math.random()*150-75)+'px');
-      span.style.setProperty('--y',(Math.random()*150-75)+'px');
-      span.style.fontSize=(12+Math.random()*18)+'px';
-      light.appendChild(span);
-      setTimeout(()=>span.remove(),1500);
-    }
-  },200);
-
-  // --- Fataka / Firework Explosions ---
-  function createFataka(){
-    const count = Math.floor(Math.random()*15)+5;
-    for(let i=0;i<count;i++){
-      const f = document.createElement('div');
-      f.className='fataka';
-      f.style.left=Math.random()*100+'vw';
-      f.style.top=Math.random()*50+'vh';
-      const fx = (Math.random()*200-100)+'px';
-      const fy = (Math.random()*200-100)+'px';
-      f.style.setProperty('--fx',fx);
-      f.style.setProperty('--fy',fy);
-      f.style.background=['#ff0','#f90','#f00','#ff8800','#fff'][Math.floor(Math.random()*5)];
-      document.body.appendChild(f);
-      setTimeout(()=>f.remove(),800);
-    }
-  }
-  setInterval(createFataka,1500);
-</script>
 </body>
 </html>

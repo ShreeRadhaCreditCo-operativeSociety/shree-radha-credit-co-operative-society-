@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Loan Terms & Conditions — SRCCS</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<style>
+
+/* PRINT SETTINGS */
+@page { size: A4; margin: 12mm; }
+@media print {
+  body { background:white !important; }
+  .top-bar, .nav { display:none !important; }
+  .wrapper { 
+    width:100% !important; 
+    margin:0 !important; 
+    padding:0 !important; 
+    box-shadow:none !important;
+  }
+}
+
+/* THEME */
+:root{
+  --blue:#01baf2;
+  --dark:#002e6e;
+  --bg:#f4f6fb;
+  --white:#ffffff;
+  --muted:#666;
+  --ink:#111;
+  --radius:22px;
+  --shadow:0 12px 30px rgba(0,0,0,0.12);
+}
+
+/* BODY */
+body{
+  margin:0;
+  padding-bottom:80px;
+  background:var(--bg);
+  font-family:'Poppins',sans-serif;
+  display:flex;
+  justify-content:center;
+}
+
+/* APP WRAPPER */
+.app{
+  width:100%;
+  max-width:480px;
+}
+
+/* TOP BAR (Index style) */
+.top-bar{
+  display:flex;
+  align-items:center;
+  padding:16px;
+  gap:10px;
+}
+.logo{
+  width:34px;height:34px;
+  border-radius:50%;
+  background:#007bff;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  font-size:18px;
+  box-shadow:0 5px 14px rgba(0,0,0,0.20);
+}
+.top-text span:first-child{
+  font-size:14px;font-weight:600;color:var(--dark);
+}
+.top-text span:last-child{
+  font-size:11px;color:var(--muted);
+}
+
+/* PAPER WRAPPER */
+.wrapper{
+  background:white;
+  margin:12px 16px;
+  padding:22px;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  animation:fade .4s ease;
+}
+@keyframes fade{
+  from{opacity:0;transform:translateY(10px);}
+  to{opacity:1;}
+}
+
+/* HEADER */
+.paper-header{
+  text-align:center;
+  padding-bottom:10px;
+  margin-bottom:12px;
+  border-bottom:3px solid var(--blue);
+}
+.paper-header h1{
+  margin:0;
+  font-size:20px;
+  font-weight:800;
+  color:var(--dark);
+}
+.paper-header .sub{
+  font-size:12px;
+  color:var(--muted);
+}
+
+/* SECTION TITLES */
+h2{
+  font-size:16px;
+  margin:18px 0 8px;
+  border-left:4px solid var(--blue);
+  padding-left:8px;
+  color:var(--dark);
+}
+
+/* TEXT */
+p,li{
+  font-size:14px;
+  color:#222;
+  line-height:1.55;
+  margin:6px 0;
+  text-align:justify;
+}
+ol{ margin-left:20px; }
+
+/* SIGN AREA */
+.footer-row{
+  margin-top:30px;
+  display:flex;
+  justify-content:space-between;
+}
+.stamp{
+  width:160px;
+  height:70px;
+  border:2px dashed var(--dark);
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:rgba(1,186,242,0.08);
+  font-size:11px;
+  color:var(--dark);
+}
+.sign{text-align:right;}
+.sign .name{
+  font-size:14px;
+  font-weight:700;
+  color:var(--dark);
+}
+.sign .role{
+  font-size:12px;
+  color:var(--muted);
+}
+
+/* BOTTOM NAV — index style */
+.nav{
+  position:fixed;
+  bottom:8px;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:460px;
+  padding:0 12px;
+}
+.nav-inner{
+  background:white;
+  border-radius:18px;
+  box-shadow:0 5px 18px rgba(0,0,0,.25);
+  padding:8px;
+  display:flex;
+  justify-content:space-around;
+}
+.n-item{
+  font-size:11px;
+  color:var(--muted);
+  text-align:center;
+  cursor:pointer;
+}
+.n-item i{
+  font-size:14px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="logo">S</div>
+    <div class="top-text">
+      <span>Shree Radha Credit</span><br>
+      <span>Co-operative Society</span>
+    </div>
+  </div>
+
+  <!-- PAPER CARD -->
+  <div class="wrapper">
+
+    <div class="paper-header">
+      <h1>Loan Terms & Conditions</h1>
+      <div class="sub">Shree Radha Credit Co-operative Society Ltd.</div>
+    </div>
+
+    <!-- TERMS -->
+    <h2>Loan Rules / लोन नियम एवं शर्तें</h2>
+    <ol>
+      <li>सदस्य को कम से कम 3 माह नियमित बचत करनी आवश्यक है।</li>
+      <li>3 माह से पहले किसी सदस्य को ऋण नहीं दिया जाएगा।</li>
+      <li>लोन राशि अधिकतम जमा की <b>2 गुना (2X)</b> होगी।</li>
+      <li>किश्तें सदस्य के खाते से स्वतः कटेंगी।</li>
+      <li>ब्याज दर संस्था द्वारा निर्धारित होगी।</li>
+      <li>किश्त समय पर न भरने पर अतिरिक्त ब्याज लागू होगा।</li>
+      <li>पासबुक/डायरी में दर्ज जानकारी अंतिम मानी जाएगी।</li>
+      <li>अच्छा रिकॉर्ड होने पर ही ऋण स्वीकृत होगा।</li>
+      <li>लोन स्वीकृति का अंतिम निर्णय संस्था का होगा।</li>
+    </ol>
+
+    <h2>आवश्यक दस्तावेज़</h2>
+    <ol>
+      <li>लोन आवेदन पत्र।</li>
+      <li>तीन पासपोर्ट फोटो।</li>
+      <li>आधार कार्ड व पैन कार्ड।</li>
+      <li>दो सुरक्षा चेक।</li>
+      <li>स्टाम्प पेपर (नियम अनुसार)।</li>
+      <li>जमानतदार के फोटो + आधार कार्ड।</li>
+      <li>जमानतदार के दो चेक।</li>
+      <li>खाता संस्था में होना अनिवार्य।</li>
+      <li>लोन राशि जमा की <b>2X</b> सीमा से अधिक नहीं।</li>
+      <li>जमानतदार भी संस्था का सदस्य होना चाहिए।</li>
+      <li>जरूरत पड़ने पर अभिभावक की अनुमति।</li>
+      <li>लोन पूरा चुकाने से पहले जमा राशि नहीं मिलेगी।</li>
+      <li>6 माह बाद समायोजन संभव।</li>
+      <li>दैनिक जमा न भरने पर 6% अतिरिक्त ब्याज।</li>
+    </ol>
+
+    <!-- SIGN AREA -->
+    <div class="footer-row">
+      <div class="stamp">
+        ✓ Digitally Signed<br>
+        Date: 2025.09.15<br>
+        +05:30
+      </div>
+      <div class="sign">
+        <div class="name">Dharmendra Prajapat</div>
+        <div class="role">प्रबंधक / Manager</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="n-item" onclick="go('index.html')">
+        <i class="fa-solid fa-house"></i><br>Home
+      </div>
+      <div class="n-item" onclick="go('fund.html')">
+        <i class="fa-solid fa-chart-line"></i><br>Fund
+      </div>
+      <div class="n-item" onclick="go('others.html')">
+        <i class="fa-solid fa-grid-2"></i><br>Others
+      </div>
+      <div class="n-item" onclick="go('profile.html')">
+        <i class="fa-solid fa-user"></i><br>Profile
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function go(p){ window.location.href=p; }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CLR-166 Terms — SRCCS</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" 
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<style>
+
+/* PRINT MODE */
+@page { size: A4; margin: 12mm; }
+@media print {
+  body { background:#fff !important; }
+  .wrapper{
+    box-shadow:none !important;
+    max-width:100% !important;
+    border-radius:0 !important;
+    margin:0 !important;
+  }
+  .top, .nav{ display:none !important; }
+}
+
+/* THEME */
+:root{
+  --blue:#01baf2;
+  --dark:#002e6e;
+  --bg:#f4f6fb;
+  --white:#ffffff;
+  --text:#111;
+  --soft:#6b7280;
+  --radius-lg:22px;
+  --shadow-soft:0 12px 30px rgba(0,0,0,0.12);
+}
+
+/* BODY */
+body{
+  background:var(--bg);
+  margin:0;
+  padding-bottom:100px;
+  font-family:'Poppins',sans-serif;
+  display:flex;
+  justify-content:center;
+}
+
+/* MAIN APP */
+.app{
+  width:100%;
+  max-width:460px;
+}
+
+/* TOP HEADER (index style) */
+.top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.logo{
+  width:34px;height:34px;
+  border-radius:50%;
+  background:#007bff;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  box-shadow:0 6px 16px rgba(0,0,0,0.20);
+}
+.head span:first-child{
+  font-size:14px;font-weight:600;color:var(--dark);
+}
+.head span:last-child{
+  font-size:11px;color:var(--soft);
+}
+
+/* WRAPPER (card like A4) */
+.wrapper{
+  background:var(--white);
+  margin:10px 16px 20px;
+  padding:22px 18px;
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-soft);
+  animation:fade .4s ease;
+}
+@keyframes fade{
+  from{opacity:0; transform:translateY(10px);}
+  to{opacity:1;}
+}
+
+/* HEADER BADGE */
+.badge{
+  border:2px solid #7a0026;
+  color:#7a0026;
+  font-size:12px;
+  padding:6px 10px;
+  border-radius:8px;
+  font-weight:700;
+  display:inline-block;
+  margin-bottom:12px;
+}
+
+/* TEXT */
+p{
+  margin:8px 0;
+  font-size:14px;
+  color:var(--text);
+  text-align:justify;
+  line-height:1.55;
+}
+strong{color:#111;font-weight:700;}
+
+/* Bottom Navigation */
+.nav{
+  position:fixed;
+  bottom:8px;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:460px;
+  padding:0 12px;
+}
+.nav-inner{
+  background:white;
+  border-radius:18px;
+  padding:8px;
+  display:flex;
+  justify-content:space-around;
+  box-shadow:0 5px 18px rgba(0,0,0,.25);
+}
+.n-item{
+  text-align:center;
+  font-size:11px;
+  color:var(--soft);
+  cursor:pointer;
+}
+.n-item i{font-size:14px;}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- TOP HEADER -->
+  <div class="top">
+    <div class="brand">
+      <div class="logo">S</div>
+      <div class="head">
+        <span>Shree Radha Credit</span>
+        <span>Co-operative Society</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE CONTENT -->
+  <div class="wrapper">
+
+    <span class="badge">CLR-166 — TERMS</span>
+
+    <p><strong>Customer Loan Registration 166 (CLR-166) Terms & Conditions</strong></p>
+    <p><strong>ग्राहक लोन रजिस्ट्रेशन 166 (सीएलआर-166) नियम और शर्तें</strong></p>
+    <p>प्रभावी तिथि / Effective Date: __________________</p>
+
+    <p>यह CLR-166 दस्तावेज़ ग्राहक और
+      <strong>Shree Radha Credit Co-operative Society</strong> (“सोसाइटी”)
+      के बीच Loan Registration प्रक्रिया के सभी नियम बताता है।
+      ₹166 शुल्क जमा करते ही आप नीचे दिए गए नियम स्वीकार करते हैं।</p>
+
+    <p><strong>1. पंजीकरण शुल्क (₹166) – Non-Refundable</strong><br>
+    यह शुल्क CIBIL Check, Eligibility Check और Document Review के लिए है। यह राशि वापस नहीं होगी।</p>
+
+    <p><strong>2. सोसाइटी की भूमिका</strong><br>
+    सोसाइटी Loan Facilitator है, Loan Provider नहीं।
+    Loan Approval बैंक/एनबीएफसी तय करते हैं।</p>
+
+    <p><strong>3. पात्रता</strong><br>
+    CIBIL सामान्यतः 700+ अपेक्षित। अन्य active loan या overdue होने पर आवेदन अस्वीकृत हो सकता है।</p>
+
+    <p><strong>4. दस्तावेज़ आवश्यक</strong><br>
+    Aadhaar, PAN, 6-month Bank Statement, Income Proof, Photo आदि।</p>
+
+    <p><strong>5. शुल्क वापसी नहीं</strong><br>
+    ₹166 किसी भी स्थिति में refundable नहीं है।</p>
+
+    <p><strong>6. कोई गारंटी नहीं</strong><br>
+    Loan Approval, Amount, EMI, Disbursement— इनकी कोई गारंटी नहीं।</p>
+
+    <p><strong>7. डेटा गोपनीयता</strong><br>
+    ग्राहक द्वारा दिए गए सभी दस्तावेज़ गोपनीय रखे जाते हैं।</p>
+
+    <p><strong>8. ग्राहक की जिम्मेदारी</strong><br>
+    सभी जानकारी सही होना अनिवार्य।</p>
+
+    <p><strong>9. विवाद निवारण</strong><br>
+    विवाद होने पर पहले मध्यस्थता, फिर धार जिला न्यायालय।</p>
+
+    <p><strong>10. सहमति</strong><br>
+    ₹166 जमा करते ही ग्राहक सभी नियम पढ़कर सहमति देता है।</p>
+
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="n-item" onclick="go('index.html')">
+        <i class="fa-solid fa-house"></i><br>Home
+      </div>
+      <div class="n-item" onclick="go('fund.html')">
+        <i class="fa-solid fa-chart-line"></i><br>Fund
+      </div>
+      <div class="n-item" onclick="go('others.html')">
+        <i class="fa-solid fa-grid-2"></i><br>Others
+      </div>
+      <div class="n-item" onclick="go('profile.html')">
+        <i class="fa-solid fa-user"></i><br>Profile
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function go(p){ window.location.href = p; }
+</script>
+
+</body>
+</html>

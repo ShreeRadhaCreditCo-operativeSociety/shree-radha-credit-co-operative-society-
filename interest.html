@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interest Calculator - SRCCS</title>
+
+  <!-- FONT + ICONS -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+  <style>
+    :root{
+      --paytm-blue:#01baf2;
+      --paytm-dark:#002e6e;
+      --bg:#f4f6fb;
+      --card:#ffffff;
+      --radius-lg:20px;
+      --shadow-soft:0 12px 28px rgba(0,0,0,0.12);
+      --text-soft:#6b7280;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:'Poppins',sans-serif;
+      background:var(--bg);
+      display:flex;
+      justify-content:center;
+      color:#222;
+      padding-bottom:90px;
+    }
+
+    .app{
+      width:100%;
+      max-width:460px;
+      min-height:100vh;
+      background:var(--bg);
+    }
+
+    /* TOP BAR */
+    .top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:16px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .logo{
+      width:34px;height:34px;
+      border-radius:50%;
+      background:#007bff;
+      display:flex;align-items:center;justify-content:center;
+      color:white;font-weight:700;
+      box-shadow:0 5px 14px rgba(0,0,0,.20);
+    }
+
+    .head span:first-child{
+      font-size:14px;
+      font-weight:600;
+      color:var(--paytm-dark);
+    }
+    .head span:last-child{
+      font-size:11px;
+      color:var(--text-soft);
+    }
+
+    /* MAIN CALC CARD */
+    .container{
+      margin:18px;
+      padding:22px;
+      background:var(--card);
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-soft);
+      animation:fadeIn .4s ease;
+      text-align:center;
+    }
+
+    @keyframes fadeIn{
+      from{opacity:0; transform:translateY(10px);}
+      to{opacity:1; transform:translateY(0);}
+    }
+
+    h2{
+      font-size:18px;
+      font-weight:700;
+      color:var(--paytm-dark);
+      margin-bottom:16px;
+    }
+
+    label{
+      margin-top:14px;
+      font-size:14px;
+      font-weight:600;
+      display:block;
+      text-align:left;
+      color:#333;
+    }
+
+    input{
+      width:100%;
+      padding:12px;
+      margin-top:6px;
+      border-radius:14px;
+      border:1px solid #d8d8d8;
+      background:#f8f9ff;
+      font-size:15px;
+      transition:0.25s ease;
+    }
+
+    input:focus{
+      border-color:var(--paytm-blue);
+      box-shadow:0 0 0 3px rgba(1,186,242,0.25);
+      background:white;
+      outline:none;
+    }
+
+    button{
+      margin-top:22px;
+      width:100%;
+      background:var(--paytm-blue);
+      color:white;
+      padding:14px;
+      border:none;
+      border-radius:14px;
+      font-size:16px;
+      font-weight:600;
+      cursor:pointer;
+      box-shadow:0 6px 16px rgba(1,186,242,0.28);
+    }
+
+    button:hover{
+      background:#009cd4;
+      transform:translateY(-2px);
+    }
+
+    .result{
+      margin-top:16px;
+      font-size:17px;
+      font-weight:600;
+      color:#333;
+      line-height:1.6;
+    }
+
+    /* BOTTOM NAV */
+    .nav{
+      position:fixed;
+      bottom:8px;
+      left:50%;
+      transform:translateX(-50%);
+      width:100%;
+      max-width:460px;
+      padding:0 12px;
+    }
+
+    .nav-inner{
+      background:white;
+      border-radius:18px;
+      padding:8px;
+      display:flex;
+      justify-content:space-around;
+      box-shadow:0 5px 18px rgba(0,0,0,.25);
+    }
+
+    .n-item{
+      text-align:center;
+      font-size:11px;
+      color:var(--text-soft);
+      cursor:pointer;
+    }
+
+    .n-item i{
+      font-size:14px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- TOP BAR -->
+  <div class="top">
+    <div class="brand">
+      <div class="logo">S</div>
+      <div class="head">
+        <span>Shree Radha Credit</span>
+        <span>Co-operative Society</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CALCULATOR CARD -->
+  <div class="container">
+    <h2>Daily Collection Interest Calculator</h2>
+
+    <label>Daily Deposit (₹):</label>
+    <input type="number" id="daily" value="100">
+
+    <label>Number of Days:</label>
+    <input type="number" id="days" value="365">
+
+    <label>Annual Interest Rate (%):</label>
+    <input type="number" id="rate" value="6">
+
+    <button onclick="calculate()">Calculate</button>
+
+    <div class="result" id="output"></div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="nav">
+    <div class="nav-inner">
+
+      <div class="n-item" onclick="openLink('fund.html')">
+        <i class="fa-solid fa-chart-line"></i><br>Fund
+      </div>
+
+      <div class="n-item" onclick="openLink('loandetails.html')">
+        <i class="fa-solid fa-file-invoice"></i><br>Loan
+      </div>
+
+      <div class="n-item" onclick="openLink('others.html')">
+        <i class="fa-solid fa-grid-2"></i><br>Others
+      </div>
+
+      <div class="n-item" onclick="openLink('profile.html')">
+        <i class="fa-solid fa-user"></i><br>Profile
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+function openLink(u){ window.location.href=u; }
+
+function calculate(){
+  let daily = parseFloat(document.getElementById("daily").value);
+  let days = parseInt(document.getElementById("days").value);
+  let rate = parseFloat(document.getElementById("rate").value);
+
+  let totalDeposit = daily * days;
+  let interest = 0;
+
+  for(let i = 1; i <= days; i++){
+    interest += daily * ((days - i + 1) / 365) * (rate / 100);
+  }
+
+  let maturity = totalDeposit + interest;
+
+  document.getElementById("output").innerHTML = `
+    कुल जमा: ₹${totalDeposit.toFixed(2)} <br>
+    कुल ब्याज: ₹${interest.toFixed(2)} <br>
+    अंतिम राशि: ₹${maturity.toFixed(2)}
+  `;
+}
+</script>
+
+</body>
+</html>

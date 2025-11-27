@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SRCCS QR Code</title>
+
+  <!-- FONT + ICONS -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+  <style>
+    :root{
+      --paytm-blue:#01baf2;
+      --paytm-dark:#002e6e;
+      --bg:#f4f6fb;
+      --white:#ffffff;
+      --radius-lg:20px;
+      --shadow-soft:0 12px 28px rgba(0,0,0,0.12);
+      --qr-bg:#f0f5ff;
+      --text-soft:#6b7280;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;}
+
+    body{
+      background:var(--bg);
+      font-family:'Poppins',sans-serif;
+      display:flex;
+      justify-content:center;
+      padding-bottom:90px;
+    }
+
+    .app{
+      width:100%;
+      max-width:460px;
+      min-height:100vh;
+      background:var(--bg);
+    }
+
+    /* TOP HEADER */
+    .top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:16px;
+    }
+    .brand{
+      display:flex;align-items:center;gap:10px;
+    }
+    .logo{
+      width:34px;height:34px;border-radius:50%;
+      background:#007bff;color:white;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;
+      box-shadow:0 5px 14px rgba(0,0,0,0.20);
+    }
+    .head span:first-child{
+      font-size:14px;font-weight:600;color:var(--paytm-dark);
+    }
+    .head span:last-child{
+      font-size:11px;color:var(--text-soft);
+    }
+
+    /* CARD */
+    .container{
+      margin:16px;
+      padding:26px;
+      background:var(--white);
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-soft);
+      text-align:center;
+      animation:fadeIn .4s ease;
+    }
+
+    @keyframes fadeIn{
+      from{opacity:0; transform:translateY(10px);}
+      to{opacity:1; transform:translateY(0);}
+    }
+
+    h2{
+      font-size:20px;
+      font-weight:700;
+      color:var(--paytm-dark);
+      margin-bottom:12px;
+    }
+
+    #qrcode-box{
+      display:inline-block;
+      padding:16px;
+      border-radius:18px;
+      background:var(--qr-bg);
+      box-shadow:0 6px 16px rgba(0,0,0,0.10);
+      margin-top:16px;
+      position:relative;
+    }
+
+    #centerText{
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%, -50%);
+      font-weight:700;
+      font-size:18px;
+      color:var(--paytm-dark);
+      background:white;
+      padding:4px 10px;
+      border-radius:6px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.15);
+      pointer-events:none;
+    }
+
+    /* BOTTOM NAV */
+    .nav{
+      position:fixed;
+      bottom:8px;
+      left:50%;
+      transform:translateX(-50%);
+      width:100%;
+      max-width:460px;
+      padding:0 12px;
+    }
+
+    .nav-inner{
+      background:white;
+      border-radius:18px;
+      padding:8px;
+      display:flex;
+      justify-content:space-around;
+      box-shadow:0 5px 18px rgba(0,0,0,.25);
+    }
+
+    .n-item{
+      text-align:center;
+      font-size:11px;
+      color:var(--text-soft);
+      cursor:pointer;
+    }
+    .n-item i{ font-size:14px; }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- TOP BAR -->
+  <div class="top">
+    <div class="brand">
+      <div class="logo">S</div>
+      <div class="head">
+        <span>Shree Radha Credit</span>
+        <span>Co-operative Society</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- QR CARD -->
+  <div class="container">
+    <h2>SRCCS QR Code</h2>
+
+    <div id="qrcode-box">
+      <div id="qrcode"></div>
+      <div id="centerText">SRCCS</div>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="nav">
+    <div class="nav-inner">
+
+      <div class="n-item" onclick="openLink('fund.html')">
+        <i class="fa-solid fa-chart-line"></i><br>Fund
+      </div>
+
+      <div class="n-item" onclick="openLink('loandetails.html')">
+        <i class="fa-solid fa-file-invoice"></i><br>Loan
+      </div>
+
+      <div class="n-item" onclick="openLink('others.html')">
+        <i class="fa-solid fa-grid-2"></i><br>Others
+      </div>
+
+      <div class="n-item" onclick="openLink('profile.html')">
+        <i class="fa-solid fa-user"></i><br>Profile
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- QR Code Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+function openLink(url){ window.location.href = url; }
+
+new QRCode(document.getElementById("qrcode"), {
+  text: "https://shreeradhacreditco-operativesociety.github.io/shree-radha-credit-co-operative-society-/",
+  width: 200,
+  height: 200,
+  colorDark: "#000",
+  colorLight: "#fff",
+  correctLevel: QRCode.CorrectLevel.H,
+});
+</script>
+
+</body>
+</html>

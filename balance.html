@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Digital Portal - SRCCS</title>
+
+  <!-- FONTS & ICONS -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+  <style>
+    :root{
+      --paytm-blue:#01baf2;
+      --paytm-dark:#002e6e;
+      --bg:#f4f6fb;
+      --card:#ffffff;
+      --text-main:#111827;
+      --text-soft:#6b7280;
+      --radius-xl:22px;
+      --shadow-soft:0 12px 30px rgba(15,118,255,0.10);
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;}
+
+    body{
+      background:var(--bg);
+      font-family:'Poppins',sans-serif;
+      display:flex;
+      justify-content:center;
+      padding-bottom:90px;
+    }
+
+    .app{
+      width:100%;
+      max-width:480px;
+      background:linear-gradient(180deg,#e9f6ff 0%,#f6f7fb 30%,#f4f6fb 100%);
+      min-height:100vh;
+      position:relative;
+    }
+
+    /* TOP BAR (index style) */
+    .top-bar{
+      padding:16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .logo{
+      width:34px;height:34px;
+      border-radius:50%;
+      background:#007bff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-weight:700;
+      box-shadow:0 5px 14px rgba(0,0,0,0.20);
+    }
+    .head span:first-child{
+      font-size:14px;
+      font-weight:600;
+      color:var(--paytm-dark);
+    }
+    .head span:last-child{
+      font-size:11px;
+      color:var(--text-soft);
+    }
+    .welcome-pill{
+      margin-top:4px;
+      font-size:11px;
+      padding:4px 10px;
+      background:rgba(1,186,242,0.10);
+      border-radius:999px;
+      color:var(--paytm-dark);
+      display:inline-block;
+    }
+    .agent-btn{
+      width:40px;height:40px;
+      display:flex;align-items:center;justify-content:center;
+      background:white;border-radius:12px;
+      font-size:18px;color:var(--paytm-blue);
+      box-shadow:0 8px 20px rgba(0,0,0,0.15);
+      cursor:pointer;
+    }
+
+    /* PANELS (cards) */
+    .panel{
+      display:none;
+      margin:0 18px 18px;
+      padding:18px 16px 20px;
+      background:var(--card);
+      border-radius:var(--radius-xl);
+      box-shadow:var(--shadow-soft);
+      animation:fadeIn .4s ease;
+    }
+    .panel.active{display:block;}
+
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(20px);}
+      to{opacity:1;transform:translateY(0);}
+    }
+
+    .heading{
+      font-size:16px;
+      font-weight:600;
+      color:var(--paytm-dark);
+      margin-bottom:8px;
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+    .sub-info{
+      font-size:11px;
+      color:var(--text-soft);
+      margin-bottom:8px;
+    }
+
+    label{
+      font-size:12px;
+      color:var(--text-soft);
+      margin-top:8px;
+      display:block;
+    }
+
+    input,select{
+      width:100%;
+      padding:11px 12px;
+      border:1px solid #d1d5db;
+      border-radius:12px;
+      margin-top:4px;
+      font-size:14px;
+      outline:none;
+      background:#f9fafb;
+      transition:.2s;
+    }
+    input:focus,select:focus{
+      border-color:var(--paytm-blue);
+      box-shadow:0 0 0 2px rgba(1,186,242,0.20);
+      background:#fff;
+    }
+
+    button{
+      width:100%;
+      padding:13px;
+      margin-top:14px;
+      background:var(--paytm-blue);
+      border:none;
+      border-radius:12px;
+      color:#fff;
+      font-size:15px;
+      font-weight:600;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      box-shadow:0 6px 16px rgba(1,186,242,0.28);
+      transition:.2s;
+    }
+    button:hover{
+      transform:translateY(-1px);
+      background:#009cd4;
+    }
+    button:disabled{
+      opacity:0.85;
+      cursor:not-allowed;
+      transform:none;
+      box-shadow:none;
+    }
+
+    #balance{
+      text-align:center;
+      font-size:20px;
+      color:var(--paytm-dark);
+      font-weight:600;
+      margin:10px 0 12px;
+    }
+
+    footer{
+      text-align:center;
+      font-size:11px;
+      color:var(--text-soft);
+      margin:20px 0 70px;
+    }
+
+    /* Loader overlay */
+    .loader-overlay{
+      position:fixed;
+      top:0;left:0;
+      width:100%;height:100%;
+      background:rgba(15,23,42,0.10);
+      backdrop-filter:blur(2px);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:999;
+    }
+    .loader-overlay.show{display:flex;}
+    .loader-circle{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      border:4px solid rgba(1,186,242,0.25);
+      border-top-color:var(--paytm-blue);
+      animation:spin 0.9s linear infinite;
+    }
+    @keyframes spin{
+      to{transform:rotate(360deg);}
+    }
+
+    /* Statement success badge */
+    .status-badge{
+      display:none;
+      align-items:center;
+      gap:6px;
+      background:rgba(16,185,129,0.10);
+      color:#047857;
+      padding:7px 12px;
+      border-radius:999px;
+      font-size:11px;
+      margin-bottom:10px;
+    }
+    .status-badge i{font-size:14px;}
+
+    /* Password wrapper */
+    .pass-wrap{
+      position:relative;
+      margin-top:4px;
+    }
+    .pass-wrap i{
+      position:absolute;
+      right:12px;
+      top:50%;
+      transform:translateY(-50%);
+      color:var(--text-soft);
+      cursor:pointer;
+      font-size:14px;
+    }
+
+    /* Agent history items */
+    .h-item{
+      background:#f9fafb;
+      padding:10px;
+      border-radius:12px;
+      margin-bottom:8px;
+      border-left:4px solid var(--paytm-blue);
+      font-size:13px;
+    }
+
+    /* Bottom NAV */
+    .nav{
+      position:fixed;
+      bottom:8px;
+      left:50%;
+      transform:translateX(-50%);
+      width:100%;
+      max-width:480px;
+      padding:0 12px;
+      z-index:50;
+    }
+    .nav-inner{
+      background:#fff;
+      border-radius:18px;
+      padding:8px;
+      display:flex;
+      justify-content:space-around;
+      box-shadow:0 5px 18px rgba(0,0,0,.25);
+    }
+    .n-item{
+      text-align:center;
+      font-size:11px;
+      color:var(--text-soft);
+      cursor:pointer;
+    }
+    .n-item i{font-size:14px;}
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="brand">
+      <div class="logo">S</div>
+      <div class="head">
+        <span>Shree Radha Credit</span>
+        <span>Co-operative Society</span>
+        <span class="welcome-pill">✨ Shree Radha Digital सेवा में आपका स्वागत 🙏</span>
+      </div>
+    </div>
+
+    <div class="agent-btn" onclick="showPanel('agentLogin')">
+      <i class="fa-solid fa-shield-halved"></i>
+    </div>
+  </div>
+
+  <!-- CUSTOMER LOGIN PANEL -->
+  <div id="customerLogin" class="panel active">
+    <div class="heading">
+      <i class="fa-solid fa-user"></i>
+      Customer Login
+    </div>
+    <p class="sub-info">अपना खाता नम्बर और 4 अंकों का पासवर्ड डालकर बैलेंस देखें।</p>
+
+    <label>Account Number</label>
+    <input id="cAccount" placeholder="उदा. SRC1234">
+
+    <label>Password (Last 4 digits)</label>
+    <input id="cPass"
+           type="number"
+           maxlength="4"
+           oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,4)"
+           placeholder="4 digit password">
+
+    <button id="cLoginBtn" onclick="customerLogin()">
+      <span>Check Account Balance</span>
+    </button>
+  </div>
+
+  <!-- CUSTOMER ACCOUNT PANEL -->
+  <div id="customerPanel" class="panel">
+    <div class="heading">
+      <i class="fa-solid fa-wallet"></i>
+      Your Account
+    </div>
+    <p class="sub-info">आपका बैलेंस और पूरा स्टेटमेंट यहाँ से डाउनलोड करें।</p>
+
+    <div id="statementStatus" class="status-badge">
+      <i class="fa-solid fa-circle-check"></i>
+      <span>Statement Successful</span>
+    </div>
+
+    <p id="balance">Balance: ₹0</p>
+
+    <button id="downloadBtn" onclick="downloadStatement()">
+      <i class="fa-solid fa-file-arrow-down"></i>
+      <span>Download Statement</span>
+    </button>
+  </div>
+
+  <!-- AGENT LOGIN PANEL -->
+  <div id="agentLogin" class="panel">
+    <div class="heading">
+      <i class="fa-solid fa-lock"></i>
+      Agent Security
+    </div>
+    <p class="sub-info">केवल अधिकृत एजेंट ही यहाँ से कलेक्शन एंट्री कर सकते हैं।</p>
+
+    <label>Security Code</label>
+    <div class="pass-wrap">
+      <input id="aCode" type="password" placeholder="Enter Security Code (****)">
+      <i class="fa-solid fa-eye" id="toggleEye" onclick="togglePassword()"></i>
+    </div>
+
+    <button id="aLoginBtn" onclick="agentAuth()">Continue</button>
+  </div>
+
+  <!-- AGENT TRANSACTION PANEL -->
+  <div id="agentPanel" class="panel">
+    <div class="heading">
+      <i class="fa-solid fa-briefcase"></i>
+      Agent Transaction
+    </div>
+    <p class="sub-info">आज का कलेक्शन, खाता नम्बर और एजेंट ID के साथ जमा करें।</p>
+
+    <label>Account Number</label>
+    <div style="display:flex;margin-top:4px;">
+      <span style="padding:11px 10px;background:#e5e7eb;border-radius:12px 0 0 12px;border:1px solid #d1d5db;border-right:none;font-size:13px;">SRC</span>
+      <input id="aAccount" maxlength="4" placeholder="1234" style="border-radius:0 12px 12px 0;">
+    </div>
+
+    <label>Amount (₹)</label>
+    <input id="aAmount" type="number" placeholder="Amount">
+
+    <label>Type</label>
+    <select id="aType">
+      <option value="credit">Credit</option>
+    </select>
+
+    <label>Agent ID</label>
+    <select id="aID">
+      <option value="">Select Agent</option>
+      <option>SH7333</option>
+      <option>KA4564</option>
+      <option>JE2659</option>
+      <option>SRCCS1432</option>
+    </select>
+
+    <button id="aSubmitBtn" onclick="saveTransaction()">Submit</button>
+
+    <p id="msg" style="text-align:center;color:green;font-size:13px;margin-top:6px;"></p>
+
+    <p id="todayTotal"
+       style="text-align:center;font-weight:600;margin-top:10px;color:#002e6e;">
+       Today Total: ₹0
+    </p>
+
+    <div id="todayHistory"
+         style="background:white;padding:12px;border-radius:15px;margin-top:6px;
+                box-shadow:0 4px 15px rgba(0,0,0,0.08);font-size:13px;">
+    </div>
+  </div>
+
+  <footer>
+    © 2025 Shree Radha Credit Co-operative Society | Reg. No: DR/DHR/151716
+  </footer>
+
+  <!-- Bottom NAV (same style as index inner pages) -->
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="n-item" onclick="openLink('index.html')">
+        <i class="fa-solid fa-house"></i><br>Home
+      </div>
+      <div class="n-item" onclick="openLink('fund.html')">
+        <i class="fa-solid fa-chart-line"></i><br>Fund
+      </div>
+      <div class="n-item" onclick="openLink('loandetails.html')">
+        <i class="fa-solid fa-file-invoice"></i><br>Loan
+      </div>
+      <div class="n-item" onclick="openLink('profile.html')">
+        <i class="fa-solid fa-user"></i><br>Profile
+      </div>
+    </div>
+  </div>
+
+  <!-- Global loader -->
+  <div id="loader" class="loader-overlay">
+    <div class="loader-circle"></div>
+  </div>
+
+</div>
+
+<!-- jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+<script>
+const API_URL="https://script.google.com/macros/s/AKfycby4_JhyXSQUj1VrViySeAhxvQYw86HUxhcNlAvKdJzAJmOLUT-zF5EDW3WaP88-gvW9/exec";
+const SECURITY_CODE="1234";
+
+function openLink(url){
+  window.location.href = url;
+}
+
+function showPanel(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function showLoader(){ document.getElementById("loader").classList.add("show"); }
+function hideLoader(){ document.getElementById("loader").classList.remove("show"); }
+
+function customerLogin(){
+  let acc=document.getElementById("cAccount").value.trim();
+  let pass=document.getElementById("cPass").value;
+
+  if(!acc || !pass){
+    alert("⚠️ Please fill all fields!");
+    return;
+  }
+
+  let btn=document.getElementById("cLoginBtn");
+  btn.disabled=true;
+  btn.innerHTML='<i class="fa-solid fa-circle-notch fa-spin"></i><span>Checking...</span>';
+  showLoader();
+
+  fetch(`${API_URL}?fn=checkCustomer&account=${acc}&pass=${pass}`)
+  .then(res=>res.json())
+  .then(data=>{
+    if(data.success){
+      showPanel("customerPanel");
+      document.getElementById("balance").innerText="Balance: ₹"+data.balance;
+      document.getElementById("statementStatus").style.display="none";
+    }else{
+      alert("Invalid Account/Password ❌");
+    }
+  })
+  .catch(()=>alert("Network error ❌"))
+  .finally(()=>{
+    hideLoader();
+    btn.disabled=false;
+    btn.innerHTML='<span>Check Account Balance</span>';
+  });
+}
+
+async function downloadStatement(){
+  let acc=document.getElementById("cAccount").value.trim();
+  let pass=document.getElementById("cPass").value;
+
+  if(!acc||!pass){
+    alert("⚠️ Please login first!");
+    return;
+  }
+
+  let btn=document.getElementById("downloadBtn");
+  btn.disabled=true;
+  btn.innerHTML='<i class="fa-solid fa-circle-notch fa-spin"></i><span>Preparing...</span>';
+  showLoader();
+
+  const statusBadge=document.getElementById("statementStatus");
+  statusBadge.style.display="none";
+
+  try{
+    const res=await fetch(`${API_URL}?fn=getHistory&account=${acc}&pass=${pass}`);
+    const data=await res.json();
+    if(!data.success){
+      alert("Unable to fetch statement ❌");
+      return;
+    }
+
+    const { jsPDF }=window.jspdf;
+    const doc=new jsPDF();
+
+    doc.setFontSize(16);
+    doc.text("Account Statement",14,20);
+    doc.setFontSize(12);
+    doc.text(`Account: ${acc}`,14,28);
+    doc.text(`Balance: ₹${data.balance}`,14,36);
+
+    const rows=[];
+    data.transactions.forEach(trx=>{
+      rows.push([trx.date,`₹${trx.amount}`,trx.type,trx.agent]);
+    });
+
+    doc.autoTable({
+      startY:50,
+      head:[["Date","Amount","Type","Agent"]],
+      body:rows
+    });
+
+    doc.save(`Statement_${acc}.pdf`);
+    statusBadge.style.display="inline-flex";
+  }
+  finally{
+    hideLoader();
+    btn.disabled=false;
+    btn.innerHTML='<i class="fa-solid fa-file-arrow-down"></i><span>Download Statement</span>';
+  }
+}
+
+function agentAuth(){
+  let code=document.getElementById("aCode").value.trim();
+  if(code===SECURITY_CODE){
+    showPanel("agentPanel");
+    loadTodayHistory();
+  }else{
+    alert("Wrong Code ❌");
+  }
+}
+
+function togglePassword(){
+  const input=document.getElementById("aCode");
+  const eye=document.getElementById("toggleEye");
+  if(input.type==="password"){
+    input.type="text";
+    eye.classList.replace("fa-eye","fa-eye-slash");
+  }else{
+    input.type="password";
+    eye.classList.replace("fa-eye-slash","fa-eye");
+  }
+}
+
+function getTodayKey(){
+  const d=new Date();
+  return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+}
+
+function loadTodayHistory(){
+  const key=getTodayKey();
+  const data=JSON.parse(localStorage.getItem("agentHistory_"+key)) || [];
+
+  let total=0;
+  let html="";
+
+  data.forEach(row=>{
+    total += Number(row.amount||0);
+    html += `
+      <div class="h-item">
+        <div><b>${row.account}</b> — ₹${row.amount}</div>
+        <small>${row.time} • ${row.agent}</small>
+      </div>
+    `;
+  });
+
+  document.getElementById("todayHistory").innerHTML =
+    html || "<p style='font-size:12px;color:#6b7280;text-align:center;'>आज की कोई एंट्री नहीं है।</p>";
+  document.getElementById("todayTotal").innerText="Today Total: ₹"+total;
+}
+
+function saveTransaction(){
+  let accSuffix=document.getElementById("aAccount").value.trim();
+  let amt=document.getElementById("aAmount").value.trim();
+  let type=document.getElementById("aType").value;
+  let id=document.getElementById("aID").value;
+
+  if(accSuffix.length!==4){
+    alert("Enter 4 digit Account Number!");
+    return;
+  }
+  if(!amt || !id){
+    alert("Fill all fields!");
+    return;
+  }
+
+  let acc="SRC"+accSuffix;
+
+  let btn=document.getElementById("aSubmitBtn");
+  btn.disabled=true;
+  btn.innerHTML='<i class="fa-solid fa-circle-notch fa-spin"></i><span>Saving...</span>';
+
+  fetch(API_URL,{
+    method:"POST",
+    body:JSON.stringify({fn:"transaction",account:acc,amount:amt,type:type,agent:id})
+  })
+  .then(res=>res.json())
+  .then(data=>{
+    document.getElementById("msg").innerText=data.message || "Entry Saved ✔";
+
+    const key=getTodayKey();
+    const oldData=JSON.parse(localStorage.getItem("agentHistory_"+key)) || [];
+
+    const now=new Date();
+    const time=now.getHours()+":"+now.getMinutes().toString().padStart(2,"0");
+
+    oldData.push({
+      account:acc,
+      amount:amt,
+      agent:id,
+      time:time
+    });
+
+    localStorage.setItem("agentHistory_"+key,JSON.stringify(oldData));
+
+    document.getElementById("aAccount").value="";
+    document.getElementById("aAmount").value="";
+    document.getElementById("aID").value="";
+
+    loadTodayHistory();
+
+    setTimeout(()=>document.getElementById("msg").innerText="",3000);
+  })
+  .finally(()=>{
+    btn.disabled=false;
+    btn.innerHTML='Submit';
+  });
+}
+</script>
+
+</body>
+</html>

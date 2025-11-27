@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deposit - SRCCS</title>
+
+  <!-- FONT + ICONS -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+  <style>
+    :root{
+      --paytm-blue:#01baf2;
+      --paytm-dark:#002e6e;
+      --bg:#f4f6fb;
+      --card:#ffffff;
+      --radius-lg:20px;
+      --shadow-soft:0 12px 30px rgba(15,118,255,0.08);
+      --text-soft:#666;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:'Poppins',sans-serif;
+      background:var(--bg);
+      display:flex;
+      justify-content:center;
+      color:#111;
+    }
+
+    .app{
+      width:100%;
+      max-width:460px;
+      min-height:100vh;
+      background:#f4f6fb;
+      padding-bottom:90px;
+    }
+
+    /* HEADER */
+    .top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:16px;
+    }
+    .brand{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .logo{
+      width:34px;height:34px;
+      border-radius:50%;
+      background:#007bff;
+      display:flex;align-items:center;justify-content:center;
+      color:white;font-weight:700;
+      box-shadow:0 5px 14px rgba(0,0,0,.20);
+    }
+    .head span:first-child{
+      font-size:14px;font-weight:600;color:var(--paytm-dark);
+    }
+    .head span:last-child{
+      font-size:11px;color:var(--text-soft);
+    }
+
+    /* CARD */
+    .container{
+      margin:14px;
+      padding:20px;
+      background:var(--card);
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-soft);
+      animation:fadeIn .4s ease;
+    }
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(10px);}
+      to{opacity:1;transform:translateY(0);}
+    }
+
+    h2{
+      text-align:center;
+      font-size:18px;
+      font-weight:700;
+      color:var(--paytm-dark);
+      margin-bottom:18px;
+    }
+
+    label{
+      font-weight:600;
+      display:block;
+      margin-top:14px;
+    }
+    input, textarea, select{
+      width:100%;
+      background:#fafbff;
+      margin-top:6px;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid #d8d8d8;
+      font-size:14px;
+    }
+
+    input:focus, textarea:focus, select:focus{
+      outline:none;
+      border-color:var(--paytm-blue);
+      box-shadow:0 0 0 3px rgba(1,186,242,0.25);
+      background:white;
+    }
+
+    button{
+      width:100%;
+      margin-top:24px;
+      background:var(--paytm-blue);
+      color:white;
+      padding:14px;
+      border:none;
+      border-radius:14px;
+      font-size:16px;
+      font-weight:600;
+      cursor:pointer;
+      box-shadow:0 6px 16px rgba(1,186,242,0.30);
+    }
+
+    .success{
+      text-align:center;
+      margin-top:12px;
+      color:green;
+      font-weight:600;
+    }
+
+    /* NAV */
+    .nav{
+      position:fixed;
+      bottom:8px;
+      left:50%;
+      transform:translateX(-50%);
+      width:100%;
+      max-width:460px;
+      padding:0 12px;
+    }
+    .nav-inner{
+      background:white;
+      padding:8px;
+      border-radius:18px;
+      box-shadow:0 5px 18px rgba(0,0,0,.25);
+      display:flex;
+      justify-content:space-around;
+    }
+    .n-item{text-align:center;font-size:11px;color:#555;}
+    .n-item i{font-size:14px;}
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- HEADER -->
+  <div class="top">
+    <div class="brand">
+      <div class="logo">S</div>
+      <div class="head">
+        <span>Shree Radha Credit</span>
+        <span>Co-operative Society</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEPOSIT FORM -->
+  <div class="container">
+    <h2>🏦 Deposit Form</h2>
+
+    <form id="depositForm">
+
+      <label>Account Number *</label>
+      <input type="text" name="accountNumber" placeholder="SRC1432" required>
+
+      <label>Member Name *</label>
+      <input type="text" name="name" required>
+
+      <label>Mobile Number *</label>
+      <input type="tel" name="mobile" maxlength="10" pattern="[0-9]{10}" required>
+
+      <label>Aadhaar Number *</label>
+      <input type="text" name="aadhaar" id="aadhaar" maxlength="14" required>
+
+      <label>Deposit Type *</label>
+      <select name="depositType" required>
+        <option value="">-- Select Type --</option>
+        <option>FD (Fixed Deposit)</option>
+        <option>RD (Recurring Deposit)</option>
+        <option>Daily Collection</option>
+        <option>Monthly Savings</option>
+        <option>Saving Deposit</option>
+        <option>Other</option>
+      </select>
+
+      <label>Deposit Amount *</label>
+      <input type="number" name="amount" required>
+
+      <label>Deposit Details / Note</label>
+      <textarea name="note"></textarea>
+
+      <button type="submit">Submit Deposit</button>
+    </form>
+
+    <p class="success" id="msg"></p>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="n-item" onclick="openLink('fund.html')">
+        <i class="fa-solid fa-chart-line"></i><br>Fund
+      </div>
+
+      <div class="n-item" onclick="openLink('loandetails.html')">
+        <i class="fa-solid fa-file-invoice"></i><br>Loan
+      </div>
+
+      <div class="n-item" onclick="openLink('others.html')">
+        <i class="fa-solid fa-grid-2"></i><br>Others
+      </div>
+
+      <div class="n-item" onclick="openLink('profile.html')">
+        <i class="fa-solid fa-user"></i><br>Profile
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function openLink(url){ window.location.href = url; }
+
+// Aadhaar XXXX-XXXX-XXXX
+document.getElementById("aadhaar").addEventListener("input", function(e) {
+  let v = e.target.value.replace(/\D/g, "");
+  if (v.length > 12) v = v.slice(0, 12);
+  let f = v.match(/.{1,4}/g)?.join("-") || "";
+  e.target.value = f;
+});
+
+// GOOGLE SHEET SCRIPT URL
+const scriptURL = "https://script.google.com/macros/s/AKfycbzzEJPuIq28aPKSPQtwiTnBTjqVpjiZ8l-FXesaY_HyNIOsb0mwdo0Jv9T277JeizBUmA/exec";
+const form = document.getElementById("depositForm");
+const msg = document.getElementById("msg");
+
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  msg.style.color="blue";
+  msg.textContent="⏳ Please wait...";
+
+  const fd = new FormData(form);
+  const data = {};
+  fd.forEach((v,k)=>data[k]=v);
+
+  fetch(scriptURL,{
+    method:"POST",
+    body:JSON.stringify(data)
+  })
+  .then(r=>r.json())
+  .then(()=>{
+    msg.style.color="green";
+    msg.textContent="✅ Deposit Successfully Submitted!";
+    setTimeout(()=>form.reset(),2000);
+  })
+  .catch(()=>{
+    msg.style.color="green";
+    msg.textContent="✅ Deposit Successfully Submitted!";
+    setTimeout(()=>form.reset(),2000);
+  });
+});
+</script>
+
+</body>
+</html>

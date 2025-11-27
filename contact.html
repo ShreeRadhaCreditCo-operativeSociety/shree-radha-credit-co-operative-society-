@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — SRCCS</title>
+
+  <!-- FONT + ICONS -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+  <style>
+    :root{
+      --paytm-blue:#01baf2;
+      --paytm-dark:#002e6e;
+      --bg:#f4f6fb;
+      --white:#ffffff;
+      --text-soft:#6b7280;
+      --radius-lg:20px;
+      --shadow-soft:0 12px 28px rgba(0,0,0,0.12);
+      --red:#d63333;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      background:var(--bg);
+      font-family:'Poppins',sans-serif;
+      display:flex;
+      justify-content:center;
+      padding-bottom:100px;
+    }
+
+    .app{
+      width:100%;
+      max-width:460px;
+      min-height:100vh;
+    }
+
+    /* TOP HEADER */
+    .top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:16px;
+    }
+    .brand{display:flex;align-items:center;gap:10px;}
+    .logo{
+      width:34px;height:34px;border-radius:50%;
+      background:#007bff;color:white;
+      font-weight:700;
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 5px 14px rgba(0,0,0,0.20);
+    }
+    .head span:first-child{
+      font-size:14px;font-weight:600;color:var(--paytm-dark);
+    }
+    .head span:last-child{
+      font-size:11px;color:var(--text-soft);
+    }
+
+    /* CONTACT CARD */
+    .card{
+      margin:16px;
+      padding:24px;
+      background:var(--white);
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-soft);
+      text-align:center;
+      animation:fadeIn .4s ease;
+    }
+
+    @keyframes fadeIn{
+      from{opacity:0; transform:translateY(10px);}
+      to{opacity:1; transform:translateY(0);}
+    }
+
+    .title{
+      font-size:20px;
+      font-weight:700;
+      color:var(--paytm-dark);
+      margin-bottom:4px;
+    }
+    .sub{
+      font-size:13px;
+      color:var(--text-soft);
+      margin-bottom:20px;
+    }
+
+    /* Buttons */
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+    .btn{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:14px;
+      border-radius:14px;
+      color:white;
+      text-decoration:none;
+      font-weight:600;
+      box-shadow:0 6px 15px rgba(0,0,0,0.12);
+      transition:0.2s;
+      font-size:15px;
+    }
+    .btn i{font-size:18px;}
+
+    .call{background:var(--paytm-dark);}
+    .call:hover{background:#06398c; transform:translateY(-2px);}
+
+    .sms{background:var(--red);}
+    .sms:hover{background:#b22b2b; transform:translateY(-2px);}
+
+    /* FLOATING CALL BUTTON */
+    .floating{
+      position:fixed;
+      right:18px;
+      bottom:70px;
+      z-index:50;
+    }
+    .fab{
+      width:58px;height:58px;border-radius:50%;
+      background:var(--paytm-blue);
+      display:flex;align-items:center;justify-content:center;
+      font-size:26px;color:white;
+      text-decoration:none;
+      box-shadow:0 8px 20px rgba(0,0,0,0.20);
+      transition:0.3s;
+    }
+    .fab:hover{transform:scale(1.08);}
+
+    /* Bottom NAV */
+    .nav{
+      position:fixed;
+      bottom:8px;
+      left:50%;
+      transform:translateX(-50%);
+      width:100%;
+      max-width:460px;
+      padding:0 12px;
+    }
+    .nav-inner{
+      background:white;
+      border-radius:18px;
+      padding:8px;
+      display:flex;
+      justify-content:space-around;
+      box-shadow:0 5px 18px rgba(0,0,0,.25);
+    }
+    .n-item{
+      text-align:center;
+      font-size:11px;
+      color:var(--text-soft);
+      cursor:pointer;
+    }
+    .n-item i{font-size:14px;}
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- TOP HEADER -->
+  <div class="top">
+    <div class="brand">
+      <div class="logo">S</div>
+      <div class="head">
+        <span>Shree Radha Credit</span>
+        <span>Co-operative Society</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT CARD -->
+  <section class="card">
+    <h1 class="title">संपर्क करें</h1>
+    <p class="sub">कॉल या SMS द्वारा सहायता प्राप्त करें।</p>
+
+    <div class="grid">
+      <a class="btn call" href="tel:+918370022176">
+        <i class="fa-solid fa-phone"></i> कॉल करें
+      </a>
+
+      <a class="btn sms" href="sms:+918370022176">
+        <i class="fa-solid fa-envelope"></i> SMS भेजें
+      </a>
+    </div>
+  </section>
+
+  <!-- FLOAT BUTTON -->
+  <div class="floating">
+    <a class="fab" href="tel:+918370022176"><i class="fa-solid fa-phone"></i></a>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="n-item" onclick="go('index.html')">
+        <i class="fa-solid fa-house"></i><br>Home
+      </div>
+      <div class="n-item" onclick="go('fund.html')">
+        <i class="fa-solid fa-chart-line"></i><br>Fund
+      </div>
+      <div class="n-item" onclick="go('others.html')">
+        <i class="fa-solid fa-grid-2"></i><br>Others
+      </div>
+      <div class="n-item" onclick="go('profile.html')">
+        <i class="fa-solid fa-user"></i><br>Profile
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function go(p){ window.location.href = p; }
+</script>
+
+</body>
+</html>

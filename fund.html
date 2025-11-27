@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Growth Graphs - SRCCS</title>
+
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+  <!-- CHART.JS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root{
+      --paytm-blue:#01baf2;
+      --paytm-dark:#002e6e;
+      --bg:#f4f6fb;
+      --card:#ffffff;
+      --radius-lg:22px;
+      --shadow-soft:0 12px 28px rgba(0,0,0,0.10);
+      --text-soft:#6b7280;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      background:var(--bg);
+      font-family:'Poppins',sans-serif;
+      display:flex;
+      justify-content:center;
+      padding-bottom:120px;
+    }
+
+    .app{
+      width:100%;
+      max-width:460px;
+      min-height:100vh;
+      background:var(--bg);
+    }
+
+    /* TOP HEADER */
+    .top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:16px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .logo{
+      width:34px;height:34px;border-radius:50%;
+      background:#007bff;color:white;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;
+      box-shadow:0 6px 14px rgba(0,0,0,0.20);
+    }
+    .head span:first-child{
+      font-size:14px;
+      font-weight:600;
+      color:var(--paytm-dark);
+    }
+    .head span:last-child{
+      font-size:11px;
+      color:var(--text-soft);
+    }
+
+    /* CARD */
+    .card{
+      background:var(--card);
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-soft);
+      padding:18px;
+      margin:10px 16px 20px;
+      animation:fadeIn .35s ease;
+    }
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(12px);}
+      to{opacity:1;transform:translateY(0);}
+    }
+
+    .card-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .title{
+      font-size:16px;
+      font-weight:600;
+      color:var(--paytm-dark);
+    }
+    .subtitle{
+      font-size:11px;
+      color:var(--text-soft);
+    }
+
+    .amount{text-align:right;}
+    .amount-main{
+      font-size:18px;
+      font-weight:700;
+      color:#10b981;
+    }
+    .amount-change{
+      font-size:11px;
+      color:#059669;
+    }
+
+    .chart-wrap{margin-top:12px;}
+    canvas{max-width:100%;}
+
+    /* Bottom NAV (index style) */
+    .nav{
+      position:fixed;
+      bottom:8px;
+      left:50%;
+      transform:translateX(-50%);
+      width:100%;
+      max-width:460px;
+      padding:0 12px;
+    }
+    .nav-inner{
+      background:white;
+      border-radius:18px;
+      padding:8px;
+      display:flex;
+      justify-content:space-around;
+      box-shadow:0 5px 18px rgba(0,0,0,.25);
+    }
+    .n-item{
+      text-align:center;
+      font-size:11px;
+      color:var(--text-soft);
+      cursor:pointer;
+    }
+    .n-item i{font-size:14px;}
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- TOP HEADER -->
+  <div class="top">
+    <div class="brand">
+      <div class="logo">S</div>
+      <div class="head">
+        <span>Shree Radha Credit</span>
+        <span>Co-operative Society</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⭐ FUND GRAPH -->
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="title">Total Fund Growth</div>
+        <div class="subtitle">पिछले महीनों में बढ़ता हुआ फंड</div>
+      </div>
+      <div class="amount">
+        <div class="amount-main">₹ 2,45,000</div>
+        <div class="amount-change">+ ₹ 45,000 इस महीने</div>
+      </div>
+    </div>
+
+    <div class="chart-wrap">
+      <canvas id="fundChart" height="180"></canvas>
+    </div>
+  </div>
+
+  <!-- ⭐ MEMBER GROWTH GRAPH -->
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="title">New Members Growth</div>
+        <div class="subtitle">हर दिन नए सदस्य जोड़े जा रहे हैं</div>
+      </div>
+      <div class="amount">
+        <div class="amount-main">145 Members</div>
+        <div class="amount-change">+ 8 इस सप्ताह</div>
+      </div>
+    </div>
+
+    <div class="chart-wrap">
+      <canvas id="memberChart" height="180"></canvas>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="n-item" onclick="go('index.html')">
+        <i class="fa-solid fa-house"></i><br>Home
+      </div>
+      <div class="n-item" onclick="go('fund.html')">
+        <i class="fa-solid fa-chart-line"></i><br>Fund
+      </div>
+      <div class="n-item" onclick="go('others.html')">
+        <i class="fa-solid fa-grid-2"></i><br>Others
+      </div>
+      <div class="n-item" onclick="go('profile.html')">
+        <i class="fa-solid fa-user"></i><br>Profile
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function go(url){ window.location.href = url; }
+
+/* ---------------- FUND GRAPH ---------------- */
+const fundLabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"];
+const fundData = [50000, 75000, 98000, 125000, 160000, 200000, 245000];
+
+new Chart(document.getElementById("fundChart"), {
+  type: "line",
+  data: {
+    labels: fundLabels,
+    datasets: [{
+      label: "Fund",
+      data: fundData,
+      tension: 0.4,
+      fill: true,
+      borderColor: "#01baf2",
+      backgroundColor:"rgba(1,186,242,0.18)",
+      borderWidth: 2,
+      pointRadius: 3,
+      pointBackgroundColor:"#01baf2"
+    }]
+  },
+  options: {
+    plugins:{ legend:{ display:false } },
+    maintainAspectRatio:false
+  }
+});
+
+/* ---------------- MEMBER GRAPH ---------------- */
+const memberLabels = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+
+let base = 135;
+let members = [];
+for (let i=0; i<7; i++){
+  members.push(base + i*(1 + Math.floor(Math.random()*2)));
+}
+
+new Chart(document.getElementById("memberChart"), {
+  type: "line",
+  data: {
+    labels: memberLabels,
+    datasets: [{
+      label: "Members",
+      data: members,
+      tension:0.4,
+      fill:true,
+      borderColor:"#10b981",
+      backgroundColor:"rgba(16,185,129,0.18)",
+      borderWidth:2,
+      pointRadius:3,
+      pointBackgroundColor:"#10b981"
+    }]
+  },
+  options:{
+    plugins:{ legend:{ display:false } },
+    maintainAspectRatio:false
+  }
+});
+</script>
+
+</body>
+</html>

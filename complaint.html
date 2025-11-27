@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Agent Complaint - SRCCS</title>
+
+<!-- FONTS & ICONS -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<style>
+  :root{
+    --blue:#01baf2;
+    --dark:#002e6e;
+    --bg:#f4f6fb;
+    --card:#ffffff;
+    --text:#111827;
+    --soft:#6b7280;
+    --radius:22px;
+    --shadow:0 12px 30px rgba(15,118,255,0.10);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  body{
+    background:var(--bg);
+    font-family:'Poppins',sans-serif;
+    display:flex;
+    justify-content:center;
+    padding-bottom:90px;
+  }
+
+  .app{
+    width:100%;
+    max-width:480px;
+  }
+
+  /* TOP HEADER (index style) */
+  .top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .logo{
+    width:34px;height:34px;
+    background:#007bff;
+    border-radius:50%;
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:18px;
+    font-weight:700;
+    box-shadow:0 5px 14px rgba(0,0,0,0.20);
+  }
+  .head span:first-child{
+    font-size:14px;font-weight:600;color:var(--dark);
+  }
+  .head span:last-child{
+    font-size:11px;color:var(--soft);
+  }
+
+  /* MAIN PANEL */
+  .panel{
+    background:white;
+    margin:18px;
+    padding:18px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    animation:fadeIn .4s ease;
+  }
+
+  @keyframes fadeIn{
+    from{opacity:0;transform:translateY(10px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+
+  label{
+    display:block;
+    margin-top:10px;
+    font-size:13px;
+    font-weight:600;
+    color:var(--soft);
+  }
+  input,select,textarea{
+    width:100%;
+    padding:12px 12px;
+    border-radius:12px;
+    border:1px solid #d1d5db;
+    margin-top:4px;
+    font-size:14px;
+    background:#f9fafb;
+    outline:none;
+  }
+  textarea{height:120px;resize:none;}
+  input:focus,select:focus,textarea:focus{
+    border-color:var(--blue);
+    background:white;
+    box-shadow:0 0 0 2px rgba(1,186,242,0.20);
+  }
+
+  button{
+    width:100%;
+    margin-top:20px;
+    padding:13px;
+    background:var(--blue);
+    color:white;
+    font-size:15px;
+    font-weight:600;
+    border:none;
+    border-radius:14px;
+    cursor:pointer;
+    box-shadow:0 6px 16px rgba(1,186,242,0.28);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+  }
+
+  .msg{
+    text-align:center;
+    margin-top:10px;
+    font-size:14px;
+  }
+
+  /* Loader */
+  .loader{
+    position:fixed;top:0;left:0;width:100%;height:100%;
+    background:rgba(0,0,0,0.15);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:999;
+  }
+  .loader.show{display:flex;}
+  .circle{
+    width:45px;height:45px;
+    border-radius:50%;
+    border:4px solid #90dfff;
+    border-top-color:#01baf2;
+    animation:spin .8s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  /* Bottom Navigation */
+  .nav{
+    position:fixed;
+    bottom:8px;
+    left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:460px;
+    padding:0 12px;
+  }
+  .nav-inner{
+    background:white;
+    border-radius:18px;
+    padding:8px;
+    display:flex;
+    justify-content:space-around;
+    box-shadow:0 5px 18px rgba(0,0,0,.25);
+  }
+  .n-item{
+    text-align:center;
+    font-size:11px;
+    color:var(--soft);
+    cursor:pointer;
+  }
+  .n-item i{font-size:14px;}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- HEADER -->
+  <div class="top">
+    <div class="brand">
+      <div class="logo">S</div>
+      <div class="head">
+        <span>Shree Radha Credit</span>
+        <span>Co-operative Society</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPLAINT PANEL -->
+  <div class="panel">
+
+    <label>Agent Name</label>
+    <input id="name" placeholder="उदा. Ramesh Kumar">
+
+    <label>Customer Account Number</label>
+    <input id="acc" placeholder="उदा. SRC1234">
+
+    <label>Mobile Number</label>
+    <input id="mobile" maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,10)" placeholder="उदा. 9876543210">
+
+    <label>Agent ID</label>
+    <select id="agentID">
+      <option value="">Select Agent ID</option>
+      <option>SH7333</option>
+      <option>KA4564</option>
+      <option>JE2659</option>
+      <option>SRCCS1432</option>
+    </select>
+
+    <label>Enter Your Complaint</label>
+    <textarea id="complaint" placeholder="अपनी शिकायत यहाँ लिखें..."></textarea>
+
+    <button onclick="submitComplaint()">
+      <i class="fa-solid fa-paper-plane"></i> Submit Complaint
+    </button>
+
+    <p id="msg" class="msg"></p>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="n-item" onclick="go('index.html')">
+        <i class="fa-solid fa-house"></i><br>Home
+      </div>
+      <div class="n-item" onclick="go('fund.html')">
+        <i class="fa-solid fa-chart-line"></i><br>Fund
+      </div>
+      <div class="n-item" onclick="go('others.html')">
+        <i class="fa-solid fa-grid-2"></i><br>Others
+      </div>
+      <div class="n-item" onclick="go('profile.html')">
+        <i class="fa-solid fa-user"></i><br>Profile
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- LOADER -->
+<div id="loader" class="loader">
+  <div class="circle"></div>
+</div>
+
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycbw-nMDswSFdjFx0DZa0reI1fNtknDa25bjnu2OIYjGCIfDwUVSacqj8D4LKLyrUljOLCQ/exec";
+
+function go(p){ window.location.href=p; }
+function showLoader(){ document.getElementById("loader").classList.add("show"); }
+function hideLoader(){ document.getElementById("loader").classList.remove("show"); }
+
+function submitComplaint(){
+  let name = document.getElementById("name").value.trim();
+  let acc = document.getElementById("acc").value.trim();
+  let mobile = document.getElementById("mobile").value.trim();
+  let agentID = document.getElementById("agentID").value.trim();
+  let complaint = document.getElementById("complaint").value.trim();
+  let msg = document.getElementById("msg");
+
+  msg.innerText = "";
+
+  if(!name || !acc || !mobile || !agentID || !complaint){
+    msg.style.color = "red";
+    msg.innerText = "⚠️ Please fill all fields!";
+    return;
+  }
+
+  showLoader();
+
+  fetch(API_URL,{
+    method:"POST",
+    body:JSON.stringify({
+      fn:"agentComplaint",
+      name:name,
+      accountNumber:acc,
+      mobile:mobile,
+      agentID:agentID,
+      complaintText:complaint,
+      dateTime:new Date().toLocaleString()
+    })
+  })
+  .then(res=>res.json())
+  .then(data=>{
+    msg.style.color = "green";
+    msg.innerText = data.message || "Complaint Submitted Successfully ✔";
+
+    document.getElementById("name").value = "";
+    document.getElementById("acc").value = "";
+    document.getElementById("mobile").value = "";
+    document.getElementById("agentID").value = "";
+    document.getElementById("complaint").value = "";
+  })
+  .catch(()=>{
+    msg.style.color = "red";
+    msg.innerText = "Error submitting complaint ❌";
+  })
+  .finally(()=>{
+    hideLoader();
+  });
+}
+</script>
+
+</body>
+</html>

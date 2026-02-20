@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SRCCS Mobile App</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<style>
+:root{
+ --blue:#0b4fa2;
+ --light:#eaf1fb;
+ --bg:#f3f6fb;
+ --card:#fff;
+ --muted:#6b7280
+}
+*{
+ box-sizing:border-box;
+ font-family:Inter
+}
+
+/* ===== BODY ===== */
+body{
+ margin:0;
+ background:#dbe2ef;
+ display:flex;
+ justify-content:center
+}
+
+/* ===== PHONE FRAME ===== */
+.phone{
+ width:360px;
+ height:100vh;
+ background:var(--bg);
+ display:flex;
+ flex-direction:column;
+ overflow:hidden;   /* phone ke bahar scroll band */
+}
+
+/* ===== LOGIN ===== */
+.login{
+ flex:1;
+ display:flex;
+ align-items:center;
+ justify-content:center
+}
+.login-box{
+ background:#fff;
+ width:90%;
+ padding:24px;
+ border-radius:18px;
+ box-shadow:0 12px 30px rgba(0,0,0,.15);
+ text-align:center
+}
+.login-box h2{margin:0}
+.login-box input{
+ width:100%;
+ padding:10px;
+ margin-top:12px;
+ border-radius:10px;
+ border:1px solid #ccc
+}
+.login-box button{
+ width:100%;
+ margin-top:16px;
+ padding:10px;
+ background:var(--blue);
+ color:#fff;
+ border:none;
+ border-radius:10px;
+ font-weight:600
+}
+.err{
+ color:red;
+ font-size:12px;
+ margin-top:8px
+}
+
+/* ===== HEADER (FIXED) ===== */
+.header{
+ background:var(--blue);
+ color:#fff;
+ padding:14px;
+ position:sticky;
+ top:0;
+ z-index:10;
+ height:96px;     /* 🔑 fixed height */
+}
+.header h1{
+ font-size:15px;
+ margin:0
+}
+.header span{
+ font-size:11px;
+ opacity:.85
+}
+.top-actions{
+ display:flex;
+ gap:8px;
+ margin-top:10px
+}
+.search{
+ flex:1;
+ border:none;
+ border-radius:18px;
+ padding:6px 12px;
+ font-size:12px
+}
+.icon-btn{
+ width:32px;
+ height:32px;
+ background:rgba(255,255,255,.25);
+ border-radius:50%;
+ display:flex;
+ align-items:center;
+ justify-content:center
+}
+
+/* ===== CONTENT (ONLY SCROLL AREA) ===== */
+.content{
+ height:calc(100vh - 96px - 56px); /* header + footer */
+ overflow-y:auto;
+ padding:14px;
+ -webkit-overflow-scrolling:touch;
+}
+
+/* ===== CARD ===== */
+.card{
+ background:#fff;
+ border-radius:16px;
+ padding:14px;
+ box-shadow:0 6px 18px rgba(0,0,0,.08)
+}
+.acc-type{
+ font-size:12px;
+ color:var(--muted)
+}
+.acc-no{
+ font-weight:600;
+ margin:4px 0 6px
+}
+.balance{
+ font-size:22px;
+ font-weight:600;
+ color:var(--blue)
+}
+
+/* ===== CREDIT / DEBIT BOX ===== */
+.amount-box{
+ flex:1;
+ border-radius:10px;
+ padding:8px;
+ text-align:center
+}
+
+/* ===== MINI ACTIONS ===== */
+.mini-actions{
+ display:flex;
+ justify-content:space-between;
+ margin-top:14px
+}
+.mini{
+ text-align:center;
+ font-size:11px
+}
+.mini div{
+ width:40px;
+ height:40px;
+ background:var(--light);
+ border-radius:50%;
+ margin:auto auto 6px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ color:var(--blue)
+}
+
+/* ===== SECTION ===== */
+.section{
+ margin-top:22px
+}
+.section h3{
+ font-size:14px;
+ margin-bottom:12px
+}
+
+/* ===== GRID ===== */
+.grid{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:12px
+}
+.item{
+ background:#fff;
+ border-radius:14px;
+ padding:10px 4px;
+ text-align:center;
+ font-size:11px;
+ box-shadow:0 4px 14px rgba(0,0,0,.06)
+}
+.item div{
+ width:38px;
+ height:38px;
+ background:var(--light);
+ border-radius:50%;
+ margin:0 auto 6px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ color:var(--blue)
+}
+
+/* ===== TRANSACTION CARD ===== */
+.txn{
+ background:#fff;
+ border-radius:12px;
+ padding:10px;
+ margin-bottom:8px;
+ box-shadow:0 4px 14px rgba(0,0,0,.06)
+}
+
+/* ===== FOOTER / BOTTOM NAV (FIXED) ===== */
+.bottom{
+ background:#fff;
+ border-top:1px solid #e5e7eb;
+ display:flex;
+ justify-content:space-around;
+ padding:8px 0;
+ position:sticky;
+ bottom:0;
+ z-index:10;
+ height:56px;   /* 🔑 fixed height */
+}
+.nav{
+ text-align:center;
+ font-size:10px;
+ color:var(--muted)
+}
+.nav span{
+ width:26px;
+ height:26px;
+ background:var(--light);
+ border-radius:50%;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ margin:auto
+}
+.nav.active{
+ color:var(--blue)
+}
+.nav.active span{
+ background:var(--blue);
+ color:#fff
+}
+
+/* ===== MODAL ===== */
+.modal{
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,.45);
+ display:none;
+ align-items:center;
+ justify-content:center;
+ z-index:50
+}
+.modal-box{
+ width:260px;
+ background:#fff;
+ border-radius:18px;
+ padding:20px;
+ text-align:center
+}
+
+/* ===== HISTORY / STATEMENT ===== */
+
+.history-title{
+ font-size:15px;
+ font-weight:600;
+ margin-bottom:12px
+}
+
+/* transaction card */
+.txn{
+ background:#fff;
+ border-radius:12px;
+ padding:10px;
+ margin-bottom:10px;
+ box-shadow:0 4px 14px rgba(0,0,0,.06)
+}
+.txn.credit{border-left:5px solid #16a34a}
+.txn.debit{border-left:5px solid #dc2626}
+
+.txn-top{
+ display:flex;
+ justify-content:space-between;
+ align-items:center
+}
+.txn-type{
+ font-size:12px;
+ font-weight:600
+}
+.txn-amt.credit{color:#16a34a}
+.txn-amt.debit{color:#dc2626}
+
+.txn-date{
+ font-size:11px;
+ color:#6b7280;
+ margin-top:4px
+}
+
+/* statement box */
+.statement-box{
+ background:#fff;
+ border-radius:16px;
+ padding:14px;
+ box-shadow:0 6px 18px rgba(0,0,0,.08)
+}
+.statement-box label{
+ font-size:12px;
+ color:#374151
+}
+.statement-box input{
+ width:100%;
+ padding:8px;
+ margin-top:4px;
+ margin-bottom:10px;
+ border-radius:8px;
+ border:1px solid #d1d5db
+}
+.statement-box button{
+ width:100%;
+ padding:10px;
+ background:#0b4fa2;
+ color:#fff;
+ border:none;
+ border-radius:10px;
+ font-weight:600
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="phone">
+
+<!-- LOGIN -->
+<div class="login" id="loginBox">
+ <div class="login-box">
+  <h2>SRCCS Login</h2>
+  <input id="acc" placeholder="Account Number">
+  <input id="pass" type="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+  <div class="err" id="err"></div>
+ </div>
+</div>
+
+<!-- APP -->
+<div id="app" style="display:none;flex:1;flex-direction:column">
+
+<div class="header">
+ <h1>🏦 SRCCS</h1>
+ <span id="welcome"></span>
+ <div class="top-actions">
+  <input class="search" placeholder="Search services">
+  <div class="icon-btn" onclick="logout()">
+   <i class="fa fa-right-from-bracket"></i>
+  </div>
+ </div>
+</div>
+
+<div class="content" id="page"></div>
+
+<div class="bottom">
+ <div class="nav active" onclick="nav(this,'home')"><span>🏠</span>Home</div>
+ <div class="mini" onclick="openHistory()">
+ <div>⏱</div>History
+</div>
+
+<div class="mini" onclick="openStatement()">
+ <div>📄</div>Statement
+</div>
+
+ <div class="nav" onclick="nav(this,'loans')"><span>🏦</span>Loans</div>
+ <div class="nav" onclick="nav(this,'profile')"><span>👤</span>Profile</div>
+</div>
+
+</div>
+</div>
+
+<!-- QR MODAL -->
+<div class="modal" id="qrModal" onclick="this.style.display='none'">
+ <div class="modal-box">
+  <h3>Scan & Pay</h3>
+  <i class="fa fa-qrcode" style="font-size:80px;color:#0b4fa2"></i>
+ </div>
+</div>
+
+
+<script>
+/* ================= APIs ================= */
+const ACCOUNT_API = "https://script.google.com/macros/s/AKfycby4N8cn4BT2IUTU3kR9XMNGhRYubXLlDu0BBsZWjRgvTw9gIddRln8pIKHIL-Jj5Q1elw/exec";
+const LOAN_API    = "https://script.google.com/macros/s/AKfycbx9ASrADhROLfc_aTjoWMPb7AacG2GfOs4bpiOB6khZqcrFusZRBUk7G6spPQH2GdF3/exec";
+
+const page = document.getElementById("page");
+let timer = null;
+
+/* ================= LOGIN ================= */
+function login(){
+ err.innerText = "";
+ fetch(ACCOUNT_API,{
+  method:"POST",
+  body:JSON.stringify({
+   action:"login",
+   account: acc.value,
+   password: pass.value
+  })
+ })
+ .then(r=>r.json())
+ .then(d=>{
+  if(!d.success){
+   err.innerText = d.message;
+   return;
+  }
+  localStorage.setItem("srccs",JSON.stringify(d));
+  start();
+ });
+}
+
+/* ================= START ================= */
+function start(){
+ const d = JSON.parse(localStorage.getItem("srccs"));
+ if(!d) return;
+
+ loginBox.style.display = "none";
+ app.style.display = "flex";
+ welcome.innerText = "Welcome, " + d.name;
+
+ loadHome();
+ startLive();
+}
+
+/* ================= HOME ================= */
+function loadHome(){
+ const d = JSON.parse(localStorage.getItem("srccs"));
+
+ page.innerHTML = `
+ <div class="card">
+  <div class="acc-type">My Savings A/c</div>
+  <div class="acc-no">${d.customer.account}</div>
+  <div class="balance" id="liveBal">₹ 0</div>
+
+  <div style="display:flex;gap:12px;margin-top:10px">
+   <div style="flex:1;background:#e8f5e9;border-radius:10px;padding:8px;text-align:center">
+    <div style="font-size:11px;color:#166534">Credit</div>
+    <b id="crAmt">₹ 0</b>
+   </div>
+   <div style="flex:1;background:#fdecea;border-radius:10px;padding:8px;text-align:center">
+    <div style="font-size:11px;color:#991b1b">Debit</div>
+    <b id="drAmt">₹ 0</b>
+   </div>
+  </div>
+
+  <div class="mini-actions">
+   <div class="mini" onclick="openHistory()"><div>⏱</div>History</div>
+   <div class="mini" onclick="openStatement()"><div>📄</div>Statement</div>
+   <div class="mini" onclick="openDepositPage()">
+ <div>➕</div>Servises
+</div>
+
+  </div>
+ </div>
+
+ <div class="section">
+  <h3>Recent Transactions</h3>
+  <div id="txnBox"></div>
+ </div>
+
+ <div class="section">
+  <h3>Payments</h3>
+  <div class="grid">
+   <div class="item" onclick="qrModal.style.display='flex'"><div>🔳</div>QR Pay</div>
+   <div class="item" onclick="alert('Transfer Coming Soon')"><div>📤</div>Transfer</div>
+   <div class="item"><div>🐖</div>FD</div>
+   <div class="item"><div>💰</div>RD</div>
+  </div>
+ </div>
+ `;
+}
+
+/* ================= LIVE BALANCE ================= */
+function startLive(){
+ clearInterval(timer);
+ fetchLive();
+ timer = setInterval(fetchLive,5000);
+}
+
+function fetchLive(){
+ const d = JSON.parse(localStorage.getItem("srccs"));
+
+ fetch(`${ACCOUNT_API}?fn=getStatement&account=${d.customer.account}`)
+ .then(r=>r.json())
+ .then(res=>{
+  if(!res.success) return;
+
+  liveBal.innerText = "₹ " + res.balance;
+
+  let cr = 0, dr = 0;
+  res.transactions.forEach(t=>{
+   if(t.type==="credit") cr += Number(t.amount);
+   if(t.type==="debit")  dr += Number(t.amount);
+  });
+  crAmt.innerText = "₹ " + cr;
+  drAmt.innerText = "₹ " + dr;
+
+  txnBox.innerHTML = "";
+  res.transactions.slice(-5).reverse().forEach(t=>{
+   txnBox.innerHTML += `
+    <div class="txn ${t.type}">
+     <div style="display:flex;justify-content:space-between">
+      <b>${t.type.toUpperCase()}</b>
+      <b style="color:${t.type==="credit"?"#16a34a":"#dc2626"}">₹ ${t.amount}</b>
+     </div>
+     <div style="font-size:11px;color:#6b7280">
+      ${t.date} • Bal ₹ ${t.balance}
+     </div>
+    </div>
+   `;
+  });
+ });
+}
+
+/* ================= NAV ================= */
+function nav(el,p){
+ document.querySelectorAll(".nav").forEach(n=>n.classList.remove("active"));
+ el.classList.add("active");
+
+ if(p==="home")    loadHome();
+ if(p==="loans")   loadLoans();
+ if(p==="profile") loadProfile();
+}
+
+/* ================= LOANS (LOAN API) ================= */
+/* ================= LOAN PAGE ================= */
+
+/* ================= LOANS (FINAL – EMI BASED) ================= */
+
+let emiTimer = null;
+
+function loadLoans(){
+ const d = JSON.parse(localStorage.getItem("srccs"));
+
+ page.innerHTML = `
+  <div class="card">
+   <h3>Loan & EMI Details</h3>
+   <div id="loanBox" style="font-size:13px;color:#374151">Loading...</div>
+  </div>
+ `;
+
+ fetch(LOAN_API,{
+  method:"POST",
+  body:JSON.stringify({
+   action:"searchLoan",
+   q:d.customer.account
+  })
+ })
+ .then(r=>r.json())
+ .then(res=>{
+  const box = document.getElementById("loanBox");
+
+  if(!res.found){
+   box.innerHTML = "No active loan found.";
+   return;
+  }
+
+  /* ===== EMI BASED VALUES ===== */
+  const emiAmount = Number(res.row.emi);
+  const tenure    = Number(res.row.tenure);
+
+  const paidEMI       = Array.isArray(res.emiHistory) ? res.emiHistory.length : 0;
+  const remainingEMI  = tenure - paidEMI;
+
+  const principal     = emiAmount * tenure;
+  const outstanding   = emiAmount * remainingEMI;
+
+  /* ===== NEXT EMI DATE (1st) ===== */
+  const today = new Date();
+  let nextEmiDate = new Date(today.getFullYear(), today.getMonth(), 1);
+  if(today.getDate() > 1){
+    nextEmiDate.setMonth(nextEmiDate.getMonth() + 1);
+  }
+  const nextEmiStr = nextEmiDate.toISOString().split("T")[0];
+
+  /* ===== EMI ALERT ===== */
+  let alertBox = "";
+  const diffDays = Math.ceil(
+   (nextEmiDate - today) / (1000 * 60 * 60 * 24)
+  );
+
+  if(remainingEMI > 0 && diffDays <= 3){
+   alertBox = `
+    <div style="
+     background:#fee2e2;
+     color:#991b1b;
+     padding:8px;
+     border-radius:10px;
+     margin-bottom:10px;
+     font-size:12px;
+     font-weight:600">
+     ⚠ EMI Due on ${nextEmiStr}
+    </div>
+   `;
+  }
+
+  /* ===== EMI HISTORY (WITH MODE) ===== */
+  let emiHistoryHTML = "";
+
+  if(res.emiHistory && res.emiHistory.length > 0){
+   emiHistoryHTML = res.emiHistory.map((e,i)=>`
+    <div style="
+      background:#f3f4f6;
+      padding:8px;
+      border-radius:10px;
+      margin:6px 0;
+      font-size:12px">
+
+      <div style="display:flex;justify-content:space-between">
+        <b>EMI ${i+1}</b>
+        <b>₹ ${e.amount}</b>
+      </div>
+
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        margin-top:4px;
+        font-size:11px;
+        color:#374151">
+
+        <span>📅 ${e.date}</span>
+
+        <span style="
+          background:#e5e7eb;
+          padding:2px 8px;
+          border-radius:999px;
+          font-weight:600">
+          ${e.mode ? e.mode.toUpperCase() : "N/A"}
+        </span>
+
+      </div>
+    </div>
+   `).join("");
+  }else{
+   emiHistoryHTML = `
+    <div style="font-size:12px;color:#6b7280">
+     No EMI paid yet
+    </div>
+   `;
+  }
+
+  /* ===== FINAL UI ===== */
+  box.innerHTML = `
+   ${alertBox}
+
+   <b>Loan ID:</b> ${res.row.loan_id}<br>
+
+   <b>Principal Amount:</b>
+   <span style="font-weight:600;color:#0b4fa2">
+    ₹ ${principal}
+   </span><br>
+
+   <b>Outstanding Amount:</b>
+   <span style="color:#dc2626;font-weight:600">
+    ₹ ${outstanding}
+   </span><br><br>
+
+   <b>EMI Amount:</b> ₹ ${emiAmount}<br>
+   <b>Paid EMI:</b> ${paidEMI} / ${tenure}<br>
+   <b>Remaining EMI:</b> ${remainingEMI}<br>
+   <b>Next EMI Date:</b> ${nextEmiStr}<br>
+   <b>Status:</b> ${res.row.status}<br><br>
+
+   <b>EMI History:</b><br>
+   ${emiHistoryHTML}
+  `;
+
+  startEmiNotification(nextEmiDate, remainingEMI);
+ });
+}
+
+/* ================= EMI NOTIFICATION ================= */
+
+function startEmiNotification(emiDate, remainingEMI){
+ if(remainingEMI <= 0) return;
+
+ if ("Notification" in window && Notification.permission !== "granted") {
+  Notification.requestPermission();
+ }
+
+ clearInterval(emiTimer);
+
+ function notify(){
+  const today = new Date();
+  const diff = Math.ceil(
+   (emiDate - today) / (1000 * 60 * 60 * 24)
+  );
+
+  if(diff <= 3 && diff >= 0 && Notification.permission === "granted"){
+   new Notification("🏦 SRCCS EMI Alert",{
+    body:`Your EMI is due on ${emiDate.toISOString().split("T")[0]}`
+   });
+  }
+ }
+
+ notify();
+ emiTimer = setInterval(notify, 12 * 60 * 60 * 1000);
+}
+
+
+/* ================= PROFILE ================= */
+/* ================= PROFILE ================= */
+function loadProfile(){
+ const d = JSON.parse(localStorage.getItem("srccs"));
+
+ const photo = d.customer.photo || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
+ const cibil = d.customer.cibil || "Not Available";
+
+ page.innerHTML = `
+  <!-- PROFILE CARD -->
+  <div class="card" style="text-align:center">
+   <img src="${photo}"
+    style="
+     width:90px;
+     height:90px;
+     border-radius:50%;
+     object-fit:cover;
+     border:3px solid #0b4fa2;
+     margin-bottom:8px">
+
+   <h3 style="margin:6px 0">${d.name || "-"}</h3>
+   <div style="font-size:12px;color:#6b7280">
+    A/c No: ${d.customer.account || "-"}
+   </div>
+  </div>
+
+  <!-- BASIC DETAILS -->
+  <div class="card" style="margin-top:14px">
+   <h3 style="margin-top:0">📄 Customer Details</h3>
+   <div style="font-size:12px;color:#374151;line-height:1.6">
+    <b>Father / Husband:</b> ${d.customer.guardian || "-"}<br>
+    <b>Gender:</b> ${d.customer.gender || "-"}<br>
+    <b>Mobile:</b> ${d.customer.mobile || "-"}<br><br>
+
+    <b>Address:</b><br>
+    ${d.customer.address || "-"}
+   </div>
+  </div>
+
+  <!-- NOMINEE DETAILS -->
+  <div class="card" style="margin-top:14px">
+   <h3 style="margin-top:0">👨‍👩‍👦 Nominee Details</h3>
+   <div style="font-size:12px;color:#374151;line-height:1.6">
+    <b>Nominee Name:</b> ${d.customer.nominee || "-"}<br>
+    <b>Relation:</b> ${d.customer.nominee_relation || "-"}
+   </div>
+  </div>
+
+  <!-- CIBIL STATUS -->
+  <div class="card" style="margin-top:14px">
+   <h3 style="margin-top:0">📊 CIBIL Status</h3>
+   <div style="font-size:14px;font-weight:600;
+    color:${cibil >= 700 ? '#16a34a' : '#dc2626'}">
+    CIBIL Score: ${cibil}
+   </div>
+   <div style="font-size:11px;color:#6b7280;margin-top:4px">
+    (As per internal record)
+   </div>
+  </div>
+
+  <!-- CURRENT LOAN -->
+  <div class="card" style="margin-top:14px">
+   <h3 style="margin-top:0">🏦 Current Loan</h3>
+   <div id="profileLoanBox" style="font-size:12px;color:#374151">
+    Loading loan details...
+   </div>
+  </div>
+
+
+
+  <!-- LOGOUT -->
+  <div class="card" style="margin-top:14px">
+   <button onclick="logout()"
+    style="
+     width:100%;
+     padding:10px;
+     background:#dc2626;
+     color:#fff;
+     border:none;
+     border-radius:10px;
+     font-weight:600">
+    Logout
+   </button>
+  </div>
+ `;
+
+ /* ===== CURRENT LOAN FETCH (SUMMARY ONLY) ===== */
+ fetch(LOAN_API,{
+  method:"POST",
+  body:JSON.stringify({
+   action:"searchLoan",
+   q:d.customer.account
+  })
+ })
+ .then(r=>r.json())
+ .then(res=>{
+  const box = document.getElementById("profileLoanBox");
+
+  if(!res.found){
+   box.innerHTML = "No active loan.";
+   return;
+  }
+const emiAmount = Number(res.row.emi);
+const tenure = Number(res.row.tenure);
+const paidEMI = res.emiHistory.length;
+const remainingEMI = tenure - paidEMI;
+
+const outstanding = emiAmount * remainingEMI;
+
+  
+
+  box.innerHTML = `
+ <b>Loan ID:</b> ${res.row.loan_id}<br>
+ <b>Outstanding:</b>
+ <span style="color:#dc2626;font-weight:600">
+  ₹ ${outstanding}
+ </span><br>
+ <b>EMI:</b> ₹ ${emiAmount}<br>
+ <b>Remaining EMI:</b> ${remainingEMI}<br>
+ <b>Status:</b> ${res.row.status}
+`;
+
+ });
+}
+
+
+/* ================= HISTORY ================= */
+function openHistory(){
+ page.innerHTML = `
+  <div class="history-title">Transaction History</div>
+  <div id="historyBox"></div>
+ `;
+
+ const d = JSON.parse(localStorage.getItem("srccs"));
+
+ fetch(`${ACCOUNT_API}?fn=getStatement&account=${d.customer.account}`)
+ .then(r=>r.json())
+ .then(res=>{
+  if(!res.success) return;
+
+  historyBox.innerHTML = "";
+  res.transactions.slice(-20).reverse().forEach(t=>{
+   historyBox.innerHTML += `
+    <div class="txn ${t.type}">
+     <div class="txn-top">
+      <div class="txn-type">${t.type.toUpperCase()}</div>
+      <div class="txn-amt ${t.type}">₹ ${t.amount}</div>
+     </div>
+     <div class="txn-date">
+      ${t.date} • Balance ₹ ${t.balance}
+     </div>
+    </div>
+   `;
+  });
+ });
+}
+
+/* ================= STATEMENT ================= */
+function openStatement(){
+ page.innerHTML = `
+  <div class="statement-box">
+   <h3 style="margin-top:0">Account Statement</h3>
+   <label>From Date</label>
+   <input type="date" id="fromDate">
+   <label>To Date</label>
+   <input type="date" id="toDate">
+   <button onclick="downloadStatement()">Download PDF Statement</button>
+  </div>
+ `;
+}
+
+function downloadStatement(){
+ if(!fromDate.value || !toDate.value){
+  alert("Please select date range");
+  return;
+ }
+ const d = JSON.parse(localStorage.getItem("srccs"));
+ window.open(
+  `${ACCOUNT_API}?fn=downloadStatement&account=${d.customer.account}&from=${fromDate.value}&to=${toDate.value}`,
+  "_blank"
+ );
+}
+
+/* ================= LOGOUT ================= */
+function logout(){
+ clearInterval(timer);
+ localStorage.clear();
+ location.reload();
+}
+
+/* AUTO START IF ALREADY LOGGED IN */
+if(localStorage.getItem("srccs")){
+ start();
+}
+function openDepositPage(){
+ window.location.href = "deposit.html";
+}
+
+
+</script>
+
+
+</body>
+</html>

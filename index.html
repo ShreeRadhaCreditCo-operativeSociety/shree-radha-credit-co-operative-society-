@@ -124,6 +124,7 @@ body{
  padding:14px;
  padding-bottom:80px;   /* 🔥 important */
  -webkit-overflow-scrolling:touch;
+ scroll-behavior: smooth;
 }
 /* ===== CARD ===== */
 .card{
@@ -380,7 +381,7 @@ body{
 
 <div class="bottom">
  <div class="nav active" onclick="nav(this,'home')"><span>🏠</span>Home</div>
- <div class="mini" onclick="openHistory()">
+ <div class="nav" onclick="openHistory()">
  <div>⏱</div>History
 </div>
 
@@ -406,7 +407,7 @@ body{
 
 <script>
 /* ================= APIs ================= */
-const ACCOUNT_API = "https://script.google.com/macros/s/AKfycby0-hYPYjDV-cgGHw8D6IEBNhW12rabpnnKU-PoLla6WFDkv1GZ_-fE2XWgtXtLY2BrSg/exec";
+const ACCOUNT_API = "https://script.google.com/macros/s/AKfycbwBkxKR8Zs9eEW0xaKdTME2EqGCnvgPdv3pSRcpWYO_7aW-Kxw7VVTeA342ZruLaiwe0w/exec";
 const LOAN_API    = "https://script.google.com/macros/s/AKfycbx9ASrADhROLfc_aTjoWMPb7AacG2GfOs4bpiOB6khZqcrFusZRBUk7G6spPQH2GdF3/exec";
 
 const page = document.getElementById("page");
@@ -499,7 +500,7 @@ function loadHome(){
 function startLive(){
  clearInterval(timer);
  fetchLive();
- timer = setInterval(fetchLive,5000);
+ timer = setInterval(fetchLive,8000);
 }
 
 function fetchLive(){
@@ -508,7 +509,7 @@ function fetchLive(){
  fetch(`${ACCOUNT_API}?fn=getStatement&account=${d.customer.account}`)
  .then(r=>r.json())
  .then(res=>{
-  if(!res.success) return;
+  if(!res.success || !res.transactions) return;
 
   liveBal.innerText = "₹ " + res.balance;
 
@@ -523,16 +524,21 @@ function fetchLive(){
   txnBox.innerHTML = "";
   res.transactions.slice(-5).reverse().forEach(t=>{
    txnBox.innerHTML += `
-    <div class="txn ${t.type}">
-     <div style="display:flex;justify-content:space-between">
-      <b>${t.type.toUpperCase()}</b>
-      <b style="color:${t.type==="credit"?"#16a34a":"#dc2626"}">₹ ${t.amount}</b>
-     </div>
-     <div style="font-size:11px;color:#6b7280">
-      ${t.date} • Bal ₹ ${t.balance}
-     </div>
-    </div>
-   `;
+ <div class="txn ${t.type}">
+  <div style="display:flex;justify-content:space-between">
+   <b>${t.type.toUpperCase()}</b>
+   <b style="color:${t.type==="credit"?"#16a34a":"#dc2626"}">₹ ${t.amount}</b>
+  </div>
+
+  <div style="font-size:11px;color:#6b7280">
+   ${t.date} • Bal ₹ ${t.balance}
+  </div>
+
+  <div style="font-size:10px;color:#9ca3af">
+   ID: ${t.id || "-"}
+  </div>
+ </div>
+`;
   });
  });
 }
@@ -872,8 +878,12 @@ function openHistory(){
       <div class="txn-amt ${t.type}">₹ ${t.amount}</div>
      </div>
      <div class="txn-date">
-      ${t.date} • Balance ₹ ${t.balance}
-     </div>
+ ${t.date} • Balance ₹ ${t.balance}
+</div>
+
+<div style="font-size:10px;color:#9ca3af">
+ ID: ${t.id || "-"}
+</div>
     </div>
    `;
   });
@@ -920,7 +930,11 @@ if(localStorage.getItem("srccs")){
 function openDepositPage(){
  window.location.href = "deposit.html";
 }
-
+document.addEventListener("keydown", function(e){
+ if(e.key === "Enter"){
+  login();
+ }
+});
 
 </script>
 

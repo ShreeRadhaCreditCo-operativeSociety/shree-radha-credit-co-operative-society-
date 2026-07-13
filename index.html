@@ -5,27 +5,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SRCCS Mobile App</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 <style>
 :root{
- --blue:#0b4fa2;
- --light:#eaf1fb;
- --bg:#f3f6fb;
- --card:#fff;
- --muted:#6b7280
+ --bar:#0B0B0C;
+ --bg:#F1F3F4;
+ --card:#FFFFFF;
+ --blue:#4285F4;
+ --blue-dark:#1A56C4;
+ --orange:#FF6D2A;
+ --text:#202124;
+ --text-soft:#5F6368;
+ --text-faint:#9AA0A6;
+ --border:#E1E3E6;
+ --green:#1B8A4C;
+ --red:#D93025;
+ --warn:#F2A600;
+ --light:#EAF1FB;
+ --muted:#5F6368
 }
 *{
  box-sizing:border-box;
- font-family:Inter
+ font-family:'Roboto',Arial,sans-serif
 }
+.mono{font-family:'Roboto Mono',monospace}
 
 /* ===== BODY ===== */
 body{
  margin:0;
- background:#dbe2ef;
+ background:#DADCE0;
  display:flex;
  justify-content:center;
+ font-size:13px;
+ color:var(--text);
 }
 
 /* ===== PHONE FRAME ===== */
@@ -48,52 +63,73 @@ body{
 .login-box{
  background:#fff;
  width:90%;
- padding:24px;
- border-radius:18px;
- box-shadow:0 12px 30px rgba(0,0,0,.15);
+ padding:26px 22px;
+ border-radius:10px;
+ border:1px solid var(--border);
+ box-shadow:0 8px 24px rgba(0,0,0,.12);
  text-align:center
 }
-.login-box h2{margin:0}
+.login-box h2{
+ margin:0 0 4px;
+ font-size:17px;
+ font-weight:900;
+ color:var(--text);
+ letter-spacing:-.01em
+}
 .login-box input{
  width:100%;
- padding:10px;
+ padding:11px 10px;
  margin-top:12px;
- border-radius:10px;
- border:1px solid #ccc
+ border-radius:8px;
+ border:1px solid var(--border);
+ font-family:'Roboto Mono',monospace;
+ font-size:13px;
+ background:var(--bg);
+ outline:none
 }
+.login-box input:focus{border-color:var(--blue)}
 .login-box button{
  width:100%;
- margin-top:16px;
- padding:10px;
+ margin-top:18px;
+ padding:12px;
  background:var(--blue);
  color:#fff;
  border:none;
- border-radius:10px;
- font-weight:600
+ border-radius:8px;
+ font-weight:700;
+ font-size:12.5px;
+ letter-spacing:.03em;
+ text-transform:uppercase;
+ cursor:pointer
 }
+.login-box button:active{background:var(--blue-dark)}
 .err{
- color:red;
- font-size:12px;
- margin-top:8px
+ color:var(--red);
+ font-size:11.5px;
+ font-weight:500;
+ margin-top:10px
 }
 
 /* ===== HEADER (FIXED) ===== */
 .header{
- background:var(--blue);
+ background:var(--bar);
  color:#fff;
- padding:14px;
+ padding:14px 16px;
  position:sticky;
  top:0;
  z-index:10;
  height:96px;     /* 🔑 fixed height */
 }
 .header h1{
- font-size:15px;
+ font-size:17px;
+ font-weight:900;
+ letter-spacing:-.01em;
  margin:0
 }
 .header span{
  font-size:11px;
- opacity:.85
+ color:var(--text-faint);
+ opacity:1
 }
 .top-actions{
  display:flex;
@@ -103,18 +139,24 @@ body{
 .search{
  flex:1;
  border:none;
- border-radius:18px;
- padding:6px 12px;
- font-size:12px
+ border-radius:8px;
+ padding:8px 12px;
+ font-size:12px;
+ font-family:'Roboto',sans-serif;
+ background:rgba(255,255,255,.1);
+ color:#fff;
 }
+.search::placeholder{color:var(--text-faint)}
 .icon-btn{
- width:32px;
- height:32px;
- background:rgba(255,255,255,.25);
- border-radius:50%;
+ width:34px;
+ height:34px;
+ background:rgba(255,255,255,.12);
+ border-radius:8px;
  display:flex;
  align-items:center;
- justify-content:center
+ justify-content:center;
+ cursor:pointer;
+ color:#fff;
 }
 
 /* ===== CONTENT (ONLY SCROLL AREA) ===== */
@@ -128,23 +170,30 @@ body{
 }
 /* ===== CARD ===== */
 .card{
- background:#fff;
- border-radius:16px;
- padding:14px;
- box-shadow:0 6px 18px rgba(0,0,0,.08)
+ background:var(--card);
+ border:1px solid var(--border);
+ border-left:4px solid var(--blue);
+ border-radius:8px;
+ padding:16px;
+ box-shadow:0 1px 3px rgba(0,0,0,.05)
 }
 .acc-type{
- font-size:12px;
- color:var(--muted)
+ font-size:11.5px;
+ color:var(--text-soft);
+ text-transform:uppercase;
+ letter-spacing:.03em;
 }
 .acc-no{
- font-weight:600;
- margin:4px 0 6px
+ font-family:'Roboto Mono',monospace;
+ font-weight:700;
+ font-size:14px;
+ margin:4px 0 8px
 }
 .balance{
- font-size:22px;
- font-weight:600;
- color:var(--blue)
+ font-family:'Roboto Mono',monospace;
+ font-size:24px;
+ font-weight:900;
+ color:var(--blue-dark)
 }
 
 /* ===== CREDIT / DEBIT BOX ===== */
@@ -159,17 +208,22 @@ body{
 .mini-actions{
  display:flex;
  justify-content:space-between;
- margin-top:14px
+ margin-top:16px;
+ padding-top:14px;
+ border-top:1px solid #F0F1F2;
 }
 .mini{
  text-align:center;
- font-size:11px
+ font-size:10.5px;
+ color:var(--text-soft);
+ font-weight:500;
+ cursor:pointer;
 }
 .mini div{
- width:40px;
- height:40px;
+ width:38px;
+ height:38px;
  background:var(--light);
- border-radius:50%;
+ border-radius:8px;
  margin:auto auto 6px;
  display:flex;
  align-items:center;
@@ -179,32 +233,39 @@ body{
 
 /* ===== SECTION ===== */
 .section{
- margin-top:22px
+ margin-top:20px
 }
 .section h3{
- font-size:14px;
- margin-bottom:12px
+ font-size:12px;
+ font-weight:700;
+ color:var(--text-soft);
+ text-transform:uppercase;
+ letter-spacing:.04em;
+ margin-bottom:10px
 }
 
 /* ===== GRID ===== */
 .grid{
  display:grid;
  grid-template-columns:repeat(auto-fit,minmax(70px,1fr));
- gap:12px;
+ gap:10px;
 }
 .item{
- background:#fff;
- border-radius:14px;
- padding:10px 4px;
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:8px;
+ padding:12px 4px;
  text-align:center;
  font-size:11px;
- box-shadow:0 4px 14px rgba(0,0,0,.06)
+ font-weight:500;
+ color:var(--text-soft);
+ cursor:pointer;
 }
 .item div{
- width:38px;
- height:38px;
+ width:36px;
+ height:36px;
  background:var(--light);
- border-radius:50%;
+ border-radius:8px;
  margin:0 auto 6px;
  display:flex;
  align-items:center;
@@ -212,22 +273,13 @@ body{
  color:var(--blue)
 }
 
-/* ===== TRANSACTION CARD ===== */
-.txn{
- background:#fff;
- border-radius:12px;
- padding:10px;
- margin-bottom:8px;
- box-shadow:0 4px 14px rgba(0,0,0,.06)
-}
-
 /* ===== FOOTER / BOTTOM NAV (FIXED) ===== */
 .bottom{
- background:#fff;
- border-top:1px solid #e5e7eb;
+ background:var(--bar);
+ border-top:none;
  display:flex;
  justify-content:space-around;
- padding:8px 0;
+ padding:10px 0 8px;
  position:fixed;        /* 🔥 change */
  bottom:0;
  left:50%;
@@ -235,25 +287,29 @@ body{
  width:100%;
  max-width:480px;
  z-index:100;
- height:56px;
+ height:60px;
 }
 .nav{
  text-align:center;
- font-size:10px;
- color:var(--muted)
+ font-size:9.5px;
+ color:var(--text-faint);
+ font-weight:500;
+ cursor:pointer;
 }
 .nav span{
  width:26px;
  height:26px;
- background:var(--light);
+ background:rgba(255,255,255,.08);
  border-radius:50%;
  display:flex;
  align-items:center;
  justify-content:center;
- margin:auto
+ margin:auto;
+ font-size:12px;
 }
 .nav.active{
- color:var(--blue)
+ color:#fff;
+ font-weight:700;
 }
 .nav.active span{
  background:var(--blue);
@@ -264,7 +320,7 @@ body{
 .modal{
  position:fixed;
  inset:0;
- background:rgba(0,0,0,.45);
+ background:rgba(0,0,0,.5);
  display:none;
  align-items:center;
  justify-content:center;
@@ -273,29 +329,36 @@ body{
 .modal-box{
  width:260px;
  background:#fff;
- border-radius:18px;
- padding:20px;
+ border-radius:10px;
+ border:1px solid var(--border);
+ padding:22px 20px;
  text-align:center
+}
+.modal-box h3{
+ font-size:15px;
+ font-weight:700;
+ color:var(--text);
 }
 
 /* ===== HISTORY / STATEMENT ===== */
 
 .history-title{
  font-size:15px;
- font-weight:600;
+ font-weight:700;
+ color:var(--text);
  margin-bottom:12px
 }
 
 /* transaction card */
 .txn{
- background:#fff;
- border-radius:12px;
- padding:10px;
- margin-bottom:10px;
- box-shadow:0 4px 14px rgba(0,0,0,.06)
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:8px;
+ padding:11px 12px;
+ margin-bottom:8px;
 }
-.txn.credit{border-left:5px solid #16a34a}
-.txn.debit{border-left:5px solid #dc2626}
+.txn.credit{border-left:4px solid var(--green)}
+.txn.debit{border-left:4px solid var(--red)}
 
 .txn-top{
  display:flex;
@@ -303,47 +366,150 @@ body{
  align-items:center
 }
 .txn-type{
- font-size:12px;
- font-weight:600
+ font-size:11.5px;
+ font-weight:700;
+ color:var(--text-soft);
+ letter-spacing:.03em;
 }
-.txn-amt.credit{color:#16a34a}
-.txn-amt.debit{color:#dc2626}
+.txn-amt{
+ font-family:'Roboto Mono',monospace;
+ font-weight:700;
+ font-size:13.5px;
+}
+.txn-amt.credit{color:var(--green)}
+.txn-amt.debit{color:var(--red)}
 
 .txn-date{
  font-size:11px;
- color:#6b7280;
- margin-top:4px
+ color:var(--text-faint);
+ margin-top:4px;
+ font-family:'Roboto Mono',monospace;
 }
 
 /* statement box */
 .statement-box{
- background:#fff;
- border-radius:16px;
- padding:14px;
- box-shadow:0 6px 18px rgba(0,0,0,.08)
+ background:var(--card);
+ border:1px solid var(--border);
+ border-left:4px solid var(--orange);
+ border-radius:8px;
+ padding:16px;
+}
+.statement-box h3{
+ font-size:14px;
+ font-weight:700;
+ color:var(--text);
 }
 .statement-box label{
- font-size:12px;
- color:#374151
+ font-size:11.5px;
+ color:var(--text-soft);
+ font-weight:500;
 }
 .statement-box input{
  width:100%;
- padding:8px;
+ padding:9px 10px;
  margin-top:4px;
  margin-bottom:10px;
  border-radius:8px;
- border:1px solid #d1d5db
+ border:1px solid var(--border);
+ font-family:'Roboto Mono',monospace;
+ font-size:12.5px;
+ background:var(--bg);
 }
+.statement-box input:focus{outline:none;border-color:var(--blue)}
 .statement-box button{
  width:100%;
- padding:10px;
- background:#0b4fa2;
+ padding:11px;
+ background:var(--blue);
  color:#fff;
  border:none;
- border-radius:10px;
- font-weight:600
+ border-radius:8px;
+ font-weight:700;
+ font-size:12px;
+ text-transform:uppercase;
+ letter-spacing:.03em;
+ cursor:pointer;
+}
+.statement-box button:active{background:var(--blue-dark)}
+
+/* ===== LOADING OVERLAY ===== */
+.loading-overlay{
+ position:fixed;
+ inset:0;
+ background:rgba(255,255,255,.9);
+ display:none;
+ align-items:center;
+ justify-content:center;
+ z-index:200;
+}
+.spinner{
+ width:38px;
+ height:38px;
+ border:4px solid var(--border);
+ border-top:4px solid var(--blue);
+ border-radius:50%;
+ animation:spin .8s linear infinite;
+}
+@keyframes spin{100%{transform:rotate(360deg)}}
+
+/* ===== INLINE ERROR / EMPTY STATE ===== */
+.state-msg{
+ text-align:center;
+ font-size:12px;
+ color:var(--text-faint);
+ padding:24px 10px;
+}
+.state-msg.error{color:var(--red)}
+.state-msg button{
+ margin-top:10px;
+ padding:8px 16px;
+ background:var(--blue);
+ color:#fff;
+ border:none;
+ border-radius:6px;
+ font-size:11.5px;
+ font-weight:700;
+ text-transform:uppercase;
+ letter-spacing:.03em;
+ width:auto;
+ cursor:pointer;
 }
 
+/* ===== BUTTON DISABLED ===== */
+button:disabled{
+ opacity:.6;
+ cursor:not-allowed;
+}
+
+/* ===== LOGOUT CONFIRM MODAL ===== */
+.modal-box p{
+ font-size:12.5px;
+ color:var(--text-soft);
+ margin:10px 0 18px;
+}
+.modal-actions{
+ display:flex;
+ gap:8px;
+}
+.modal-actions button{
+ flex:1;
+ padding:11px;
+ border:none;
+ border-radius:8px;
+ font-weight:700;
+ font-size:12px;
+ text-transform:uppercase;
+ letter-spacing:.03em;
+ cursor:pointer;
+}
+.modal-actions .cancel-btn{
+ background:var(--bg);
+ color:var(--text-soft);
+ border:1px solid var(--border);
+}
+.modal-actions .confirm-btn{
+ background:var(--red);
+ color:#fff;
+}
 </style>
 
 </head>
@@ -370,8 +536,11 @@ body{
  <h1>🏦 SRCCS</h1>
  <span id="welcome"></span>
  <div class="top-actions">
-  <input class="search" placeholder="Search services">
-  <div class="icon-btn" onclick="logout()">
+  <input class="search" id="searchInput" placeholder="Search services">
+  <div class="icon-btn" onclick="doSearch()">
+   <i class="fa fa-search"></i>
+  </div>
+  <div class="icon-btn" onclick="askLogout()">
    <i class="fa fa-right-from-bracket"></i>
   </div>
  </div>
@@ -381,14 +550,8 @@ body{
 
 <div class="bottom">
  <div class="nav active" onclick="nav(this,'home')"><span>🏠</span>Home</div>
- <div class="nav" onclick="openHistory()">
- <div>⏱</div>History
-</div>
-
-<div class="mini" onclick="openStatement()">
- <div>📄</div>Statement
-</div>
-
+ <div class="nav" onclick="openHistory()"><span>⏱</span>History</div>
+ <div class="nav" onclick="openStatement()"><span>📄</span>Statement</div>
  <div class="nav" onclick="nav(this,'loans')"><span>🏦</span>Loans</div>
  <div class="nav" onclick="nav(this,'profile')"><span>👤</span>Profile</div>
 </div>
@@ -404,6 +567,23 @@ body{
  </div>
 </div>
 
+<!-- LOGOUT CONFIRM MODAL -->
+<div class="modal" id="logoutModal">
+ <div class="modal-box">
+  <h3 style="margin:0">Logout?</h3>
+  <p>Are you sure you want to log out of your SRCCS account?</p>
+  <div class="modal-actions">
+   <button class="cancel-btn" onclick="logoutModal.style.display='none'">Cancel</button>
+   <button class="confirm-btn" onclick="logout()">Logout</button>
+  </div>
+ </div>
+</div>
+
+<!-- LOADING OVERLAY -->
+<div class="loading-overlay" id="loadingOverlay">
+ <div class="spinner"></div>
+</div>
+
 
 <script>
 /* ================= APIs ================= */
@@ -413,25 +593,61 @@ const LOAN_API    = "https://script.google.com/macros/s/AKfycbx9ASrADhROLfc_aTjo
 const page = document.getElementById("page");
 let timer = null;
 
+/* ================= CACHE (avoids reloading same data every click) ================= */
+const appCache = {
+ home: null,     // {balanceHTML, crHTML, drHTML, txnHTML}
+ history: null,  // rendered historyBox HTML
+ loans: null     // rendered loanBox HTML
+};
+
+/* ================= LOADING HELPER ================= */
+function showLoading(){
+ document.getElementById("loadingOverlay").style.display = "flex";
+}
+function hideLoading(){
+ document.getElementById("loadingOverlay").style.display = "none";
+}
+function fmtAmount(n){
+ const num = Number(n) || 0;
+ return "₹ " + num.toLocaleString("en-IN");
+}
+
 /* ================= LOGIN ================= */
 function login(){
  err.innerText = "";
+
+ if(!acc.value.trim() || !pass.value){
+  err.innerText = "Please enter account number and password";
+  return;
+ }
+
+ const loginBtn = document.querySelector(".login-box button");
+ loginBtn.disabled = true;
+ loginBtn.innerText = "Logging in...";
+
  fetch(ACCOUNT_API,{
   method:"POST",
   body:JSON.stringify({
    action:"login",
-   account: acc.value,
+   account: acc.value.trim(),
    password: pass.value
   })
  })
  .then(r=>r.json())
  .then(d=>{
   if(!d.success){
-   err.innerText = d.message;
+   err.innerText = d.message || "Invalid account number or password";
    return;
   }
   localStorage.setItem("srccs",JSON.stringify(d));
   start();
+ })
+ .catch(()=>{
+  err.innerText = "Network error. Please check your connection and try again.";
+ })
+ .finally(()=>{
+  loginBtn.disabled = false;
+  loginBtn.innerText = "Login";
  });
 }
 
@@ -446,26 +662,31 @@ function start(){
 
  loadHome();
  startLive();
+
+ /* preload History & Loans silently so their tabs open instantly */
+ prefetchHistory();
+ prefetchLoans();
 }
 
 /* ================= HOME ================= */
 function loadHome(){
  const d = JSON.parse(localStorage.getItem("srccs"));
+ const c = appCache.home;
 
  page.innerHTML = `
  <div class="card">
   <div class="acc-type">My Savings A/c</div>
   <div class="acc-no">${d.customer.account}</div>
-  <div class="balance" id="liveBal">₹ 0</div>
+  <div class="balance" id="liveBal">${c ? c.balanceHTML : "₹ 0"}</div>
 
   <div style="display:flex;gap:12px;margin-top:10px">
    <div style="flex:1;background:#e8f5e9;border-radius:10px;padding:8px;text-align:center">
     <div style="font-size:11px;color:#166534">Credit</div>
-    <b id="crAmt">₹ 0</b>
+    <b id="crAmt">${c ? c.crHTML : "₹ 0"}</b>
    </div>
    <div style="flex:1;background:#fdecea;border-radius:10px;padding:8px;text-align:center">
     <div style="font-size:11px;color:#991b1b">Debit</div>
-    <b id="drAmt">₹ 0</b>
+    <b id="drAmt">${c ? c.drHTML : "₹ 0"}</b>
    </div>
   </div>
 
@@ -473,7 +694,7 @@ function loadHome(){
    <div class="mini" onclick="openHistory()"><div>⏱</div>History</div>
    <div class="mini" onclick="openStatement()"><div>📄</div>Statement</div>
    <div class="mini" onclick="openDepositPage()">
- <div>➕</div>Servises
+ <div>➕</div>Services
 </div>
 
   </div>
@@ -481,7 +702,7 @@ function loadHome(){
 
  <div class="section">
   <h3>Recent Transactions</h3>
-  <div id="txnBox"></div>
+  <div id="txnBox">${c ? c.txnHTML : ""}</div>
  </div>
 
  <div class="section">
@@ -511,27 +732,33 @@ function fetchLive(){
  .then(res=>{
   if(!res.success || !res.transactions) return;
 
-  liveBal.innerText = "₹ " + res.balance;
+  liveBal.innerText = fmtAmount(res.balance);
 
   let cr = 0, dr = 0;
   res.transactions.forEach(t=>{
    if(t.type==="credit") cr += Number(t.amount);
    if(t.type==="debit")  dr += Number(t.amount);
   });
-  crAmt.innerText = "₹ " + cr;
-  drAmt.innerText = "₹ " + dr;
+  crAmt.innerText = fmtAmount(cr);
+  drAmt.innerText = fmtAmount(dr);
 
   txnBox.innerHTML = "";
+
+  if(res.transactions.length===0){
+   txnBox.innerHTML = `<div class="state-msg">No transactions yet.</div>`;
+   return;
+  }
+
   res.transactions.slice(-5).reverse().forEach(t=>{
    txnBox.innerHTML += `
  <div class="txn ${t.type}">
   <div style="display:flex;justify-content:space-between">
    <b>${t.type.toUpperCase()}</b>
-   <b style="color:${t.type==="credit"?"#16a34a":"#dc2626"}">₹ ${t.amount}</b>
+   <b style="color:${t.type==="credit"?"#16a34a":"#dc2626"}">${fmtAmount(t.amount)}</b>
   </div>
 
   <div style="font-size:11px;color:#6b7280">
-   ${t.date} • Bal ₹ ${t.balance}
+   ${t.date} • Bal ${fmtAmount(t.balance)}
   </div>
 
   <div style="font-size:10px;color:#9ca3af">
@@ -540,7 +767,59 @@ function fetchLive(){
  </div>
 `;
   });
+
+  /* save to cache so switching tabs shows this instantly next time */
+  appCache.home = {
+   balanceHTML: liveBal.innerText,
+   crHTML: crAmt.innerText,
+   drHTML: drAmt.innerText,
+   txnHTML: txnBox.innerHTML
+  };
+ })
+ .catch(()=>{
+  const txnBoxEl = document.getElementById("txnBox");
+  if(txnBoxEl && !appCache.home) txnBoxEl.innerHTML = `<div class="state-msg error">Unable to load latest balance. Retrying shortly…</div>`;
  });
+}
+
+/* ================= SEARCH ================= */
+function doSearch(){
+ const input = document.getElementById("searchInput");
+ const q = input.value.trim().toLowerCase();
+ if(!q){
+  input.focus();
+  return;
+ }
+
+ const routes = [
+  { keys:["home","dashboard"], run:()=> setActiveNav(0, ()=>loadHome()) },
+  { keys:["history","transaction","statement history"], run:()=> setActiveNav(1, openHistory) },
+  { keys:["statement","download"], run:()=> setActiveNav(2, openStatement) },
+  { keys:["loan","emi","loans"], run:()=> setActiveNav(3, ()=>loadLoans()) },
+  { keys:["profile","account details","cibil","nominee"], run:()=> setActiveNav(4, ()=>loadProfile()) },
+  { keys:["qr","scan","pay"], run:()=>{ document.getElementById("qrModal").style.display="flex"; } },
+  { keys:["transfer"], run:()=> alert("Transfer Coming Soon") },
+  { keys:["fd","fixed deposit"], run:()=> alert("FD — Coming Soon") },
+  { keys:["rd","recurring deposit"], run:()=> alert("RD — Coming Soon") },
+  { keys:["deposit","service","services"], run: openDepositPage },
+  { keys:["logout","sign out"], run: askLogout }
+ ];
+
+ for(const r of routes){
+  if(r.keys.some(k=> k.includes(q) || q.includes(k))){
+   r.run();
+   return;
+  }
+ }
+
+ alert(`"${input.value}" ke liye koi matching service nahi mili.`);
+}
+
+function setActiveNav(index, fn){
+ const navs = document.querySelectorAll(".nav");
+ navs.forEach(n=>n.classList.remove("active"));
+ if(navs[index]) navs[index].classList.add("active");
+ fn();
 }
 
 /* ================= NAV ================= */
@@ -562,15 +841,38 @@ let emiTimer = null;
 
 function loadLoans(){
  const d = JSON.parse(localStorage.getItem("srccs"));
+ const cached = appCache.loans;
 
  page.innerHTML = `
   <div class="card">
    <h3>Loan & EMI Details</h3>
-   <div id="loanBox" style="font-size:13px;color:#374151">Loading...</div>
+   <div id="loanBox" style="font-size:13px;color:#374151">${cached ? cached : "Loading..."}</div>
   </div>
  `;
 
- fetch(LOAN_API,{
+ fetchLoanData()
+ .then(result=>{
+  const box = document.getElementById("loanBox");
+  if(!box) return;
+
+  box.innerHTML = result.html;
+  appCache.loans = result.html;
+
+  if(result.nextEmiDate){
+   startEmiNotification(result.nextEmiDate, result.remainingEMI);
+  }
+ })
+ .catch(()=>{
+  const box = document.getElementById("loanBox");
+  if(box && !appCache.loans) box.innerHTML = `<div class="state-msg error">Unable to load loan details. <button onclick="loadLoans()">Retry</button></div>`;
+ });
+}
+
+/* ===== fetch + build loan HTML (used by loadLoans AND background prefetch after login) ===== */
+function fetchLoanData(){
+ const d = JSON.parse(localStorage.getItem("srccs"));
+
+ return fetch(LOAN_API,{
   method:"POST",
   body:JSON.stringify({
    action:"searchLoan",
@@ -579,11 +881,8 @@ function loadLoans(){
  })
  .then(r=>r.json())
  .then(res=>{
-  const box = document.getElementById("loanBox");
-
   if(!res.found){
-   box.innerHTML = "No active loan found.";
-   return;
+   return { html:`<div class="state-msg">No active loan found.</div>`, nextEmiDate:null, remainingEMI:0 };
   }
 
   /* ===== EMI BASED VALUES ===== */
@@ -639,7 +938,7 @@ function loadLoans(){
 
       <div style="display:flex;justify-content:space-between">
         <b>EMI ${i+1}</b>
-        <b>₹ ${e.amount}</b>
+        <b>${fmtAmount(e.amount)}</b>
       </div>
 
       <div style="
@@ -671,22 +970,22 @@ function loadLoans(){
   }
 
   /* ===== FINAL UI ===== */
-  box.innerHTML = `
+  const html = `
    ${alertBox}
 
    <b>Loan ID:</b> ${res.row.loan_id}<br>
 
    <b>Principal Amount:</b>
    <span style="font-weight:600;color:#0b4fa2">
-    ₹ ${principal}
+    ${fmtAmount(principal)}
    </span><br>
 
    <b>Outstanding Amount:</b>
    <span style="color:#dc2626;font-weight:600">
-    ₹ ${outstanding}
+    ${fmtAmount(outstanding)}
    </span><br><br>
 
-   <b>EMI Amount:</b> ₹ ${emiAmount}<br>
+   <b>EMI Amount:</b> ${fmtAmount(emiAmount)}<br>
    <b>Paid EMI:</b> ${paidEMI} / ${tenure}<br>
    <b>Remaining EMI:</b> ${remainingEMI}<br>
    <b>Next EMI Date:</b> ${nextEmiStr}<br>
@@ -696,8 +995,20 @@ function loadLoans(){
    ${emiHistoryHTML}
   `;
 
-  startEmiNotification(nextEmiDate, remainingEMI);
+  return { html, nextEmiDate, remainingEMI };
  });
+}
+
+/* ===== silently preload Loans data right after login ===== */
+function prefetchLoans(){
+ fetchLoanData()
+ .then(result=>{
+  appCache.loans = result.html;
+  if(result.nextEmiDate){
+   startEmiNotification(result.nextEmiDate, result.remainingEMI);
+  }
+ })
+ .catch(()=>{ /* silent — Loans tab will just fetch normally if this fails */ });
 }
 
 /* ================= EMI NOTIFICATION ================= */
@@ -735,7 +1046,9 @@ function loadProfile(){
  const d = JSON.parse(localStorage.getItem("srccs"));
 
  const photo = d.customer.photo || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
- const cibil = d.customer.cibil || "Not Available";
+ const cibil = d.customer.cibil || null;
+ const cibilNum = Number(cibil);
+ const cibilOk = !isNaN(cibilNum) && cibilNum >= 700;
 
  page.innerHTML = `
   <!-- PROFILE CARD -->
@@ -781,8 +1094,8 @@ function loadProfile(){
   <div class="card" style="margin-top:14px">
    <h3 style="margin-top:0">📊 CIBIL Status</h3>
    <div style="font-size:14px;font-weight:600;
-    color:${cibil >= 700 ? '#16a34a' : '#dc2626'}">
-    CIBIL Score: ${cibil}
+    color:${cibilOk ? '#16a34a' : '#dc2626'}">
+    CIBIL Score: ${cibil !== null ? cibil : "Not Available"}
    </div>
    <div style="font-size:11px;color:#6b7280;margin-top:4px">
     (As per internal record)
@@ -801,7 +1114,7 @@ function loadProfile(){
 
   <!-- LOGOUT -->
   <div class="card" style="margin-top:14px">
-   <button onclick="logout()"
+   <button onclick="askLogout()"
     style="
      width:100%;
      padding:10px;
@@ -844,50 +1157,80 @@ const outstanding = emiAmount * remainingEMI;
  <b>Loan ID:</b> ${res.row.loan_id}<br>
  <b>Outstanding:</b>
  <span style="color:#dc2626;font-weight:600">
-  ₹ ${outstanding}
+  ${fmtAmount(outstanding)}
  </span><br>
- <b>EMI:</b> ₹ ${emiAmount}<br>
+ <b>EMI:</b> ${fmtAmount(emiAmount)}<br>
  <b>Remaining EMI:</b> ${remainingEMI}<br>
  <b>Status:</b> ${res.row.status}
 `;
 
+ })
+ .catch(()=>{
+  const box = document.getElementById("profileLoanBox");
+  if(box) box.innerHTML = `<span style="color:#dc2626">Unable to load loan details.</span>`;
  });
 }
 
 
 /* ================= HISTORY ================= */
 function openHistory(){
+ const cached = appCache.history;
+
  page.innerHTML = `
   <div class="history-title">Transaction History</div>
-  <div id="historyBox"></div>
+  <div id="historyBox">${cached ? cached : '<div class="state-msg">Loading transactions…</div>'}</div>
  `;
 
+ fetchHistoryData()
+ .then(html=>{
+  const box = document.getElementById("historyBox");
+  if(box) box.innerHTML = html;
+  appCache.history = html;
+ })
+ .catch(()=>{
+  const box = document.getElementById("historyBox");
+  if(box && !appCache.history) box.innerHTML = `<div class="state-msg error">Unable to load history. <button onclick="openHistory()">Retry</button></div>`;
+ });
+}
+
+/* ===== fetch + build history HTML (used by openHistory AND background prefetch after login) ===== */
+function fetchHistoryData(){
  const d = JSON.parse(localStorage.getItem("srccs"));
 
- fetch(`${ACCOUNT_API}?fn=getStatement&account=${d.customer.account}`)
+ return fetch(`${ACCOUNT_API}?fn=getStatement&account=${d.customer.account}`)
  .then(r=>r.json())
  .then(res=>{
-  if(!res.success) return;
+  if(!res.success){
+   return `<div class="state-msg error">Unable to load history.</div>`;
+  }
 
-  historyBox.innerHTML = "";
-  res.transactions.slice(-20).reverse().forEach(t=>{
-   historyBox.innerHTML += `
+  if(res.transactions.length===0){
+   return `<div class="state-msg">No transactions found.</div>`;
+  }
+
+  return res.transactions.slice(-20).reverse().map(t=>`
     <div class="txn ${t.type}">
      <div class="txn-top">
       <div class="txn-type">${t.type.toUpperCase()}</div>
-      <div class="txn-amt ${t.type}">₹ ${t.amount}</div>
+      <div class="txn-amt ${t.type}">${fmtAmount(t.amount)}</div>
      </div>
      <div class="txn-date">
- ${t.date} • Balance ₹ ${t.balance}
+ ${t.date} • Balance ${fmtAmount(t.balance)}
 </div>
 
 <div style="font-size:10px;color:#9ca3af">
  ID: ${t.id || "-"}
 </div>
     </div>
-   `;
-  });
+   `).join("");
  });
+}
+
+/* ===== silently preload History data right after login ===== */
+function prefetchHistory(){
+ fetchHistoryData()
+ .then(html=>{ appCache.history = html; })
+ .catch(()=>{ /* silent — History tab will just fetch normally if this fails */ });
 }
 
 /* ================= STATEMENT ================= */
@@ -906,19 +1249,41 @@ function openStatement(){
 
 function downloadStatement(){
  if(!fromDate.value || !toDate.value){
-  alert("Please select date range");
+  alert("Please select both From and To dates");
   return;
  }
+ if(fromDate.value > toDate.value){
+  alert("'From Date' cannot be after 'To Date'");
+  return;
+ }
+
+ const btn = document.querySelector(".statement-box button");
+ btn.disabled = true;
+ btn.innerText = "Preparing statement...";
+
  const d = JSON.parse(localStorage.getItem("srccs"));
  window.open(
   `${ACCOUNT_API}?fn=downloadStatement&account=${d.customer.account}&from=${fromDate.value}&to=${toDate.value}`,
   "_blank"
  );
+
+ setTimeout(()=>{
+  btn.disabled = false;
+  btn.innerText = "Download PDF Statement";
+ },1500);
 }
 
 /* ================= LOGOUT ================= */
+function askLogout(){
+ document.getElementById("logoutModal").style.display = "flex";
+}
+
 function logout(){
  clearInterval(timer);
+ clearInterval(emiTimer);
+ appCache.home = null;
+ appCache.history = null;
+ appCache.loans = null;
  localStorage.clear();
  location.reload();
 }
@@ -931,7 +1296,14 @@ function openDepositPage(){
  window.location.href = "deposit.html";
 }
 document.addEventListener("keydown", function(e){
- if(e.key === "Enter"){
+ if(e.key !== "Enter") return;
+
+ if(document.activeElement && document.activeElement.id === "searchInput"){
+  doSearch();
+  return;
+ }
+
+ if(document.getElementById("loginBox").style.display !== "none"){
   login();
  }
 });

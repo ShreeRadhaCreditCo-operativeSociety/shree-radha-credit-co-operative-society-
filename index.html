@@ -1,1315 +1,822 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SRCCS Mobile App</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"/>
+<meta name="theme-color" content="#8B1538"/>
+<title>Shree Radha — Customer App</title>
 <style>
-:root{
- --bar:#0B0B0C;
- --bg:#F1F3F4;
- --card:#FFFFFF;
- --blue:#4285F4;
- --blue-dark:#1A56C4;
- --orange:#FF6D2A;
- --text:#202124;
- --text-soft:#5F6368;
- --text-faint:#9AA0A6;
- --border:#E1E3E6;
- --green:#1B8A4C;
- --red:#D93025;
- --warn:#F2A600;
- --light:#EAF1FB;
- --muted:#5F6368
-}
-*{
- box-sizing:border-box;
- font-family:'Roboto',Arial,sans-serif
-}
-.mono{font-family:'Roboto Mono',monospace}
+:root{--p:#8B1538;--pd:#6B0F2A;--bg:#F5F6FA;--cs:0 2px 8px rgba(0,0,0,.06);--t:#2D2D2D;--tm:#6B7280;--bd:#E5E7EB;--ok:#059669;--er:#DC2626}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--t);font-size:13px;min-height:100vh;-webkit-tap-highlight-color:transparent}
+.hidden{display:none!important}
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#5C0A28,#8B1538,#C2185B)}
+.login-box{background:#fff;border-radius:12px;padding:28px 24px;width:100%;max-width:360px;box-shadow:0 8px 28px rgba(0,0,0,.25)}
+.login-box .logo{text-align:center;margin-bottom:16px}
+.login-box .logo .li{width:56px;height:56px;margin:0 auto 8px;border-radius:10px;overflow:hidden}
+.login-box .logo .li img{width:100%;height:100%;object-fit:contain}
+.login-box h1{font-size:13.5px;color:var(--p);font-weight:700;line-height:1.25}
+.login-box .sub{font-size:10.5px;color:var(--tm);margin-top:2px}
+.fg{margin-bottom:10px}
+.fg label{display:block;font-size:11.5px;font-weight:600;color:var(--tm);margin-bottom:2px}
+.fg input,.fg select,.fg textarea{width:100%;height:40px;padding:4px 10px;border:1.5px solid #D1D5DB;border-radius:6px;font-size:14px;font-family:inherit}
+.fg textarea{height:70px;resize:vertical}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--p);box-shadow:0 0 0 2px rgba(139,21,56,.1)}
+.btn-login{width:100%;height:42px;border:none;border-radius:6px;background:var(--p);color:#fff;font-size:14px;font-weight:600;cursor:pointer;margin-top:4px}
+.login-hint{text-align:center;margin-top:12px;font-size:10.5px;color:var(--tm)}
+.app{display:none;flex-direction:column;height:100vh;height:100dvh;background:var(--bg)}
+.app.show{display:flex}
+.top{background:linear-gradient(135deg,#5C0A28,#8B1538,#C2185B);color:#fff;padding:10px 14px;padding-top:max(10px,env(safe-area-inset-top))}
+.top .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.top .brand-wrap{display:flex;align-items:center;gap:8px}
+.top .brand-logo{width:36px;height:36px;border-radius:8px;overflow:hidden;background:rgba(255,255,255,.95)}
+.top .brand-logo img{width:100%;height:100%;object-fit:contain}
+.top .brand{font-weight:800;font-size:11.5px;line-height:1.15}
+.top .org{font-size:10px;opacity:.9;font-weight:600}
+.top .sub{font-size:10px;opacity:.88;margin-top:1px}
+.top .av{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px}
+.top .icon-btn{background:rgba(255,255,255,.2);border:none;color:#fff;width:34px;height:34px;border-radius:50%;font-size:16px;cursor:pointer;position:relative}
+.top .icon-btn .bdg{position:absolute;top:-2px;right:-2px;background:var(--er);color:#fff;font-size:9px;font-weight:700;min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 4px}
+.bal-card{margin:10px 10px 0;background:linear-gradient(135deg,#6B0F2A,#8B1538,#C2185B);color:#fff;border-radius:12px;padding:16px;box-shadow:0 4px 16px rgba(139,21,56,.3)}
+.bal-card .lbl{font-size:11px;opacity:.85}
+.bal-card .amt{font-size:26px;font-weight:800;margin:4px 0}
+.bal-card .meta{font-size:11px;opacity:.9;display:flex;justify-content:space-between;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.2)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px 10px 0}
+.stat{background:#fff;border-radius:8px;padding:10px 6px;text-align:center;box-shadow:var(--cs)}
+.stat .v{font-size:13px;font-weight:800;color:var(--p)}
+.stat .l{font-size:9px;color:var(--tm);margin-top:2px}
+.body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:8px 10px 80px}
+.card{background:#fff;border-radius:8px;padding:12px;margin-bottom:8px;box-shadow:var(--cs)}
+.card h3{font-size:12px;color:var(--p);font-weight:700;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid var(--bd)}
+.row-item{display:flex;justify-content:space-between;align-items:flex-start;padding:9px 0;border-bottom:1px solid #F0F0F0;font-size:12px;gap:8px}
+.row-item:last-child{border-bottom:none}
+.row-item .nm{font-weight:700}
+.row-item .meta{font-size:10.5px;color:var(--tm)}
+.row-item .amt{font-weight:800;color:var(--p);white-space:nowrap}
+.row-item .amt.dr{color:var(--er)}
+.row-item .amt.cr{color:var(--ok)}
+.empty{text-align:center;color:var(--tm);padding:16px;font-size:12px}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;font-size:12px}
+.info-grid b{display:block;font-size:9.5px;text-transform:uppercase;color:var(--tm);font-weight:600}
+.tabs{display:flex;background:#fff;border-radius:8px;overflow:hidden;margin-bottom:8px;box-shadow:var(--cs);flex-wrap:wrap}
+.tab{flex:1;min-width:20%;padding:9px 2px;text-align:center;font-size:10px;font-weight:700;color:var(--tm);border:none;background:#fff;cursor:pointer}
+.tab.on{color:var(--p);border-bottom:2px solid var(--p)}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--bd);display:grid;grid-template-columns:repeat(5,1fr);padding:6px 2px calc(6px + env(safe-area-inset-bottom));z-index:50;box-shadow:0 -2px 12px rgba(0,0,0,.08)}
+.nav button{background:none;border:none;font-size:9.5px;font-weight:600;color:var(--tm);padding:6px 1px;cursor:pointer;font-family:inherit}
+.nav button.on{color:var(--p)}
+.nav button .ic{display:block;font-size:16px;margin-bottom:2px}
+.toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--p);color:#fff;padding:8px 16px;border-radius:6px;font-size:12px;font-weight:600;opacity:0;transition:all .2s;z-index:100;max-width:90%;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.btn{display:flex;align-items:center;justify-content:center;height:40px;border-radius:6px;font-size:13px;font-weight:600;border:none;cursor:pointer;font-family:inherit;width:100%}
+.btn-p{background:var(--p);color:#fff}
+.btn-o{background:#fff;color:var(--p);border:1.5px solid var(--p)}
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+.field{margin-bottom:8px}
+.field label{display:block;font-size:10.5px;font-weight:600;color:var(--tm);margin-bottom:2px}
+.field label .rq{color:var(--er)}
+.field input,.field select,.field textarea{width:100%;height:40px;padding:6px 10px;border:1px solid #D1D5DB;border-radius:6px;font-size:14px;font-family:inherit}
+.field textarea{height:64px;resize:vertical}
+.field input[readonly]{background:#F3F4F6}
+.prefix{display:flex;height:40px}
+.prefix .pfx{background:#F5E6EA;color:#8B1538;font-weight:800;font-size:13px;padding:0 10px;display:flex;align-items:center;border:1px solid #D1D5DB;border-right:none;border-radius:6px 0 0 6px}
+.prefix input{border-radius:0 6px 6px 0!important;flex:1;min-width:0}
+.verify{display:none;padding:8px 10px;border-radius:6px;font-size:11.5px;margin-top:6px;line-height:1.4}
+.verify.show{display:block}
+.verify.ok{background:#D1FAE5;border:1px solid #A7F3D0;color:#065F46}
+.verify.err{background:#FEE2E2;border:1px solid #FECACA;color:#991B1B}
+.alert-box{background:#FFF7ED;border:1px solid #FDBA74;border-radius:8px;padding:10px;font-size:11.5px;color:#9A3412;line-height:1.45;margin:8px 0}
+.alert-box b{color:#C2410C}
+.chk{display:flex;align-items:flex-start;gap:8px;font-size:12px;margin:8px 0}
+.chk input{width:18px;height:18px;margin-top:2px;flex-shrink:0}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:90;display:none;align-items:flex-end;justify-content:center}
+.modal.show{display:flex}
+.modal-sheet{background:#fff;width:100%;max-width:480px;max-height:88vh;border-radius:14px 14px 0 0;overflow:hidden;display:flex;flex-direction:column}
+.modal-head{padding:12px 14px;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center}
+.modal-head h2{font-size:14px;color:var(--p);font-weight:800}
+.modal-head button{background:none;border:none;font-size:18px;color:var(--tm);cursor:pointer}
+.modal-body{overflow-y:auto;padding:12px;padding-bottom:24px}
+.badge{display:inline-block;padding:1px 7px;border-radius:8px;font-size:10px;font-weight:700}
+.badge.warn{background:#FEF3C7;color:#92400E}
+.badge.er{background:#FEE2E2;color:#991B1B}
+.badge.ok{background:#D1FAE5;color:#065F46}
+.badge.info{background:#DBEAFE;color:#1E40AF}
+@media(min-width:480px){.app,.login-wrap{max-width:480px;margin:0 auto}.nav,.modal-sheet{max-width:480px}.nav{left:50%;transform:translateX(-50%)}}
 
-/* ===== BODY ===== */
-body{
- margin:0;
- background:#DADCE0;
- display:flex;
- justify-content:center;
- font-size:13px;
- color:var(--text);
-}
+/* UPI-style MPIN pad */
+.mpin-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:120;display:none;align-items:flex-end;justify-content:center}
+.mpin-overlay.show{display:flex}
+.mpin-sheet{background:#fff;width:100%;max-width:400px;border-radius:16px 16px 0 0;padding:18px 16px calc(16px + env(safe-area-inset-bottom));box-shadow:0 -8px 32px rgba(0,0,0,.2)}
+.mpin-sheet .title{text-align:center;font-size:14px;font-weight:800;color:#8B1538;margin-bottom:4px}
+.mpin-sheet .sub{text-align:center;font-size:12px;color:#6B7280;margin-bottom:14px;line-height:1.35}
+.mpin-sheet .amt-big{text-align:center;font-size:22px;font-weight:800;color:#2D2D2D;margin-bottom:4px}
+.mpin-sheet .to-name{text-align:center;font-size:12px;color:#6B7280;margin-bottom:14px}
+.mpin-dots{display:flex;justify-content:center;gap:12px;margin-bottom:18px}
+.mpin-dots span{width:12px;height:12px;border-radius:50%;border:2px solid #8B1538;background:transparent;transition:.15s}
+.mpin-dots span.filled{background:#8B1538}
+.mpin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:280px;margin:0 auto}
+.mpin-pad button{height:52px;border:none;border-radius:50%;background:#F3F4F6;font-size:20px;font-weight:700;color:#2D2D2D;cursor:pointer;font-family:inherit}
+.mpin-pad button:active{background:#E5E7EB}
+.mpin-pad button.ghost{background:transparent;font-size:13px;font-weight:600;color:#8B1538}
+.mpin-err{text-align:center;color:#DC2626;font-size:12px;font-weight:600;min-height:18px;margin-bottom:8px}
+.mpin-cancel{display:block;width:100%;margin-top:12px;background:none;border:none;color:#6B7280;font-size:13px;font-weight:600;padding:10px;cursor:pointer}
 
-/* ===== PHONE FRAME ===== */
-.phone{
- width:100%;
- max-width:480px;
- height:100vh;          /* dvh hata do */
- background:var(--bg);
- display:flex;
- flex-direction:column;
- margin:auto;
-}
-/* ===== LOGIN ===== */
-.login{
- flex:1;
- display:flex;
- align-items:center;
- justify-content:center
-}
-.login-box{
- background:#fff;
- width:90%;
- padding:26px 22px;
- border-radius:10px;
- border:1px solid var(--border);
- box-shadow:0 8px 24px rgba(0,0,0,.12);
- text-align:center
-}
-.login-box h2{
- margin:0 0 4px;
- font-size:17px;
- font-weight:900;
- color:var(--text);
- letter-spacing:-.01em
-}
-.login-box input{
- width:100%;
- padding:11px 10px;
- margin-top:12px;
- border-radius:8px;
- border:1px solid var(--border);
- font-family:'Roboto Mono',monospace;
- font-size:13px;
- background:var(--bg);
- outline:none
-}
-.login-box input:focus{border-color:var(--blue)}
-.login-box button{
- width:100%;
- margin-top:18px;
- padding:12px;
- background:var(--blue);
- color:#fff;
- border:none;
- border-radius:8px;
- font-weight:700;
- font-size:12.5px;
- letter-spacing:.03em;
- text-transform:uppercase;
- cursor:pointer
-}
-.login-box button:active{background:var(--blue-dark)}
-.err{
- color:var(--red);
- font-size:11.5px;
- font-weight:500;
- margin-top:10px
-}
-
-/* ===== HEADER (FIXED) ===== */
-.header{
- background:var(--bar);
- color:#fff;
- padding:14px 16px;
- position:sticky;
- top:0;
- z-index:10;
- height:96px;     /* 🔑 fixed height */
-}
-.header h1{
- font-size:17px;
- font-weight:900;
- letter-spacing:-.01em;
- margin:0
-}
-.header span{
- font-size:11px;
- color:var(--text-faint);
- opacity:1
-}
-.top-actions{
- display:flex;
- gap:8px;
- margin-top:10px
-}
-.search{
- flex:1;
- border:none;
- border-radius:8px;
- padding:8px 12px;
- font-size:12px;
- font-family:'Roboto',sans-serif;
- background:rgba(255,255,255,.1);
- color:#fff;
-}
-.search::placeholder{color:var(--text-faint)}
-.icon-btn{
- width:34px;
- height:34px;
- background:rgba(255,255,255,.12);
- border-radius:8px;
- display:flex;
- align-items:center;
- justify-content:center;
- cursor:pointer;
- color:#fff;
-}
-
-/* ===== CONTENT (ONLY SCROLL AREA) ===== */
-.content{
- flex:1;
- overflow-y:auto;
- padding:14px;
- padding-bottom:80px;   /* 🔥 important */
- -webkit-overflow-scrolling:touch;
- scroll-behavior: smooth;
-}
-/* ===== CARD ===== */
-.card{
- background:var(--card);
- border:1px solid var(--border);
- border-left:4px solid var(--blue);
- border-radius:8px;
- padding:16px;
- box-shadow:0 1px 3px rgba(0,0,0,.05)
-}
-.acc-type{
- font-size:11.5px;
- color:var(--text-soft);
- text-transform:uppercase;
- letter-spacing:.03em;
-}
-.acc-no{
- font-family:'Roboto Mono',monospace;
- font-weight:700;
- font-size:14px;
- margin:4px 0 8px
-}
-.balance{
- font-family:'Roboto Mono',monospace;
- font-size:24px;
- font-weight:900;
- color:var(--blue-dark)
-}
-
-/* ===== CREDIT / DEBIT BOX ===== */
-.amount-box{
- flex:1;
- border-radius:10px;
- padding:8px;
- text-align:center
-}
-
-/* ===== MINI ACTIONS ===== */
-.mini-actions{
- display:flex;
- justify-content:space-between;
- margin-top:16px;
- padding-top:14px;
- border-top:1px solid #F0F1F2;
-}
-.mini{
- text-align:center;
- font-size:10.5px;
- color:var(--text-soft);
- font-weight:500;
- cursor:pointer;
-}
-.mini div{
- width:38px;
- height:38px;
- background:var(--light);
- border-radius:8px;
- margin:auto auto 6px;
- display:flex;
- align-items:center;
- justify-content:center;
- color:var(--blue)
-}
-
-/* ===== SECTION ===== */
-.section{
- margin-top:20px
-}
-.section h3{
- font-size:12px;
- font-weight:700;
- color:var(--text-soft);
- text-transform:uppercase;
- letter-spacing:.04em;
- margin-bottom:10px
-}
-
-/* ===== GRID ===== */
-.grid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(70px,1fr));
- gap:10px;
-}
-.item{
- background:var(--card);
- border:1px solid var(--border);
- border-radius:8px;
- padding:12px 4px;
- text-align:center;
- font-size:11px;
- font-weight:500;
- color:var(--text-soft);
- cursor:pointer;
-}
-.item div{
- width:36px;
- height:36px;
- background:var(--light);
- border-radius:8px;
- margin:0 auto 6px;
- display:flex;
- align-items:center;
- justify-content:center;
- color:var(--blue)
-}
-
-/* ===== FOOTER / BOTTOM NAV (FIXED) ===== */
-.bottom{
- background:var(--bar);
- border-top:none;
- display:flex;
- justify-content:space-around;
- padding:10px 0 8px;
- position:fixed;        /* 🔥 change */
- bottom:0;
- left:50%;
- transform:translateX(-50%);
- width:100%;
- max-width:480px;
- z-index:100;
- height:60px;
-}
-.nav{
- text-align:center;
- font-size:9.5px;
- color:var(--text-faint);
- font-weight:500;
- cursor:pointer;
-}
-.nav span{
- width:26px;
- height:26px;
- background:rgba(255,255,255,.08);
- border-radius:50%;
- display:flex;
- align-items:center;
- justify-content:center;
- margin:auto;
- font-size:12px;
-}
-.nav.active{
- color:#fff;
- font-weight:700;
-}
-.nav.active span{
- background:var(--blue);
- color:#fff
-}
-
-/* ===== MODAL ===== */
-.modal{
- position:fixed;
- inset:0;
- background:rgba(0,0,0,.5);
- display:none;
- align-items:center;
- justify-content:center;
- z-index:50
-}
-.modal-box{
- width:260px;
- background:#fff;
- border-radius:10px;
- border:1px solid var(--border);
- padding:22px 20px;
- text-align:center
-}
-.modal-box h3{
- font-size:15px;
- font-weight:700;
- color:var(--text);
-}
-
-/* ===== HISTORY / STATEMENT ===== */
-
-.history-title{
- font-size:15px;
- font-weight:700;
- color:var(--text);
- margin-bottom:12px
-}
-
-/* transaction card */
-.txn{
- background:var(--card);
- border:1px solid var(--border);
- border-radius:8px;
- padding:11px 12px;
- margin-bottom:8px;
-}
-.txn.credit{border-left:4px solid var(--green)}
-.txn.debit{border-left:4px solid var(--red)}
-
-.txn-top{
- display:flex;
- justify-content:space-between;
- align-items:center
-}
-.txn-type{
- font-size:11.5px;
- font-weight:700;
- color:var(--text-soft);
- letter-spacing:.03em;
-}
-.txn-amt{
- font-family:'Roboto Mono',monospace;
- font-weight:700;
- font-size:13.5px;
-}
-.txn-amt.credit{color:var(--green)}
-.txn-amt.debit{color:var(--red)}
-
-.txn-date{
- font-size:11px;
- color:var(--text-faint);
- margin-top:4px;
- font-family:'Roboto Mono',monospace;
-}
-
-/* statement box */
-.statement-box{
- background:var(--card);
- border:1px solid var(--border);
- border-left:4px solid var(--orange);
- border-radius:8px;
- padding:16px;
-}
-.statement-box h3{
- font-size:14px;
- font-weight:700;
- color:var(--text);
-}
-.statement-box label{
- font-size:11.5px;
- color:var(--text-soft);
- font-weight:500;
-}
-.statement-box input{
- width:100%;
- padding:9px 10px;
- margin-top:4px;
- margin-bottom:10px;
- border-radius:8px;
- border:1px solid var(--border);
- font-family:'Roboto Mono',monospace;
- font-size:12.5px;
- background:var(--bg);
-}
-.statement-box input:focus{outline:none;border-color:var(--blue)}
-.statement-box button{
- width:100%;
- padding:11px;
- background:var(--blue);
- color:#fff;
- border:none;
- border-radius:8px;
- font-weight:700;
- font-size:12px;
- text-transform:uppercase;
- letter-spacing:.03em;
- cursor:pointer;
-}
-.statement-box button:active{background:var(--blue-dark)}
-
-/* ===== LOADING OVERLAY ===== */
-.loading-overlay{
- position:fixed;
- inset:0;
- background:rgba(255,255,255,.9);
- display:none;
- align-items:center;
- justify-content:center;
- z-index:200;
-}
-.spinner{
- width:38px;
- height:38px;
- border:4px solid var(--border);
- border-top:4px solid var(--blue);
- border-radius:50%;
- animation:spin .8s linear infinite;
-}
-@keyframes spin{100%{transform:rotate(360deg)}}
-
-/* ===== INLINE ERROR / EMPTY STATE ===== */
-.state-msg{
- text-align:center;
- font-size:12px;
- color:var(--text-faint);
- padding:24px 10px;
-}
-.state-msg.error{color:var(--red)}
-.state-msg button{
- margin-top:10px;
- padding:8px 16px;
- background:var(--blue);
- color:#fff;
- border:none;
- border-radius:6px;
- font-size:11.5px;
- font-weight:700;
- text-transform:uppercase;
- letter-spacing:.03em;
- width:auto;
- cursor:pointer;
-}
-
-/* ===== BUTTON DISABLED ===== */
-button:disabled{
- opacity:.6;
- cursor:not-allowed;
-}
-
-/* ===== LOGOUT CONFIRM MODAL ===== */
-.modal-box p{
- font-size:12.5px;
- color:var(--text-soft);
- margin:10px 0 18px;
-}
-.modal-actions{
- display:flex;
- gap:8px;
-}
-.modal-actions button{
- flex:1;
- padding:11px;
- border:none;
- border-radius:8px;
- font-weight:700;
- font-size:12px;
- text-transform:uppercase;
- letter-spacing:.03em;
- cursor:pointer;
-}
-.modal-actions .cancel-btn{
- background:var(--bg);
- color:var(--text-soft);
- border:1px solid var(--border);
-}
-.modal-actions .confirm-btn{
- background:var(--red);
- color:#fff;
-}
 </style>
-
 </head>
-
 <body>
 
-<div class="phone">
-
-<!-- LOGIN -->
-<div class="login" id="loginBox">
- <div class="login-box">
-  <h2>SRCCS Login</h2>
-  <input id="acc" placeholder="Account Number">
-  <input id="pass" type="password" placeholder="Password">
-  <button onclick="login()">Login</button>
-  <div class="err" id="err"></div>
- </div>
-</div>
-
-<!-- APP -->
-<div id="app" style="display:none;flex:1;flex-direction:column">
-
-<div class="header">
- <h1>🏦 SRCCS</h1>
- <span id="welcome"></span>
- <div class="top-actions">
-  <input class="search" id="searchInput" placeholder="Search services">
-  <div class="icon-btn" onclick="doSearch()">
-   <i class="fa fa-search"></i>
+<div id="loginScreen" class="login-wrap">
+  <div class="login-box">
+    <div class="logo">
+      <div class="li"><img src="data:image/png;base64,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" alt="SR"></div>
+      <h1>Shree Radha Credit Co-operative Society Ltd.</h1>
+      <div class="sub">Customer Mobile Banking</div>
+    </div>
+    <div class="fg"><label>Username / Mobile / Account No.</label><input id="loginUser" placeholder="Mobile or username" autocomplete="username"></div>
+    <div class="fg"><label>Password / MPIN</label><input type="password" id="loginPass" placeholder="Password or MPIN" autocomplete="current-password"></div>
+    <button class="btn-login" id="loginBtn" onclick="doCustLogin()">Login</button>
+    <p class="login-hint">Customer login only</p>
   </div>
-  <div class="icon-btn" onclick="askLogout()">
-   <i class="fa fa-right-from-bracket"></i>
+</div>
+
+<div id="custApp" class="app">
+  <div class="top">
+    <div class="row">
+      <div class="brand-wrap">
+        <div class="brand-logo"><img src="data:image/png;base64,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" alt="SR"></div>
+        <div>
+          <div class="brand">SHREE RADHA CREDIT CO-OPERATIVE</div>
+          <div class="org">Society Limited</div>
+          <div class="sub" id="cu-label">Customer</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <button type="button" class="icon-btn" onclick="openNotif()">🔔<span class="bdg" id="notif-bdg" style="display:none">0</span></button>
+        <div class="av" id="cu-avatar">C</div>
+        <button type="button" onclick="custLogout()" style="background:rgba(255,255,255,.2);border:none;color:#fff;padding:6px 10px;border-radius:6px;font-size:11px;font-weight:700">Logout</button>
+      </div>
+    </div>
   </div>
- </div>
-</div>
 
-<div class="content" id="page"></div>
-
-<div class="bottom">
- <div class="nav active" onclick="nav(this,'home')"><span>🏠</span>Home</div>
- <div class="nav" onclick="openHistory()"><span>⏱</span>History</div>
- <div class="nav" onclick="openStatement()"><span>📄</span>Statement</div>
- <div class="nav" onclick="nav(this,'loans')"><span>🏦</span>Loans</div>
- <div class="nav" onclick="nav(this,'profile')"><span>👤</span>Profile</div>
-</div>
-
-</div>
-</div>
-
-<!-- QR MODAL -->
-<div class="modal" id="qrModal" onclick="this.style.display='none'">
- <div class="modal-box">
-  <h3>Scan & Pay</h3>
-  <i class="fa fa-qrcode" style="font-size:80px;color:#0b4fa2"></i>
- </div>
-</div>
-
-<!-- LOGOUT CONFIRM MODAL -->
-<div class="modal" id="logoutModal">
- <div class="modal-box">
-  <h3 style="margin:0">Logout?</h3>
-  <p>Are you sure you want to log out of your SRCCS account?</p>
-  <div class="modal-actions">
-   <button class="cancel-btn" onclick="logoutModal.style.display='none'">Cancel</button>
-   <button class="confirm-btn" onclick="logout()">Logout</button>
+  <div class="bal-card">
+    <div class="lbl">Available Balance</div>
+    <div class="amt" id="cu-balance">₹0</div>
+    <div class="meta"><span id="cu-acc-no">—</span><span id="cu-acc-type">—</span></div>
   </div>
- </div>
+  <div class="stats">
+    <div class="stat"><div class="v" id="cu-stat-loans">0</div><div class="l">Active Loans</div></div>
+    <div class="stat"><div class="v" id="cu-stat-out">₹0</div><div class="l">Loan Due</div></div>
+    <div class="stat"><div class="v" id="cu-stat-fd">₹0</div><div class="l">FD + RD</div></div>
+  </div>
+
+  <div class="body">
+    <div class="tabs">
+      <button type="button" class="tab on" data-tab="home" onclick="cuTab('home')">Home</button>
+      <button type="button" class="tab" data-tab="transfer" onclick="cuTab('transfer')">Transfer</button>
+      <button type="button" class="tab" data-tab="loanreq" onclick="cuTab('loanreq')">Loan Request</button>
+      <button type="button" class="tab" data-tab="loans" onclick="cuTab('loans')">My Loans</button>
+      <button type="button" class="tab" data-tab="more" onclick="cuTab('more')">More</button>
+    </div>
+
+    <div id="cu-tab-home">
+      <div class="card"><h3>Account Details</h3>
+        <div class="info-grid">
+          <div><b>Name</b><span id="cu-name">—</span></div>
+          <div><b>Customer ID</b><span id="cu-cid">—</span></div>
+          <div><b>Mobile</b><span id="cu-mobile">—</span></div>
+          <div><b>Status</b><span id="cu-status">—</span></div>
+        </div>
+      </div>
+      <div class="card"><h3>EMI Alerts (next 3 days)</h3><div id="cu-emi-alerts"><div class="empty">None</div></div></div>
+      <div class="card"><h3>Recent Transactions</h3><div id="cu-recent"><div class="empty">Loading…</div></div></div>
+      <button type="button" class="btn btn-o" onclick="cuRefresh()">↻ Refresh</button>
+    </div>
+
+    <div id="cu-tab-transfer" style="display:none">
+      <div class="card">
+        <h3>Fund Transfer</h3>
+        <div class="alert-box">
+          <b>⚠ IMPORTANT ALERT</b><br>
+          Fund transfer ke samay galat account number / galat transfer ki <b>poori zimmedari aapki</b> hogi.<br>
+          <b>Shree Radha Credit Co-operative Society Ltd.</b> iske liye <b>koi jawabdari nahi legi</b> aur <b>refund bhi nahi karegi</b>.
+        </div>
+        <div class="field"><label>From Account</label><input id="ft_FROM" readonly></div>
+        <div class="field"><label>To Account No. <span class="rq">*</span></label>
+          <div class="prefix"><span class="pfx">SRC</span><input id="ft_TO" placeholder="1254" inputmode="numeric" onblur="verifyToAccount()"></div>
+        </div>
+        <button type="button" class="btn btn-o" onclick="verifyToAccount()">Verify Beneficiary</button>
+        <div class="verify" id="ft-verify"></div>
+        <div class="field" style="margin-top:8px"><label>Amount (₹) <span class="rq">*</span></label><input type="number" id="ft_AMT" min="1" step="0.01" placeholder="0.00"></div>
+        <div class="field"><label>Particulars</label><input id="ft_PART" placeholder="Transfer remark"></div>
+        <label class="chk"><input type="checkbox" id="ft_ACCEPT"><span>Main samajhta/samajhti hoon ki galat transfer par Society ki koi jawabdari nahi hai aur refund nahi milega.</span></label>
+        <button type="button" class="btn btn-p" id="ft-btn" onclick="doFundTransfer()">Transfer Now</button>
+        <p style="text-align:center;font-size:11px;color:#6B7280;margin-top:8px">Pehle <b>Email OTP</b>, phir <b>MPIN</b> — tab transfer</p>
+      </div>
+    </div>
+
+    <div id="cu-tab-loanreq" style="display:none">
+      <div class="card">
+        <h3>Loan Request</h3>
+        <div class="field"><label>Loan Amount (₹) <span class="rq">*</span></label><input type="number" id="lr_AMT" min="1000" step="100" placeholder="50000"></div>
+        <div class="field"><label>Loan Purpose <span class="rq">*</span></label>
+          <select id="lr_PURPOSE"><option value="">— Select —</option><option>Personal</option><option>Business</option><option>Agriculture</option><option>Education</option><option>Home</option><option>Vehicle</option><option>Other</option></select>
+        </div>
+        <div class="field"><label>Tenure (months)</label><input type="number" id="lr_TENURE" min="1" max="120" value="12"></div>
+        <div class="field"><label>Remarks</label><textarea id="lr_REM" placeholder="Optional"></textarea></div>
+        <button type="button" class="btn btn-p" id="lr-btn" onclick="submitLoanRequest()">Submit Loan Request</button>
+      </div>
+      <div class="card"><h3>My Loan Applications</h3><div id="lr-list"><div class="empty">—</div></div></div>
+    </div>
+
+    <div id="cu-tab-loans" style="display:none">
+      <div class="card"><h3>My Loans — tap for full details</h3><div id="cu-loan-list"><div class="empty">Loading…</div></div></div>
+    </div>
+
+    <div id="cu-tab-more" style="display:none">
+      <div class="card"><h3>Statement</h3>
+        <div class="field"><label>From</label><input type="date" id="cu-from"></div>
+        <div class="field"><label>To</label><input type="date" id="cu-to"></div>
+        <button type="button" class="btn btn-p" onclick="cuLoadStatement()">Load Statement</button>
+        <div id="cu-stmt-list" style="margin-top:10px"><div class="empty">—</div></div>
+      </div>
+      <div class="card"><h3>Fixed Deposits</h3><div id="cu-fd-list"><div class="empty">—</div></div></div>
+      <div class="card"><h3>Recurring Deposits</h3><div id="cu-rd-list"><div class="empty">—</div></div></div>
+    </div>
+  </div>
+
+  <div class="nav">
+    <button type="button" class="on" data-nav="home" onclick="cuTab('home')"><span class="ic">🏠</span>Home</button>
+    <button type="button" data-nav="transfer" onclick="cuTab('transfer')"><span class="ic">↔️</span>Transfer</button>
+    <button type="button" data-nav="loanreq" onclick="cuTab('loanreq')"><span class="ic">📝</span>Request</button>
+    <button type="button" data-nav="loans" onclick="cuTab('loans')"><span class="ic">💳</span>Loans</button>
+    <button type="button" data-nav="more" onclick="cuTab('more')"><span class="ic">☰</span>More</button>
+  </div>
 </div>
 
-<!-- LOADING OVERLAY -->
-<div class="loading-overlay" id="loadingOverlay">
- <div class="spinner"></div>
+<div class="modal" id="modal-notif" onclick="if(event.target===this)closeNotif()">
+  <div class="modal-sheet">
+    <div class="modal-head"><h2>🔔 Notifications</h2><button type="button" onclick="closeNotif()">✕</button></div>
+    <div class="modal-body" id="notif-body"><div class="empty">Loading…</div></div>
+  </div>
+</div>
+<div class="modal" id="modal-loan" onclick="if(event.target===this)closeLoanDetail()">
+  <div class="modal-sheet">
+    <div class="modal-head"><h2>Loan Details</h2><button type="button" onclick="closeLoanDetail()">✕</button></div>
+    <div class="modal-body" id="loan-detail-body"></div>
+  </div>
 </div>
 
+<div class="mpin-overlay" id="mpin-overlay">
+  <div class="mpin-sheet">
+    <div class="title">Enter MPIN</div>
+    <div class="sub">UPI / Fund Transfer ke liye MPIN darj karein</div>
+    <div class="amt-big" id="mpin-amt">₹0</div>
+    <div class="to-name" id="mpin-to">—</div>
+    <div class="mpin-dots" id="mpin-dots">
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <div class="mpin-err" id="mpin-err"></div>
+    <div class="mpin-pad">
+      <button type="button" onclick="mpinKey('1')">1</button>
+      <button type="button" onclick="mpinKey('2')">2</button>
+      <button type="button" onclick="mpinKey('3')">3</button>
+      <button type="button" onclick="mpinKey('4')">4</button>
+      <button type="button" onclick="mpinKey('5')">5</button>
+      <button type="button" onclick="mpinKey('6')">6</button>
+      <button type="button" onclick="mpinKey('7')">7</button>
+      <button type="button" onclick="mpinKey('8')">8</button>
+      <button type="button" onclick="mpinKey('9')">9</button>
+      <button type="button" class="ghost" onclick="mpinClear()">Clear</button>
+      <button type="button" onclick="mpinKey('0')">0</button>
+      <button type="button" class="ghost" onclick="mpinBack()">⌫</button>
+    </div>
+    <button type="button" class="mpin-cancel" onclick="mpinClose()">Cancel</button>
+  </div>
+</div>
+
+
+<div class="mpin-overlay" id="otp-overlay">
+  <div class="mpin-sheet">
+    <div class="title">Email OTP</div>
+    <div class="sub" id="otp-sub">Transfer confirm karne ke liye email par OTP bheja gaya hai</div>
+    <div class="amt-big" id="otp-amt">₹0</div>
+    <div class="to-name" id="otp-to">—</div>
+    <div class="field" style="margin:12px 0 8px">
+      <label style="display:block;text-align:center;margin-bottom:6px;font-size:12px;color:#6B7280">6-digit OTP</label>
+      <input id="otp-input" type="tel" inputmode="numeric" maxlength="6" placeholder="••••••" style="width:100%;height:48px;text-align:center;font-size:22px;letter-spacing:8px;border:2px solid #8B1538;border-radius:8px;font-weight:700">
+    </div>
+    <div class="mpin-err" id="otp-err"></div>
+    <button type="button" class="btn btn-p" id="otp-btn" onclick="otpVerifyAndTransfer()">Confirm Transfer</button>
+    <button type="button" class="btn btn-o" style="margin-top:8px" onclick="otpResend()">Resend OTP</button>
+    <button type="button" class="mpin-cancel" onclick="otpClose()">Cancel</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
 
 <script>
-/* ================= APIs ================= */
-const ACCOUNT_API = "https://script.google.com/macros/s/AKfycbwBkxKR8Zs9eEW0xaKdTME2EqGCnvgPdv3pSRcpWYO_7aW-Kxw7VVTeA342ZruLaiwe0w/exec";
-const LOAN_API    = "https://script.google.com/macros/s/AKfycbx9ASrADhROLfc_aTjoWMPb7AacG2GfOs4bpiOB6khZqcrFusZRBUk7G6spPQH2GdF3/exec";
+const GS_URL="https://script.google.com/macros/s/AKfycbyy8Gxh1ltmBIAZhHWVlEAt2GJ3pjw7DHkQ0eBgpA91CEt_h0U4z85K3NwdKCSAe7b9tw/exec";
+let session={customerId:"",accountNo:"",name:"",mobile:"",username:"",email:""};
+window._cuHome=null; window._toOk=false; window._notifs=[];
+var SESSION_KEY="srccs_cust_session_v1";
 
-const page = document.getElementById("page");
-let timer = null;
-
-/* ================= CACHE (avoids reloading same data every click) ================= */
-const appCache = {
- home: null,     // {balanceHTML, crHTML, drHTML, txnHTML}
- history: null,  // rendered historyBox HTML
- loans: null     // rendered loanBox HTML
-};
-
-/* ================= LOADING HELPER ================= */
-function showLoading(){
- document.getElementById("loadingOverlay").style.display = "flex";
+function today(){var d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+function fmt(n){return "₹"+Number(n||0).toLocaleString("en-IN");}
+function esc(s){return String(s||"").replace(/</g,"&lt;");}
+function postGAS(payload){
+  return fetch(GS_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload),redirect:"follow"})
+  .then(function(res){return res.text().then(function(t){try{return JSON.parse(t);}catch(e){return {status:"error",message:"Invalid response"};}});})
+  .catch(function(){return {status:"error",message:"Network error"};});
 }
-function hideLoading(){
- document.getElementById("loadingOverlay").style.display = "none";
+function toast(msg){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show");},2400);}
+function fullAcc(id){var n=(document.getElementById(id).value||"").trim().toUpperCase().replace(/^SRC/i,"");if(!n)return "";return "SRC"+n;}
+
+function saveSession(){
+  try{
+    localStorage.setItem(SESSION_KEY, JSON.stringify({
+      customerId: session.customerId||"",
+      accountNo: session.accountNo||"",
+      name: session.name||"",
+      mobile: session.mobile||"",
+      username: session.username||"",
+      email: session.email||"",
+      savedAt: Date.now()
+    }));
+  }catch(e){}
 }
-function fmtAmount(n){
- const num = Number(n) || 0;
- return "₹ " + num.toLocaleString("en-IN");
+function clearSession(){
+  try{ localStorage.removeItem(SESSION_KEY); }catch(e){}
 }
-
-/* ================= LOGIN ================= */
-function login(){
- err.innerText = "";
-
- if(!acc.value.trim() || !pass.value){
-  err.innerText = "Please enter account number and password";
-  return;
- }
-
- const loginBtn = document.querySelector(".login-box button");
- loginBtn.disabled = true;
- loginBtn.innerText = "Logging in...";
-
- fetch(ACCOUNT_API,{
-  method:"POST",
-  body:JSON.stringify({
-   action:"login",
-   account: acc.value.trim(),
-   password: pass.value
-  })
- })
- .then(r=>r.json())
- .then(d=>{
-  if(!d.success){
-   err.innerText = d.message || "Invalid account number or password";
-   return;
-  }
-  localStorage.setItem("srccs",JSON.stringify(d));
-  start();
- })
- .catch(()=>{
-  err.innerText = "Network error. Please check your connection and try again.";
- })
- .finally(()=>{
-  loginBtn.disabled = false;
-  loginBtn.innerText = "Login";
- });
+function loadSession(){
+  try{
+    var raw = localStorage.getItem(SESSION_KEY);
+    if(!raw) return null;
+    var s = JSON.parse(raw);
+    if(!s || !s.accountNo) return null;
+    // optional: expire after 90 days of inactivity
+    if(s.savedAt && (Date.now() - s.savedAt) > 90*24*60*60*1000){ clearSession(); return null; }
+    return s;
+  }catch(e){ return null; }
+}
+function enterApp(showWelcome){
+  document.getElementById("loginScreen").classList.add("hidden");
+  document.getElementById("custApp").classList.add("show");
+  var ft=document.getElementById("ft_FROM"); if(ft) ft.value=session.accountNo||"";
+  var to=document.getElementById("cu-to"),fr=document.getElementById("cu-from");
+  if(to)to.value=today();
+  if(fr){var d=new Date();d.setMonth(d.getMonth()-1);fr.value=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+  cuRefresh();
+  if(showWelcome) toast("Welcome "+(session.name||""));
 }
 
-/* ================= START ================= */
-function start(){
- const d = JSON.parse(localStorage.getItem("srccs"));
- if(!d) return;
-
- loginBox.style.display = "none";
- app.style.display = "flex";
- welcome.innerText = "Welcome, " + d.name;
-
- loadHome();
- startLive();
-
- /* preload History & Loans silently so their tabs open instantly */
- prefetchHistory();
- prefetchLoans();
-}
-
-/* ================= HOME ================= */
-function loadHome(){
- const d = JSON.parse(localStorage.getItem("srccs"));
- const c = appCache.home;
-
- page.innerHTML = `
- <div class="card">
-  <div class="acc-type">My Savings A/c</div>
-  <div class="acc-no">${d.customer.account}</div>
-  <div class="balance" id="liveBal">${c ? c.balanceHTML : "₹ 0"}</div>
-
-  <div style="display:flex;gap:12px;margin-top:10px">
-   <div style="flex:1;background:#e8f5e9;border-radius:10px;padding:8px;text-align:center">
-    <div style="font-size:11px;color:#166534">Credit</div>
-    <b id="crAmt">${c ? c.crHTML : "₹ 0"}</b>
-   </div>
-   <div style="flex:1;background:#fdecea;border-radius:10px;padding:8px;text-align:center">
-    <div style="font-size:11px;color:#991b1b">Debit</div>
-    <b id="drAmt">${c ? c.drHTML : "₹ 0"}</b>
-   </div>
-  </div>
-
-  <div class="mini-actions">
-   <div class="mini" onclick="openHistory()"><div>⏱</div>History</div>
-   <div class="mini" onclick="openStatement()"><div>📄</div>Statement</div>
-   <div class="mini" onclick="openDepositPage()">
- <div>➕</div>Services
-</div>
-
-  </div>
- </div>
-
- <div class="section">
-  <h3>Recent Transactions</h3>
-  <div id="txnBox">${c ? c.txnHTML : ""}</div>
- </div>
-
- <div class="section">
-  <h3>Payments</h3>
-  <div class="grid">
-   <div class="item" onclick="qrModal.style.display='flex'"><div>🔳</div>QR Pay</div>
-   <div class="item" onclick="alert('Transfer Coming Soon')"><div>📤</div>Transfer</div>
-   <div class="item"><div>🐖</div>FD</div>
-   <div class="item"><div>💰</div>RD</div>
-  </div>
- </div>
- `;
-}
-
-/* ================= LIVE BALANCE ================= */
-function startLive(){
- clearInterval(timer);
- fetchLive();
- timer = setInterval(fetchLive,8000);
-}
-
-function fetchLive(){
- const d = JSON.parse(localStorage.getItem("srccs"));
-
- fetch(`${ACCOUNT_API}?fn=getStatement&account=${d.customer.account}`)
- .then(r=>r.json())
- .then(res=>{
-  if(!res.success || !res.transactions) return;
-
-  liveBal.innerText = fmtAmount(res.balance);
-
-  let cr = 0, dr = 0;
-  res.transactions.forEach(t=>{
-   if(t.type==="credit") cr += Number(t.amount);
-   if(t.type==="debit")  dr += Number(t.amount);
+function doCustLogin(){
+  var u=(document.getElementById("loginUser").value||"").trim(), p=document.getElementById("loginPass").value||"";
+  if(!u||!p){alert("Enter login details");return;}
+  var btn=document.getElementById("loginBtn");btn.disabled=true;btn.textContent="Checking…";
+  postGAS({action:"customer_login",username:u,password:p,mobile:u,mpin:p}).then(function(res){
+    btn.disabled=false;btn.textContent="Login";
+    if(!res||res.status!=="success"){alert((res&&res.message)||"Invalid login");return;}
+    var us=res.user||{},acc=res.account||{};
+    session.customerId=us.CUSTOMER_ID||acc.CUSTOMER_ID||"";
+    session.accountNo=us.ACCOUNT_NO||acc.ACCOUNT_NO||"";
+    session.name=acc.ACCOUNT_NAME||us.USERNAME||u;
+    session.mobile=us.MOBILE||acc.MOBILE||"";
+    session.username=us.USERNAME||u;session.email=us.EMAIL||acc.EMAIL||"";
+    saveSession();
+    enterApp(true);
   });
-  crAmt.innerText = fmtAmount(cr);
-  drAmt.innerText = fmtAmount(dr);
+}
+function custLogout(){
+  if(!confirm("Logout?"))return;
+  session={customerId:"",accountNo:"",name:"",mobile:"",username:"",email:""};window._cuHome=null;
+  clearSession();
+  document.getElementById("custApp").classList.remove("show");
+  document.getElementById("loginScreen").classList.remove("hidden");
+  document.getElementById("loginPass").value="";
+}
 
-  txnBox.innerHTML = "";
-
-  if(res.transactions.length===0){
-   txnBox.innerHTML = `<div class="state-msg">No transactions yet.</div>`;
-   return;
+// Auto-login from this device (no password again until Logout)
+(function tryAutoLogin(){
+  var s = loadSession();
+  if(!s) return;
+  session.customerId=s.customerId||"";
+  session.accountNo=s.accountNo||"";
+  session.name=s.name||"";
+  session.mobile=s.mobile||"";
+  session.username=s.username||"";
+  session.email=s.email||"";
+  // show app immediately; refresh will update name/balance from server
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded", function(){ enterApp(false); });
+  } else {
+    enterApp(false);
   }
+})();
 
-  res.transactions.slice(-5).reverse().forEach(t=>{
-   txnBox.innerHTML += `
- <div class="txn ${t.type}">
-  <div style="display:flex;justify-content:space-between">
-   <b>${t.type.toUpperCase()}</b>
-   <b style="color:${t.type==="credit"?"#16a34a":"#dc2626"}">${fmtAmount(t.amount)}</b>
-  </div>
-
-  <div style="font-size:11px;color:#6b7280">
-   ${t.date} • Bal ${fmtAmount(t.balance)}
-  </div>
-
-  <div style="font-size:10px;color:#9ca3af">
-   ID: ${t.id || "-"}
-  </div>
- </div>
-`;
+function cuTab(name){
+  document.querySelectorAll(".tab").forEach(function(t){t.classList.toggle("on",t.getAttribute("data-tab")===name);});
+  document.querySelectorAll(".nav button").forEach(function(t){t.classList.toggle("on",t.getAttribute("data-nav")===name);});
+  ["home","transfer","loanreq","loans","more"].forEach(function(t){
+    var el=document.getElementById("cu-tab-"+t);if(el)el.style.display=t===name?"block":"none";
   });
-
-  /* save to cache so switching tabs shows this instantly next time */
-  appCache.home = {
-   balanceHTML: liveBal.innerText,
-   crHTML: crAmt.innerText,
-   drHTML: drAmt.innerText,
-   txnHTML: txnBox.innerHTML
-  };
- })
- .catch(()=>{
-  const txnBoxEl = document.getElementById("txnBox");
-  if(txnBoxEl && !appCache.home) txnBoxEl.innerHTML = `<div class="state-msg error">Unable to load latest balance. Retrying shortly…</div>`;
- });
+  if(name==="loans")cuPaintLoans();
+  if(name==="loanreq")cuPaintLoanApps();
+  if(name==="more"){cuPaintDeposits();}
 }
 
-/* ================= SEARCH ================= */
-function doSearch(){
- const input = document.getElementById("searchInput");
- const q = input.value.trim().toLowerCase();
- if(!q){
-  input.focus();
-  return;
- }
+function cuRefresh(){
+  postGAS({action:"customer_home",customer_id:session.customerId,account_no:session.accountNo}).then(function(r){
+    if(!r||r.status!=="success"){toast((r&&r.message)||"Load failed");return;}
+    window._cuHome=r;
+    session.accountNo=r.ACCOUNT_NO||session.accountNo;
+    session.customerId=r.CUSTOMER_ID||session.customerId;
+    session.name=r.ACCOUNT_NAME||session.name;
+    session.email=r.EMAIL||session.email||"";
+    session.mobile=r.MOBILE||session.mobile||"";
+    saveSession();
+    document.getElementById("ft_FROM").value=session.accountNo;
+    var bal=parseFloat(String(r.CURRENT_BALANCE!=null?r.CURRENT_BALANCE:0).toString().replace(/,/g,""))||0;
+    document.getElementById("cu-balance").textContent=fmt(bal);
+    document.getElementById("cu-acc-no").textContent=r.ACCOUNT_NO||"—";
+    document.getElementById("cu-acc-type").textContent=r.ACCOUNT_TYPE||"—";
+    document.getElementById("cu-name").textContent=r.ACCOUNT_NAME||"—";
+    document.getElementById("cu-cid").textContent=r.CUSTOMER_ID||"—";
+    document.getElementById("cu-mobile").textContent=r.MOBILE||"—";
+    document.getElementById("cu-status").textContent=r.ACCOUNT_STATUS||"—";
+    document.getElementById("cu-stat-loans").textContent=String(r.ACTIVE_LOANS||0);
+    document.getElementById("cu-stat-out").textContent=fmt(r.TOTAL_LOAN_OUTSTANDING);
+    document.getElementById("cu-stat-fd").textContent=fmt((parseFloat(r.FD_TOTAL)||0)+(parseFloat(r.RD_TOTAL)||0));
+    document.getElementById("cu-label").textContent=(r.ACCOUNT_NAME||"")+" • "+(r.ACCOUNT_NO||"");
+    document.getElementById("cu-avatar").textContent=((r.ACCOUNT_NAME||"C")[0]||"C").toUpperCase();
+    cuPaintLoans();cuPaintDeposits();cuLoadRecent();loadEmiAlerts();buildNotifications();
+  });
+}
 
- const routes = [
-  { keys:["home","dashboard"], run:()=> setActiveNav(0, ()=>loadHome()) },
-  { keys:["history","transaction","statement history"], run:()=> setActiveNav(1, openHistory) },
-  { keys:["statement","download"], run:()=> setActiveNav(2, openStatement) },
-  { keys:["loan","emi","loans"], run:()=> setActiveNav(3, ()=>loadLoans()) },
-  { keys:["profile","account details","cibil","nominee"], run:()=> setActiveNav(4, ()=>loadProfile()) },
-  { keys:["qr","scan","pay"], run:()=>{ document.getElementById("qrModal").style.display="flex"; } },
-  { keys:["transfer"], run:()=> alert("Transfer Coming Soon") },
-  { keys:["fd","fixed deposit"], run:()=> alert("FD — Coming Soon") },
-  { keys:["rd","recurring deposit"], run:()=> alert("RD — Coming Soon") },
-  { keys:["deposit","service","services"], run: openDepositPage },
-  { keys:["logout","sign out"], run: askLogout }
- ];
-
- for(const r of routes){
-  if(r.keys.some(k=> k.includes(q) || q.includes(k))){
-   r.run();
-   return;
+function cuLoadRecent(){
+  var box=document.getElementById("cu-recent");
+  if(!session.accountNo){box.innerHTML='<div class="empty">No account</div>';return;}
+  box.innerHTML='<div class="empty">Loading…</div>';
+  postGAS({action:"get_statement",account_no:session.accountNo,limit:15}).then(function(r){
+    if(!r||r.status!=="success"){
+      box.innerHTML='<div class="empty">'+(r&&r.message||"Could not load transactions")+'</div>';
+      return;
+    }
+    // sync balance from statement account if home failed
+    if(r.account && r.account.CURRENT_BALANCE!=null){
+      document.getElementById("cu-balance").textContent=fmt(r.account.CURRENT_BALANCE);
+    }
+    var rows=(r.rows||r.transactions||r.statement)||[];
+    rows=rows.filter(function(x){var d=parseFloat(x.DEPOSIT||x.CREDIT||0)||0,w=parseFloat(x.WITHDRAWAL||x.DEBIT||0)||0,t=parseFloat(x.TRANSFER||0)||0;return (d+w+t)>0;});
+    if(!rows.length){box.innerHTML='<div class="empty">No recent transactions</div>';return;}
+    box.innerHTML=rows.slice(0,10).map(txnRow).join("");
+  });
+}
+function txnRow(x){
+  var dep=parseFloat(x.DEPOSIT||x.CREDIT||0)||0;
+  var wd=parseFloat(x.WITHDRAWAL||x.DEBIT||0)||0;
+  var tr=parseFloat(x.TRANSFER||0)||0;
+  if(!dep && !wd && tr>0){
+    // Incoming if TO_ACCOUNT is me
+    if(String(x.TO_ACCOUNT||"")===String(session.accountNo||"")) dep=tr;
+    else wd=tr;
   }
- }
-
- alert(`"${input.value}" ke liye koi matching service nahi mili.`);
+  var isCr=dep>0;
+  var amt=isCr?dep:(wd||tr||0);
+  // Hide zero-amount junk (e.g. empty Agent collection lines)
+  if(!(amt>0)) return "";
+  var cls=isCr?"cr":"dr", sign=isCr?"+":"-";
+  var part=x.PARTICULARS||x.TRANSACTION_TYPE||x.NARRATION||"Transaction";
+  if(tr>0 && !x.PARTICULARS) part = isCr ? ("Transfer in from "+(x.ACCOUNT_NO||"")) : ("Transfer to "+(x.TO_ACCOUNT||""));
+  return '<div class="row-item"><div><div class="nm">'+esc(part)+'</div><div class="meta">'+esc(String(x.DATE||"").substring(0,10))+(x.RECEIPT_NO||x.TRANSACTION_ID?" • "+(x.RECEIPT_NO||x.TRANSACTION_ID):"")+'</div></div><div class="amt '+cls+'">'+sign+" "+fmt(amt)+'</div></div>';
+}
+function cuLoadStatement(){
+  var box=document.getElementById("cu-stmt-list");box.innerHTML='<div class="empty">Loading…</div>';
+  postGAS({action:"get_statement",account_no:session.accountNo,from_date:document.getElementById("cu-from").value,to_date:document.getElementById("cu-to").value,limit:500}).then(function(r){
+    var rows=(r&&(r.rows||r.transactions||r.statement))||[];
+    rows=rows.filter(function(x){var d=parseFloat(x.DEPOSIT||x.CREDIT||0)||0,w=parseFloat(x.WITHDRAWAL||x.DEBIT||0)||0,t=parseFloat(x.TRANSFER||0)||0;return (d+w+t)>0;});
+    box.innerHTML=rows.length?rows.map(txnRow).filter(Boolean).join(""):'<div class="empty">No transactions</div>';
+  });
 }
 
-function setActiveNav(index, fn){
- const navs = document.querySelectorAll(".nav");
- navs.forEach(n=>n.classList.remove("active"));
- if(navs[index]) navs[index].classList.add("active");
- fn();
+/* ===== Fund Transfer ===== */
+function verifyToAccount(){
+  var acc=fullAcc("ft_TO");
+  var box=document.getElementById("ft-verify");
+  window._toOk=false;
+  if(!acc||acc==="SRC"){box.className="verify err show";box.innerHTML="Enter beneficiary account number";return;}
+  if(acc===session.accountNo){box.className="verify err show";box.innerHTML="Cannot transfer to same account";return;}
+  box.className="verify show";box.innerHTML="Verifying…";
+  postGAS({action:"lookup_account",account_no:acc}).then(function(r){
+    if(!r||r.status!=="success"){box.className="verify err show";box.innerHTML="⚠️ "+((r&&r.message)||"Account not found");return;}
+    var st=String(r.ACCOUNT_STATUS||"ACTIVE").toUpperCase();
+    if(st==="CLOSED"||st==="BLOCKED"){box.className="verify err show";box.innerHTML="⚠️ Account is "+st;return;}
+    window._toOk=true;window._toAcc=r;
+    box.className="verify ok show";
+    box.innerHTML="<b>✓ Verified</b><br>Name: <b>"+esc(r.ACCOUNT_NAME)+"</b><br>Type: "+esc(r.ACCOUNT_TYPE)+" • Status: "+esc(r.ACCOUNT_STATUS);
+  });
 }
-
-/* ================= NAV ================= */
-function nav(el,p){
- document.querySelectorAll(".nav").forEach(n=>n.classList.remove("active"));
- el.classList.add("active");
-
- if(p==="home")    loadHome();
- if(p==="loans")   loadLoans();
- if(p==="profile") loadProfile();
-}
-
-/* ================= LOANS (LOAN API) ================= */
-/* ================= LOAN PAGE ================= */
-
-/* ================= LOANS (FINAL – EMI BASED) ================= */
-
-let emiTimer = null;
-
-function loadLoans(){
- const d = JSON.parse(localStorage.getItem("srccs"));
- const cached = appCache.loans;
-
- page.innerHTML = `
-  <div class="card">
-   <h3>Loan & EMI Details</h3>
-   <div id="loanBox" style="font-size:13px;color:#374151">${cached ? cached : "Loading..."}</div>
-  </div>
- `;
-
- fetchLoanData()
- .then(result=>{
-  const box = document.getElementById("loanBox");
-  if(!box) return;
-
-  box.innerHTML = result.html;
-  appCache.loans = result.html;
-
-  if(result.nextEmiDate){
-   startEmiNotification(result.nextEmiDate, result.remainingEMI);
+function doFundTransfer(){
+  if(!window._toOk){toast("Pehle beneficiary verify karein");verifyToAccount();return;}
+  var amt=parseFloat(document.getElementById("ft_AMT").value)||0;
+  if(amt<=0){toast("Amount enter karein");return;}
+  if(!document.getElementById("ft_ACCEPT").checked){toast("Disclaimer accept karein");return;}
+  var toName = (window._toAcc && window._toAcc.ACCOUNT_NAME) || fullAcc("ft_TO");
+  var toAcc = fullAcc("ft_TO");
+  var email = session.email || "";
+  if(!email || email.indexOf("@") < 0){
+    toast("Registered email nahi mila. Branch mein email update karein.");
+    // try refresh home for email
+    postGAS({action:"customer_home", customer_id:session.customerId, account_no:session.accountNo}).then(function(r){
+      if(r && r.status==="success" && r.EMAIL){ session.email = r.EMAIL; doFundTransfer(); }
+    });
+    return;
   }
- })
- .catch(()=>{
-  const box = document.getElementById("loanBox");
-  if(box && !appCache.loans) box.innerHTML = `<div class="state-msg error">Unable to load loan details. <button onclick="loadLoans()">Retry</button></div>`;
- });
+  window._otpPending = { amt: amt, to: toAcc, toName: toName };
+  window._otpEmail = email;
+  var btn = document.getElementById("ft-btn");
+  btn.disabled = true; btn.textContent = "Sending OTP…";
+  postGAS({action:"send_otp", email:email, CU_EMAIL:email, context:"Fund Transfer ₹"+amt+" to "+toAcc}).then(function(or){
+    btn.disabled = false; btn.textContent = "Transfer Now";
+    if(!or || or.status !== "success"){
+      toast((or && or.message) || "OTP send failed");
+      return;
+    }
+    document.getElementById("otp-amt").textContent = fmt(amt);
+    document.getElementById("otp-to").textContent = "To: " + toName + " (" + toAcc + ")";
+    document.getElementById("otp-sub").textContent = "OTP bheja gaya registered email par: " + email;
+    document.getElementById("otp-input").value = "";
+    document.getElementById("otp-err").textContent = "";
+    document.getElementById("otp-btn").textContent = "Verify OTP";
+    document.getElementById("otp-overlay").classList.add("show");
+    toast("OTP email par bhej diya");
+  });
 }
-
-/* ===== fetch + build loan HTML (used by loadLoans AND background prefetch after login) ===== */
-function fetchLoanData(){
- const d = JSON.parse(localStorage.getItem("srccs"));
-
- return fetch(LOAN_API,{
-  method:"POST",
-  body:JSON.stringify({
-   action:"searchLoan",
-   q:d.customer.account
-  })
- })
- .then(r=>r.json())
- .then(res=>{
-  if(!res.found){
-   return { html:`<div class="state-msg">No active loan found.</div>`, nextEmiDate:null, remainingEMI:0 };
+function mpinRenderDots(){
+  var buf = window._mpinBuf || "";
+  var dots = document.querySelectorAll("#mpin-dots span");
+  for(var i=0;i<dots.length;i++){
+    dots[i].classList.toggle("filled", i < buf.length);
   }
-
-  /* ===== EMI BASED VALUES ===== */
-  const emiAmount = Number(res.row.emi);
-  const tenure    = Number(res.row.tenure);
-
-  const paidEMI       = Array.isArray(res.emiHistory) ? res.emiHistory.length : 0;
-  const remainingEMI  = tenure - paidEMI;
-
-  const principal     = emiAmount * tenure;
-  const outstanding   = emiAmount * remainingEMI;
-
-  /* ===== NEXT EMI DATE (1st) ===== */
-  const today = new Date();
-  let nextEmiDate = new Date(today.getFullYear(), today.getMonth(), 1);
-  if(today.getDate() > 1){
-    nextEmiDate.setMonth(nextEmiDate.getMonth() + 1);
+}
+function mpinKey(d){
+  if((window._mpinBuf||"").length >= 4) return;
+  window._mpinBuf = (window._mpinBuf||"") + d;
+  mpinRenderDots();
+  document.getElementById("mpin-err").textContent = "";
+  if(window._mpinBuf.length === 4){
+    setTimeout(mpinSubmit, 180);
   }
-  const nextEmiStr = nextEmiDate.toISOString().split("T")[0];
-
-  /* ===== EMI ALERT ===== */
-  let alertBox = "";
-  const diffDays = Math.ceil(
-   (nextEmiDate - today) / (1000 * 60 * 60 * 24)
-  );
-
-  if(remainingEMI > 0 && diffDays <= 3){
-   alertBox = `
-    <div style="
-     background:#fee2e2;
-     color:#991b1b;
-     padding:8px;
-     border-radius:10px;
-     margin-bottom:10px;
-     font-size:12px;
-     font-weight:600">
-     ⚠ EMI Due on ${nextEmiStr}
-    </div>
-   `;
+}
+function mpinBack(){
+  window._mpinBuf = (window._mpinBuf||"").slice(0,-1);
+  mpinRenderDots();
+}
+function mpinClear(){
+  window._mpinBuf = "";
+  mpinRenderDots();
+  document.getElementById("mpin-err").textContent = "";
+}
+function mpinClose(){
+  document.getElementById("mpin-overlay").classList.remove("show");
+  window._mpinBuf = "";
+  window._mpinPending = null;
+}
+function mpinSubmit(){
+  var pin = window._mpinBuf || "";
+  var pending = window._mpinPending;
+  if(!pending || pin.length < 4){
+    document.getElementById("mpin-err").textContent = "4-digit MPIN enter karein";
+    return;
   }
-
-  /* ===== EMI HISTORY (WITH MODE) ===== */
-  let emiHistoryHTML = "";
-
-  if(res.emiHistory && res.emiHistory.length > 0){
-   emiHistoryHTML = res.emiHistory.map((e,i)=>`
-    <div style="
-      background:#f3f4f6;
-      padding:8px;
-      border-radius:10px;
-      margin:6px 0;
-      font-size:12px">
-
-      <div style="display:flex;justify-content:space-between">
-        <b>EMI ${i+1}</b>
-        <b>${fmtAmount(e.amount)}</b>
-      </div>
-
-      <div style="
-        display:flex;
-        justify-content:space-between;
-        margin-top:4px;
-        font-size:11px;
-        color:#374151">
-
-        <span>📅 ${e.date}</span>
-
-        <span style="
-          background:#e5e7eb;
-          padding:2px 8px;
-          border-radius:999px;
-          font-weight:600">
-          ${e.mode ? e.mode.toUpperCase() : "N/A"}
-        </span>
-
-      </div>
-    </div>
-   `).join("");
-  }else{
-   emiHistoryHTML = `
-    <div style="font-size:12px;color:#6b7280">
-     No EMI paid yet
-    </div>
-   `;
-  }
-
-  /* ===== FINAL UI ===== */
-  const html = `
-   ${alertBox}
-
-   <b>Loan ID:</b> ${res.row.loan_id}<br>
-
-   <b>Principal Amount:</b>
-   <span style="font-weight:600;color:#0b4fa2">
-    ${fmtAmount(principal)}
-   </span><br>
-
-   <b>Outstanding Amount:</b>
-   <span style="color:#dc2626;font-weight:600">
-    ${fmtAmount(outstanding)}
-   </span><br><br>
-
-   <b>EMI Amount:</b> ${fmtAmount(emiAmount)}<br>
-   <b>Paid EMI:</b> ${paidEMI} / ${tenure}<br>
-   <b>Remaining EMI:</b> ${remainingEMI}<br>
-   <b>Next EMI Date:</b> ${nextEmiStr}<br>
-   <b>Status:</b> ${res.row.status}<br><br>
-
-   <b>EMI History:</b><br>
-   ${emiHistoryHTML}
-  `;
-
-  return { html, nextEmiDate, remainingEMI };
- });
+  document.getElementById("mpin-err").textContent = "Verifying MPIN…";
+  var pinUser = session.username || session.mobile || session.accountNo || session.customerId;
+  postGAS({action:"verify_mpin", username:pinUser, account_no:session.accountNo, CUSTOMER_ID:session.customerId, mpin:pin}).then(function(vr){
+    if(!vr || vr.status !== "success"){
+      document.getElementById("mpin-err").textContent = (vr && vr.message) || "Invalid MPIN";
+      window._mpinBuf = "";
+      mpinRenderDots();
+      return;
+    }
+    document.getElementById("mpin-err").textContent = "Transferring…";
+    var to = pending.to, amt = pending.amt;
+    var part = document.getElementById("ft_PART").value || ("Customer transfer to " + to);
+    part += " | DISCLAIMER ACCEPTED: Society not liable, no refund | Email OTP + MPIN verified";
+    postGAS({
+      action:"transaction", TRANSACTION_TYPE:"TRANSFER", ACCOUNT_NO:session.accountNo, TO_ACCOUNT:to,
+      TRANSFER:amt, CUSTOMER_ID:session.customerId, PARTICULARS:part, TRANSACTION_MODE:"UPI",
+      CHANNEL:"CUSTOMER_APP", EMPLOYEE_ID:session.customerId, STATUS:"SUCCESS"
+    }).then(function(r){
+      if(!r || r.status !== "success"){
+        document.getElementById("mpin-err").textContent = (r && r.message) || "Transfer failed";
+        window._mpinBuf = "";
+        mpinRenderDots();
+        return;
+      }
+      mpinClose();
+      toast("✓ Transfer successful — " + fmt(amt));
+      document.getElementById("ft_AMT").value = "";
+      document.getElementById("ft_TO").value = "";
+      document.getElementById("ft_PART").value = "";
+      document.getElementById("ft_ACCEPT").checked = false;
+      document.getElementById("ft-verify").className = "verify";
+      window._toOk = false;
+      cuRefresh();
+    });
+  });
+}
+function otpClose(){
+  document.getElementById("otp-overlay").classList.remove("show");
+  window._otpPending = null;
+}
+function otpResend(){
+  var email = window._otpEmail || session.email;
+  var pending = window._otpPending;
+  if(!email || !pending) return;
+  document.getElementById("otp-err").textContent = "Resending…";
+  postGAS({action:"send_otp", email:email, CU_EMAIL:email, context:"Fund Transfer ₹"+pending.amt+" to "+pending.to}).then(function(or){
+    document.getElementById("otp-err").textContent = (or && or.status==="success") ? "OTP resent" : ((or && or.message) || "Failed");
+  });
+}
+function otpVerifyAndTransfer(){
+  var otp = (document.getElementById("otp-input").value || "").trim();
+  var pending = window._otpPending;
+  var email = window._otpEmail || session.email;
+  if(!pending){ otpClose(); return; }
+  if(otp.length < 4){ document.getElementById("otp-err").textContent = "OTP enter karein"; return; }
+  var btn = document.getElementById("otp-btn");
+  btn.disabled = true; btn.textContent = "Verifying…";
+  postGAS({action:"verify_otp", email:email, CU_EMAIL:email, otp:otp}).then(function(vr){
+    btn.disabled = false; btn.textContent = "Verify OTP";
+    if(!vr || vr.status !== "success"){
+      document.getElementById("otp-err").textContent = (vr && vr.message) || "Invalid OTP";
+      return;
+    }
+    // OTP OK → close OTP, open MPIN pad
+    otpClose();
+    window._mpinBuf = "";
+    window._mpinPending = pending;
+    document.getElementById("mpin-amt").textContent = fmt(pending.amt);
+    document.getElementById("mpin-to").textContent = "To: " + pending.toName + " (" + pending.to + ")";
+    document.getElementById("mpin-err").textContent = "";
+    mpinRenderDots();
+    document.getElementById("mpin-overlay").classList.add("show");
+    toast("OTP verified — ab MPIN enter karein");
+  });
 }
 
-/* ===== silently preload Loans data right after login ===== */
-function prefetchLoans(){
- fetchLoanData()
- .then(result=>{
-  appCache.loans = result.html;
-  if(result.nextEmiDate){
-   startEmiNotification(result.nextEmiDate, result.remainingEMI);
-  }
- })
- .catch(()=>{ /* silent — Loans tab will just fetch normally if this fails */ });
+function submitLoanRequest(){
+  var amt=parseFloat(document.getElementById("lr_AMT").value)||0;
+  var purpose=document.getElementById("lr_PURPOSE").value;
+  var tenure=parseInt(document.getElementById("lr_TENURE").value,10)||12;
+  if(amt<1000){toast("Minimum amount ₹1000");return;}
+  if(!purpose){toast("Select purpose");return;}
+  var btn=document.getElementById("lr-btn");btn.disabled=true;btn.textContent="Submitting…";
+  postGAS({
+    action:"loan_submit",
+    CUSTOMER_ID:session.customerId, ACCOUNT_NO:session.accountNo,
+    LOAN_AMOUNT:amt, LOAN_PURPOSE:purpose, LOAN_TYPE:purpose, LOAN_PRODUCT:purpose,
+    TENURE:tenure, TENURE_TYPE:"MONTH", LOAN_STATUS:"APPLIED",
+    APPLICATION_DATE:today(), REGISTERED_BY:"CUSTOMER_APP",
+    REMARKS:document.getElementById("lr_REM").value||"Customer app request",
+    INTEREST_RATE:12, REPAYMENT_FREQUENCY:"MONTHLY"
+  }).then(function(r){
+    btn.disabled=false;btn.textContent="Submit Loan Request";
+    if(!r||r.status!=="success"){toast((r&&r.message)||"Request failed");return;}
+    toast("✓ Loan request submitted");
+    document.getElementById("lr_AMT").value="";document.getElementById("lr_PURPOSE").value="";
+    document.getElementById("lr_REM").value="";
+    cuRefresh();cuPaintLoanApps();
+  });
+}
+function cuPaintLoanApps(){
+  var loans=(window._cuHome&&window._cuHome.loans)||[];
+  var box=document.getElementById("lr-list");
+  if(!loans.length){box.innerHTML='<div class="empty">No applications</div>';return;}
+  box.innerHTML=loans.map(function(L,i){
+    return '<div class="row-item" onclick="showLoanDetail('+i+')" style="cursor:pointer"><div><div class="nm">'+esc(L.APPLICATION_ID||L.LOAN_ACCOUNT_NO)+'</div><div class="meta">'+esc(L.LOAN_PURPOSE||L.LOAN_PRODUCT)+' • '+esc(L.LOAN_STATUS)+'</div></div><div class="amt">'+fmt(L.LOAN_AMOUNT)+'</div></div>';
+  }).join("");
 }
 
-/* ================= EMI NOTIFICATION ================= */
-
-function startEmiNotification(emiDate, remainingEMI){
- if(remainingEMI <= 0) return;
-
- if ("Notification" in window && Notification.permission !== "granted") {
-  Notification.requestPermission();
- }
-
- clearInterval(emiTimer);
-
- function notify(){
-  const today = new Date();
-  const diff = Math.ceil(
-   (emiDate - today) / (1000 * 60 * 60 * 24)
-  );
-
-  if(diff <= 3 && diff >= 0 && Notification.permission === "granted"){
-   new Notification("🏦 SRCCS EMI Alert",{
-    body:`Your EMI is due on ${emiDate.toISOString().split("T")[0]}`
-   });
-  }
- }
-
- notify();
- emiTimer = setInterval(notify, 12 * 60 * 60 * 1000);
+function cuPaintLoans(){
+  var loans=(window._cuHome&&window._cuHome.loans)||[];
+  var box=document.getElementById("cu-loan-list");
+  if(!loans.length){box.innerHTML='<div class="empty">No loans</div>';return;}
+  box.innerHTML=loans.map(function(L,i){
+    var st=String(L.LOAN_STATUS||"").toUpperCase();
+    var out=parseFloat(L.OUTSTANDING_PRINCIPAL);if(isNaN(out))out=(st==="CLOSED"?0:parseFloat(L.LOAN_AMOUNT)||0);
+    return '<div class="row-item" onclick="showLoanDetail('+i+')" style="cursor:pointer"><div><div class="nm">'+esc(L.LOAN_ACCOUNT_NO||L.APPLICATION_ID)+'</div><div class="meta">'+esc(L.LOAN_PRODUCT||L.LOAN_TYPE)+' • '+esc(st)+' • EMI '+fmt(L.EMI_AMOUNT)+'</div></div><div class="amt">'+fmt(out)+'</div></div>';
+  }).join("");
+}
+function showLoanDetail(i){
+  var L=((window._cuHome&&window._cuHome.loans)||[])[i];
+  if(!L)return;
+  var fields=[["Application ID",L.APPLICATION_ID],["Loan A/c",L.LOAN_ACCOUNT_NO],["Status",L.LOAN_STATUS],
+    ["Type",L.LOAN_TYPE],["Product",L.LOAN_PRODUCT],["Purpose",L.LOAN_PURPOSE],
+    ["Loan Amount",fmt(L.LOAN_AMOUNT)],["EMI Amount",fmt(L.EMI_AMOUNT)],
+    ["Interest Rate",(L.INTEREST_RATE||"—")+"%"],["Tenure",(L.TENURE||"—")+" "+(L.TENURE_TYPE||"")],
+    ["Outstanding",fmt(L.OUTSTANDING_PRINCIPAL||L.LOAN_AMOUNT)],
+    ["Disbursement",L.DISBURSEMENT_DATE],["Application Date",L.APPLICATION_DATE],
+    ["Repayment",L.REPAYMENT_FREQUENCY],["Remarks",L.REMARKS]];
+  var html=fields.map(function(f){
+    if(f[1]==null||f[1]==="")return "";
+    return '<div class="row-item"><span>'+esc(f[0])+'</span><span style="font-weight:700;text-align:right">'+esc(String(f[1]))+'</span></div>';
+  }).join("");
+  // next EMI
+  html+='<div style="margin-top:10px"><button class="btn btn-o" onclick="loadNextEmiDetail(\''+(L.LOAN_ACCOUNT_NO||"")+'\')">Load Next EMI</button><div id="next-emi-box" style="margin-top:8px"></div></div>';
+  document.getElementById("loan-detail-body").innerHTML=html;
+  document.getElementById("modal-loan").classList.add("show");
+}
+function closeLoanDetail(){document.getElementById("modal-loan").classList.remove("show");}
+function loadNextEmiDetail(loanNo){
+  if(!loanNo)return;
+  var box=document.getElementById("next-emi-box");box.innerHTML="Loading…";
+  postGAS({action:"get_next_emi",loan_account_no:loanNo}).then(function(r){
+    var e=(r&&(r.emi||r.row||r))||{};
+    if(!r||r.status!=="success"){box.innerHTML='<div class="empty">'+(r&&r.message||"No EMI")+'</div>';return;}
+    box.innerHTML='<div class="info-grid"><div><b>EMI No</b>'+esc(e.EMI_NO)+'</div><div><b>Due Date</b>'+esc(e.DUE_DATE)+'</div><div><b>Amount</b>'+fmt(e.EMI_AMOUNT)+'</div><div><b>Status</b>'+esc(e.STATUS)+'</div></div>';
+  });
 }
 
-
-/* ================= PROFILE ================= */
-/* ================= PROFILE ================= */
-function loadProfile(){
- const d = JSON.parse(localStorage.getItem("srccs"));
-
- const photo = d.customer.photo || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
- const cibil = d.customer.cibil || null;
- const cibilNum = Number(cibil);
- const cibilOk = !isNaN(cibilNum) && cibilNum >= 700;
-
- page.innerHTML = `
-  <!-- PROFILE CARD -->
-  <div class="card" style="text-align:center">
-   <img src="${photo}"
-    style="
-     width:90px;
-     height:90px;
-     border-radius:50%;
-     object-fit:cover;
-     border:3px solid #0b4fa2;
-     margin-bottom:8px">
-
-   <h3 style="margin:6px 0">${d.name || "-"}</h3>
-   <div style="font-size:12px;color:#6b7280">
-    A/c No: ${d.customer.account || "-"}
-   </div>
-  </div>
-
-  <!-- BASIC DETAILS -->
-  <div class="card" style="margin-top:14px">
-   <h3 style="margin-top:0">📄 Customer Details</h3>
-   <div style="font-size:12px;color:#374151;line-height:1.6">
-    <b>Father / Husband:</b> ${d.customer.guardian || "-"}<br>
-    <b>Gender:</b> ${d.customer.gender || "-"}<br>
-    <b>Mobile:</b> ${d.customer.mobile || "-"}<br><br>
-
-    <b>Address:</b><br>
-    ${d.customer.address || "-"}
-   </div>
-  </div>
-
-  <!-- NOMINEE DETAILS -->
-  <div class="card" style="margin-top:14px">
-   <h3 style="margin-top:0">👨‍👩‍👦 Nominee Details</h3>
-   <div style="font-size:12px;color:#374151;line-height:1.6">
-    <b>Nominee Name:</b> ${d.customer.nominee || "-"}<br>
-    <b>Relation:</b> ${d.customer.nominee_relation || "-"}
-   </div>
-  </div>
-
-  <!-- CIBIL STATUS -->
-  <div class="card" style="margin-top:14px">
-   <h3 style="margin-top:0">📊 CIBIL Status</h3>
-   <div style="font-size:14px;font-weight:600;
-    color:${cibilOk ? '#16a34a' : '#dc2626'}">
-    CIBIL Score: ${cibil !== null ? cibil : "Not Available"}
-   </div>
-   <div style="font-size:11px;color:#6b7280;margin-top:4px">
-    (As per internal record)
-   </div>
-  </div>
-
-  <!-- CURRENT LOAN -->
-  <div class="card" style="margin-top:14px">
-   <h3 style="margin-top:0">🏦 Current Loan</h3>
-   <div id="profileLoanBox" style="font-size:12px;color:#374151">
-    Loading loan details...
-   </div>
-  </div>
-
-
-
-  <!-- LOGOUT -->
-  <div class="card" style="margin-top:14px">
-   <button onclick="askLogout()"
-    style="
-     width:100%;
-     padding:10px;
-     background:#dc2626;
-     color:#fff;
-     border:none;
-     border-radius:10px;
-     font-weight:600">
-    Logout
-   </button>
-  </div>
- `;
-
- /* ===== CURRENT LOAN FETCH (SUMMARY ONLY) ===== */
- fetch(LOAN_API,{
-  method:"POST",
-  body:JSON.stringify({
-   action:"searchLoan",
-   q:d.customer.account
-  })
- })
- .then(r=>r.json())
- .then(res=>{
-  const box = document.getElementById("profileLoanBox");
-
-  if(!res.found){
-   box.innerHTML = "No active loan.";
-   return;
-  }
-const emiAmount = Number(res.row.emi);
-const tenure = Number(res.row.tenure);
-const paidEMI = res.emiHistory.length;
-const remainingEMI = tenure - paidEMI;
-
-const outstanding = emiAmount * remainingEMI;
-
-  
-
-  box.innerHTML = `
- <b>Loan ID:</b> ${res.row.loan_id}<br>
- <b>Outstanding:</b>
- <span style="color:#dc2626;font-weight:600">
-  ${fmtAmount(outstanding)}
- </span><br>
- <b>EMI:</b> ${fmtAmount(emiAmount)}<br>
- <b>Remaining EMI:</b> ${remainingEMI}<br>
- <b>Status:</b> ${res.row.status}
-`;
-
- })
- .catch(()=>{
-  const box = document.getElementById("profileLoanBox");
-  if(box) box.innerHTML = `<span style="color:#dc2626">Unable to load loan details.</span>`;
- });
+function cuPaintDeposits(){
+  var h=window._cuHome||{},fds=h.fd_list||[],rds=h.rd_list||[];
+  document.getElementById("cu-fd-list").innerHTML=fds.length?fds.map(function(f){return '<div class="row-item"><div><div class="nm">'+esc(f.FD_ACCOUNT_NO||f.FD_ID)+'</div><div class="meta">'+esc(f.STATUS)+'</div></div><div class="amt">'+fmt(f.FD_AMOUNT)+'</div></div>';}).join(""):'<div class="empty">No FD</div>';
+  document.getElementById("cu-rd-list").innerHTML=rds.length?rds.map(function(f){return '<div class="row-item"><div><div class="nm">'+esc(f.RD_ACCOUNT_NO||f.RD_ID)+'</div><div class="meta">Monthly '+fmt(f.MONTHLY_AMOUNT)+'</div></div><div class="amt">'+fmt(f.MATURITY_AMOUNT)+'</div></div>';}).join(""):'<div class="empty">No RD</div>';
 }
 
-
-/* ================= HISTORY ================= */
-function openHistory(){
- const cached = appCache.history;
-
- page.innerHTML = `
-  <div class="history-title">Transaction History</div>
-  <div id="historyBox">${cached ? cached : '<div class="state-msg">Loading transactions…</div>'}</div>
- `;
-
- fetchHistoryData()
- .then(html=>{
-  const box = document.getElementById("historyBox");
-  if(box) box.innerHTML = html;
-  appCache.history = html;
- })
- .catch(()=>{
-  const box = document.getElementById("historyBox");
-  if(box && !appCache.history) box.innerHTML = `<div class="state-msg error">Unable to load history. <button onclick="openHistory()">Retry</button></div>`;
- });
+/* ===== EMI alerts 3 days + Notifications ===== */
+function daysUntil(dateStr){
+  if(!dateStr)return 999;
+  var d=new Date(String(dateStr).substring(0,10));
+  if(isNaN(d.getTime()))return 999;
+  var t=new Date();t.setHours(0,0,0,0);d.setHours(0,0,0,0);
+  return Math.round((d-t)/86400000);
+}
+function loadEmiAlerts(){
+  var loans=(window._cuHome&&window._cuHome.loans)||[];
+  var box=document.getElementById("cu-emi-alerts");
+  if(!loans.length){box.innerHTML='<div class="empty">No loans</div>';return;}
+  var pending=loans.length;
+  var alerts=[];
+  loans.forEach(function(L){
+    var st=String(L.LOAN_STATUS||"").toUpperCase();
+    if(st==="CLOSED"||st==="REJECTED"){pending--;if(!pending)paintEmiAlerts(alerts,box);return;}
+    var loanNo=L.LOAN_ACCOUNT_NO||"";
+    if(!loanNo){pending--;if(!pending)paintEmiAlerts(alerts,box);return;}
+    postGAS({action:"get_next_emi",loan_account_no:loanNo}).then(function(r){
+      var e=(r&&(r.emi||r.row))||{};
+      if(r&&r.status==="success"&&e.DUE_DATE){
+        var d=daysUntil(e.DUE_DATE);
+        if(d>=0&&d<=3){
+          alerts.push({loan:loanNo,due:e.DUE_DATE,days:d,amount:e.EMI_AMOUNT||L.EMI_AMOUNT,emiNo:e.EMI_NO,name:L.LOAN_PRODUCT||"Loan"});
+        }
+      }
+      pending--;if(!pending)paintEmiAlerts(alerts,box);
+    }).catch(function(){pending--;if(!pending)paintEmiAlerts(alerts,box);});
+  });
+}
+function paintEmiAlerts(alerts,box){
+  window._emiAlerts=alerts||[];
+  buildNotifications();
+  if(!alerts.length){box.innerHTML='<div class="empty">No EMI due in next 3 days</div>';return;}
+  box.innerHTML=alerts.map(function(a){
+    var label=a.days===0?"Due TODAY":(a.days===1?"Due tomorrow":("Due in "+a.days+" days"));
+    return '<div class="row-item"><div><div class="nm">'+esc(a.loan)+' <span class="badge warn">'+label+'</span></div><div class="meta">EMI #'+esc(a.emiNo)+' • '+esc(a.due)+'</div></div><div class="amt">'+fmt(a.amount)+'</div></div>';
+  }).join("");
 }
 
-/* ===== fetch + build history HTML (used by openHistory AND background prefetch after login) ===== */
-function fetchHistoryData(){
- const d = JSON.parse(localStorage.getItem("srccs"));
-
- return fetch(`${ACCOUNT_API}?fn=getStatement&account=${d.customer.account}`)
- .then(r=>r.json())
- .then(res=>{
-  if(!res.success){
-   return `<div class="state-msg error">Unable to load history.</div>`;
-  }
-
-  if(res.transactions.length===0){
-   return `<div class="state-msg">No transactions found.</div>`;
-  }
-
-  return res.transactions.slice(-20).reverse().map(t=>`
-    <div class="txn ${t.type}">
-     <div class="txn-top">
-      <div class="txn-type">${t.type.toUpperCase()}</div>
-      <div class="txn-amt ${t.type}">${fmtAmount(t.amount)}</div>
-     </div>
-     <div class="txn-date">
- ${t.date} • Balance ${fmtAmount(t.balance)}
-</div>
-
-<div style="font-size:10px;color:#9ca3af">
- ID: ${t.id || "-"}
-</div>
-    </div>
-   `).join("");
- });
+function buildNotifications(){
+  var n=[];
+  (window._emiAlerts||[]).forEach(function(a){
+    var label=a.days===0?"EMI due TODAY":("EMI due in "+a.days+" day(s)");
+    n.push({type:"emi",title:label,body:a.loan+" • "+fmt(a.amount)+" • "+a.due,badge:"warn"});
+  });
+  var loans=(window._cuHome&&window._cuHome.loans)||[];
+  loans.forEach(function(L){
+    var st=String(L.LOAN_STATUS||"").toUpperCase();
+    if(st==="APPLIED"||st==="PENDING")n.push({type:"loan",title:"Loan application pending",body:(L.APPLICATION_ID||"")+" • "+fmt(L.LOAN_AMOUNT),badge:"info"});
+    if(st==="APPROVED")n.push({type:"loan",title:"Loan approved",body:(L.LOAN_ACCOUNT_NO||L.APPLICATION_ID)+" • "+fmt(L.LOAN_AMOUNT),badge:"ok"});
+  });
+  window._notifs=n;
+  var bdg=document.getElementById("notif-bdg");
+  if(n.length){bdg.style.display="flex";bdg.textContent=String(n.length>99?99:n.length);}
+  else bdg.style.display="none";
 }
-
-/* ===== silently preload History data right after login ===== */
-function prefetchHistory(){
- fetchHistoryData()
- .then(html=>{ appCache.history = html; })
- .catch(()=>{ /* silent — History tab will just fetch normally if this fails */ });
+function openNotif(){
+  buildNotifications();
+  var n=window._notifs||[];
+  var body=document.getElementById("notif-body");
+  if(!n.length)body.innerHTML='<div class="empty">No notifications</div>';
+  else body.innerHTML=n.map(function(x){
+    return '<div class="row-item"><div><div class="nm">'+esc(x.title)+' <span class="badge '+x.badge+'">●</span></div><div class="meta">'+esc(x.body)+'</div></div></div>';
+  }).join("");
+  document.getElementById("modal-notif").classList.add("show");
 }
+function closeNotif(){document.getElementById("modal-notif").classList.remove("show");}
 
-/* ================= STATEMENT ================= */
-function openStatement(){
- page.innerHTML = `
-  <div class="statement-box">
-   <h3 style="margin-top:0">Account Statement</h3>
-   <label>From Date</label>
-   <input type="date" id="fromDate">
-   <label>To Date</label>
-   <input type="date" id="toDate">
-   <button onclick="downloadStatement()">Download PDF Statement</button>
-  </div>
- `;
-}
-
-function downloadStatement(){
- if(!fromDate.value || !toDate.value){
-  alert("Please select both From and To dates");
-  return;
- }
- if(fromDate.value > toDate.value){
-  alert("'From Date' cannot be after 'To Date'");
-  return;
- }
-
- const btn = document.querySelector(".statement-box button");
- btn.disabled = true;
- btn.innerText = "Preparing statement...";
-
- const d = JSON.parse(localStorage.getItem("srccs"));
- window.open(
-  `${ACCOUNT_API}?fn=downloadStatement&account=${d.customer.account}&from=${fromDate.value}&to=${toDate.value}`,
-  "_blank"
- );
-
- setTimeout(()=>{
-  btn.disabled = false;
-  btn.innerText = "Download PDF Statement";
- },1500);
-}
-
-/* ================= LOGOUT ================= */
-function askLogout(){
- document.getElementById("logoutModal").style.display = "flex";
-}
-
-function logout(){
- clearInterval(timer);
- clearInterval(emiTimer);
- appCache.home = null;
- appCache.history = null;
- appCache.loans = null;
- localStorage.clear();
- location.reload();
-}
-
-/* AUTO START IF ALREADY LOGGED IN */
-if(localStorage.getItem("srccs")){
- start();
-}
-function openDepositPage(){
- window.location.href = "deposit.html";
-}
-document.addEventListener("keydown", function(e){
- if(e.key !== "Enter") return;
-
- if(document.activeElement && document.activeElement.id === "searchInput"){
-  doSearch();
-  return;
- }
-
- if(document.getElementById("loginBox").style.display !== "none"){
-  login();
- }
+document.getElementById("loginPass").addEventListener("keydown",function(e){if(e.key==="Enter")doCustLogin();});
+document.getElementById("ft_TO").addEventListener("input",function(){
+  var v=this.value.toUpperCase().replace(/^SRC/i,"").replace(/[^0-9A-Z]/g,"");
+  if(this.value!==v)this.value=v;
 });
-
 </script>
-
-
 </body>
 </html>

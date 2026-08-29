@@ -120,6 +120,53 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .mpin-err{text-align:center;color:#DC2626;font-size:12px;font-weight:600;min-height:18px;margin-bottom:8px}
 .mpin-cancel{display:block;width:100%;margin-top:12px;background:none;border:none;color:#6B7280;font-size:13px;font-weight:600;padding:10px;cursor:pointer}
 
+/* Terms & Conditions modal */
+.terms-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:130;display:none;align-items:center;justify-content:center;padding:12px}
+.terms-overlay.show{display:flex}
+.terms-sheet{background:#fff;width:100%;max-width:420px;max-height:92vh;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+.terms-head{background:linear-gradient(135deg,#5C0A28,#8B1538,#C2185B);color:#fff;padding:14px 16px;display:flex;align-items:center;gap:10px}
+.terms-head .terms-icon{width:42px;height:42px;border-radius:10px;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.terms-head h2{font-size:13.5px;font-weight:800;line-height:1.3;margin:0}
+.terms-head .sub{font-size:10.5px;opacity:.9;margin-top:2px}
+.terms-body{overflow-y:auto;padding:14px 16px;flex:1;-webkit-overflow-scrolling:touch}
+.terms-body .rule{display:flex;gap:10px;margin-bottom:11px;font-size:12.5px;line-height:1.45;color:#2D2D2D}
+.terms-body .rule .num{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:#F5E6EA;color:#8B1538;font-weight:800;font-size:11px;display:flex;align-items:center;justify-content:center}
+.terms-body .rule .txt b{color:#8B1538}
+.terms-highlight{background:#FFF7ED;border:1.5px solid #FDBA74;border-radius:10px;padding:12px;margin:12px 0 4px;font-size:12.5px;line-height:1.5;color:#9A3412;font-weight:600}
+.terms-highlight .main-rule{font-size:13px;color:#C2410C;margin-top:6px}
+.terms-foot{padding:12px 16px;border-top:1px solid var(--bd);background:#FAFAFA}
+.terms-foot .chk{margin:0 0 10px;font-size:12px}
+.terms-menu-btn{display:flex;align-items:center;gap:12px;width:100%;padding:12px;border:none;background:#fff;border-radius:8px;box-shadow:var(--cs);cursor:pointer;margin-bottom:8px;font-family:inherit;text-align:left}
+.terms-menu-btn .ic-box{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,#8B1538,#C2185B);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.terms-menu-btn .lbl{font-size:13px;font-weight:700;color:var(--t)}
+.terms-menu-btn .sub{font-size:11px;color:var(--tm);margin-top:2px}
+
+/* Documents list */
+.doc-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #F0F0F0}
+.doc-item:last-child{border-bottom:none}
+.doc-item .doc-ic{width:40px;height:40px;border-radius:8px;background:#FEE2E2;color:#991B1B;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.doc-item .doc-info{flex:1;min-width:0}
+.doc-item .doc-info .nm{font-weight:700;font-size:12.5px;color:var(--t)}
+.doc-item .doc-info .meta{font-size:10.5px;color:var(--tm);margin-top:2px}
+.doc-item .doc-actions{display:flex;gap:6px;flex-shrink:0}
+.doc-item .doc-actions button{height:32px;padding:0 10px;border-radius:6px;font-size:11px;font-weight:700;border:none;cursor:pointer;font-family:inherit}
+.doc-item .doc-actions .btn-prev{background:#F5E6EA;color:#8B1538}
+.doc-item .doc-actions .btn-dl{background:var(--p);color:#fff}
+
+/* PDF Preview modal */
+.pdf-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:140;display:none;align-items:center;justify-content:center;padding:8px}
+.pdf-overlay.show{display:flex}
+.pdf-sheet{background:#fff;width:100%;max-width:480px;height:92vh;max-height:92vh;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.pdf-head{background:linear-gradient(135deg,#5C0A28,#8B1538,#C2185B);color:#fff;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-shrink:0}
+.pdf-head h2{font-size:12.5px;font-weight:800;margin:0;line-height:1.3;flex:1}
+.pdf-head .pdf-btns{display:flex;gap:6px;align-items:center}
+.pdf-head .pdf-btns a,.pdf-head .pdf-btns button{background:rgba(255,255,255,.22);border:none;color:#fff;padding:6px 10px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;text-decoration:none;font-family:inherit}
+.pdf-frame-wrap{flex:1;overflow:hidden;background:#E5E7EB;position:relative}
+.pdf-frame-wrap iframe{width:100%;height:100%;border:none}
+.pdf-fallback{position:absolute;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;padding:20px;text-align:center;background:#fff}
+.pdf-fallback.show{display:flex}
+.pdf-fallback p{font-size:13px;color:var(--tm);margin-bottom:12px;line-height:1.45}
+
 </style>
 </head>
 <body>
@@ -232,6 +279,62 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
     </div>
 
     <div id="cu-tab-more" style="display:none">
+      <button type="button" class="terms-menu-btn" onclick="openTerms(false)">
+        <div class="ic-box">📜</div>
+        <div>
+          <div class="lbl">निकासी नियमावली / Terms</div>
+          <div class="sub">Withdrawal rules &amp; conditions</div>
+        </div>
+      </button>
+
+      <div class="card">
+        <h3>📄 Documents / दस्तावेज़</h3>
+        <div class="doc-item">
+          <div class="doc-ic">📕</div>
+          <div class="doc-info">
+            <div class="nm">Loan Rules &amp; Conditions</div>
+            <div class="meta">ऋण नियम, शर्त एवं अनुबंध</div>
+          </div>
+          <div class="doc-actions">
+            <button type="button" class="btn-prev" onclick="previewPdf('Loan_Rules_Conditions.pdf','Loan Rules & Conditions')">Preview</button>
+            <button type="button" class="btn-dl" onclick="downloadPdf('Loan_Rules_Conditions.pdf','Loan_Rules_Conditions.pdf')">Download</button>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div class="doc-ic">📝</div>
+          <div class="doc-info">
+            <div class="nm">Loan Application Form</div>
+            <div class="meta">ऋण आवेदन फॉर्म</div>
+          </div>
+          <div class="doc-actions">
+            <button type="button" class="btn-prev" onclick="previewPdf('Loan_Application.pdf','Loan Application Form')">Preview</button>
+            <button type="button" class="btn-dl" onclick="downloadPdf('Loan_Application.pdf','Loan_Application.pdf')">Download</button>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div class="doc-ic">📋</div>
+          <div class="doc-info">
+            <div class="nm">Document Verification Form</div>
+            <div class="meta">आवेदन एवं दस्तावेज़ सत्यापन</div>
+          </div>
+          <div class="doc-actions">
+            <button type="button" class="btn-prev" onclick="previewPdf('Loan_Application_Document_Verification.pdf','Document Verification')">Preview</button>
+            <button type="button" class="btn-dl" onclick="downloadPdf('Loan_Application_Document_Verification.pdf','Loan_Application_Document_Verification.pdf')">Download</button>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div class="doc-ic">✍️</div>
+          <div class="doc-info">
+            <div class="nm">Signature Verification Form</div>
+            <div class="meta">बैंक हस्ताक्षर सत्यापन</div>
+          </div>
+          <div class="doc-actions">
+            <button type="button" class="btn-prev" onclick="previewPdf('Signature_Verification.pdf','Signature Verification')">Preview</button>
+            <button type="button" class="btn-dl" onclick="downloadPdf('Signature_Verification.pdf','Signature_Verification.pdf')">Download</button>
+          </div>
+        </div>
+      </div>
+
       <div class="card"><h3>Statement</h3>
         <div class="field"><label>From</label><input type="date" id="cu-from"></div>
         <div class="field"><label>To</label><input type="date" id="cu-to"></div>
@@ -262,6 +365,26 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
   <div class="modal-sheet">
     <div class="modal-head"><h2>Loan Details</h2><button type="button" onclick="closeLoanDetail()">✕</button></div>
     <div class="modal-body" id="loan-detail-body"></div>
+  </div>
+</div>
+
+<!-- PDF Preview Modal -->
+<div class="pdf-overlay" id="pdf-overlay" onclick="if(event.target===this)closePdfPreview()">
+  <div class="pdf-sheet">
+    <div class="pdf-head">
+      <h2 id="pdf-title">Document</h2>
+      <div class="pdf-btns">
+        <a id="pdf-dl-link" href="#" download target="_blank" rel="noopener">⬇ Download</a>
+        <button type="button" onclick="closePdfPreview()">✕</button>
+      </div>
+    </div>
+    <div class="pdf-frame-wrap">
+      <iframe id="pdf-frame" title="PDF Preview"></iframe>
+      <div class="pdf-fallback" id="pdf-fallback">
+        <p>Preview is not available on this device/browser.<br>Please download the PDF to view it.</p>
+        <a id="pdf-fallback-dl" class="btn btn-p" href="#" download style="max-width:200px;text-decoration:none">Download PDF</a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -312,6 +435,45 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 </div>
 
 <div class="toast" id="toast"></div>
+
+<!-- Terms & Conditions / Withdrawal Rules Modal -->
+<div class="terms-overlay" id="terms-overlay">
+  <div class="terms-sheet">
+    <div class="terms-head">
+      <div class="terms-icon">📜</div>
+      <div>
+        <h2>सोसायटी निकासी (Withdrawal) नियमावली</h2>
+        <div class="sub">Shree Radha Credit Co-operative Society Ltd.</div>
+      </div>
+    </div>
+    <div class="terms-body" id="terms-body">
+      <div class="rule"><div class="num">1</div><div class="txt"><b>तीन माह का अंतराल:</b> सदस्य द्वारा एक बार राशि Withdrawal करने के बाद अगला Withdrawal कम से कम 3 माह पूर्ण होने के बाद ही किया जा सकेगा।</div></div>
+      <div class="rule"><div class="num">2</div><div class="txt"><b>समय से पहले Withdrawal नहीं:</b> 3 माह की अवधि पूर्ण होने से पहले किसी भी सदस्य को सामान्य परिस्थिति में Withdrawal की अनुमति नहीं होगी।</div></div>
+      <div class="rule"><div class="num">3</div><div class="txt"><b>एक बार में एक Withdrawal:</b> एक सदस्य को निर्धारित अवधि में केवल एक बार Withdrawal करने की अनुमति होगी।</div></div>
+      <div class="rule"><div class="num">4</div><div class="txt"><b>Withdrawal की तिथि:</b> जिस दिन सदस्य का Withdrawal भुगतान किया जाएगा, उसी दिन से अगले 3 माह की अवधि की गणना की जाएगी।</div></div>
+      <div class="rule"><div class="num">5</div><div class="txt"><b>विशेष परिस्थिति:</b> बीमारी, दुर्घटना, पारिवारिक आपातकाल या अन्य अत्यावश्यक परिस्थिति में विशेष Withdrawal की अनुमति केवल प्रबंध समिति की स्वीकृति से दी जा सकेगी।</div></div>
+      <div class="rule"><div class="num">6</div><div class="txt"><b>बकाया राशि होने पर रोक:</b> यदि सदस्य के ऊपर Society का कोई ऋण, किस्त, ब्याज, शुल्क या अन्य बकाया राशि है, तो Society आवश्यकता अनुसार Withdrawal को रोक सकती है अथवा बकाया राशि समायोजित कर सकती है।</div></div>
+      <div class="rule"><div class="num">7</div><div class="txt"><b>दस्तावेज आवश्यक:</b> Withdrawal के समय सदस्य को Society द्वारा निर्धारित Withdrawal Form भरना तथा आवश्यक पहचान/सदस्यता दस्तावेज प्रस्तुत करना अनिवार्य होगा।</div></div>
+      <div class="rule"><div class="num">8</div><div class="txt"><b>खाते की स्थिति:</b> जिस सदस्य का खाता निष्क्रिय, विवादित या किसी जांच के अधीन है, उसका Withdrawal जांच पूरी होने तक रोका जा सकता है।</div></div>
+      <div class="rule"><div class="num">9</div><div class="txt"><b>न्यूनतम शेष राशि:</b> Withdrawal के बाद सदस्य के खाते में Society द्वारा निर्धारित न्यूनतम शेष राशि रहना अनिवार्य होगा।</div></div>
+      <div class="rule"><div class="num">10</div><div class="txt"><b>भुगतान का माध्यम:</b> Withdrawal की राशि Society के नियमों के अनुसार नकद, बैंक खाते में हस्तांतरण अथवा अन्य स्वीकृत माध्यम से दी जाएगी।</div></div>
+      <div class="rule"><div class="num">11</div><div class="txt"><b>भुगतान सीमा:</b> एक दिन में सदस्य द्वारा निकाली जाने वाली अधिकतम राशि Society की निर्धारित सीमा के अनुसार होगी।</div></div>
+      <div class="rule"><div class="num">12</div><div class="txt"><b>गलत जानकारी:</b> गलत जानकारी, फर्जी दस्तावेज या गलत हस्ताक्षर पाए जाने पर Withdrawal आवेदन निरस्त किया जा सकता है और आवश्यक कार्रवाई की जा सकती है।</div></div>
+      <div class="rule"><div class="num">13</div><div class="txt"><b>समिति का अधिकार:</b> Society की वित्तीय स्थिति, उपलब्ध नकदी एवं अन्य आवश्यक परिस्थितियों को देखते हुए प्रबंध समिति Withdrawal की सीमा निर्धारित या अस्थायी रूप से नियंत्रित कर सकती है।</div></div>
+      <div class="rule"><div class="num">14</div><div class="txt"><b>रिकॉर्ड रखना:</b> प्रत्येक Withdrawal का दिनांक, राशि, सदस्य का नाम/क्रमांक, हस्ताक्षर तथा भुगतान का विवरण Society के रिकॉर्ड में दर्ज करना अनिवार्य होगा।</div></div>
+      <div class="rule"><div class="num">15</div><div class="txt"><b>नियमों में परिवर्तन:</b> Society की प्रबंध समिति/सक्षम निकाय आवश्यकता के अनुसार इन नियमों में संशोधन, वृद्धि या परिवर्तन कर सकता है, बशर्ते वह लागू कानून एवं Society के पंजीकृत Bye-Laws के अनुरूप हो।</div></div>
+      <div class="terms-highlight">
+        <div>📌 मुख्य नियम</div>
+        <div class="main-rule">"एक बार Withdrawal करने के बाद अगला सामान्य Withdrawal 3 माह पूर्ण होने के पश्चात ही मान्य होगा।"</div>
+      </div>
+    </div>
+    <div class="terms-foot" id="terms-foot">
+      <label class="chk" id="terms-chk-wrap"><input type="checkbox" id="terms_ACCEPT"><span>मैंने निकासी नियमावली पढ़ ली है और मैं इससे सहमत हूँ।</span></label>
+      <button type="button" class="btn btn-p" id="terms-accept-btn" onclick="acceptTerms()">स्वीकार करें / Accept</button>
+      <button type="button" class="btn btn-o" id="terms-close-btn" style="display:none;margin-top:8px" onclick="closeTerms()">बंद करें</button>
+    </div>
+  </div>
+</div>
 
 <script>
 const GS_URL="https://script.google.com/macros/s/AKfycbyy8Gxh1ltmBIAZhHWVlEAt2GJ3pjw7DHkQ0eBgpA91CEt_h0U4z85K3NwdKCSAe7b9tw/exec";
@@ -366,6 +528,103 @@ function enterApp(showWelcome){
   if(fr){var d=new Date();d.setMonth(d.getMonth()-1);fr.value=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
   cuRefresh();
   if(showWelcome) toast("Welcome "+(session.name||""));
+  // Login ke baad Terms popup (har login par dikhao)
+  setTimeout(function(){ openTerms(true); }, 500);
+}
+
+var TERMS_KEY="srccs_terms_accepted_v1";
+function openTerms(requireAccept){
+  var overlay=document.getElementById("terms-overlay");
+  if(!overlay) return;
+  var acceptBtn=document.getElementById("terms-accept-btn");
+  var closeBtn=document.getElementById("terms-close-btn");
+  var chkWrap=document.getElementById("terms-chk-wrap");
+  var chk=document.getElementById("terms_ACCEPT");
+  if(chk) chk.checked=false;
+  var already=false;
+  try{ already=localStorage.getItem(TERMS_KEY)==="1"; }catch(e){}
+  // Login popup: pehli baar accept, baad me close; menu se hamesha close
+  if(requireAccept && !already){
+    if(acceptBtn) acceptBtn.style.display="flex";
+    if(closeBtn) closeBtn.style.display="none";
+    if(chkWrap) chkWrap.style.display="flex";
+  } else {
+    if(acceptBtn) acceptBtn.style.display="none";
+    if(closeBtn) closeBtn.style.display="flex";
+    if(chkWrap) chkWrap.style.display="none";
+  }
+  overlay.classList.add("show");
+  var body=document.getElementById("terms-body");
+  if(body) body.scrollTop=0;
+}
+function closeTerms(){
+  var o=document.getElementById("terms-overlay");
+  if(o) o.classList.remove("show");
+}
+function acceptTerms(){
+  var chk=document.getElementById("terms_ACCEPT");
+  if(!chk || !chk.checked){
+    toast("कृपया सहमत होने के लिए checkbox चुनें");
+    return;
+  }
+  try{ localStorage.setItem(TERMS_KEY,"1"); }catch(e){}
+  closeTerms();
+  toast("✓ नियमावली स्वीकार की गई");
+}
+
+/* ===== PDF Documents: Preview & Download ===== */
+function resolvePdfUrl(file){
+  // Same folder as this HTML (works for file:// and http hosting)
+  try{
+    var base = (window.location.href || "").replace(/[^\/]*$/,"");
+    return base + file;
+  }catch(e){
+    return file;
+  }
+}
+function previewPdf(file, title){
+  var url = resolvePdfUrl(file);
+  document.getElementById("pdf-title").textContent = title || file;
+  var frame = document.getElementById("pdf-frame");
+  var fallback = document.getElementById("pdf-fallback");
+  var dl = document.getElementById("pdf-dl-link");
+  var fdl = document.getElementById("pdf-fallback-dl");
+  dl.href = url; dl.setAttribute("download", file);
+  fdl.href = url; fdl.setAttribute("download", file);
+  fallback.classList.remove("show");
+  frame.style.display = "block";
+  // Use Google Docs viewer as fallback for mobile browsers that block local PDF iframe
+  var isFile = (window.location.protocol === "file:");
+  if(isFile){
+    // Local file: try direct embed; many mobile browsers won't show it
+    frame.src = url;
+    setTimeout(function(){
+      // If still blank after short wait, show fallback (cannot reliably detect iframe PDF failure)
+      // Keep iframe; user can still Download
+    }, 800);
+  } else {
+    // Hosted: embed PDF directly; if fails user can download
+    frame.src = url + "#toolbar=1&navpanes=0";
+  }
+  document.getElementById("pdf-overlay").classList.add("show");
+}
+function closePdfPreview(){
+  var o = document.getElementById("pdf-overlay");
+  if(o) o.classList.remove("show");
+  var frame = document.getElementById("pdf-frame");
+  if(frame) frame.src = "about:blank";
+}
+function downloadPdf(file, saveAs){
+  var url = resolvePdfUrl(file);
+  var a = document.createElement("a");
+  a.href = url;
+  a.download = saveAs || file;
+  a.target = "_blank";
+  a.rel = "noopener";
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function(){ try{ document.body.removeChild(a); }catch(e){} }, 200);
+  toast("Download started — " + (saveAs || file));
 }
 
 function doCustLogin(){

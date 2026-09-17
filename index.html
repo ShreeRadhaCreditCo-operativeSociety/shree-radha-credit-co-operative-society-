@@ -287,6 +287,14 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
         </div>
       </button>
 
+      <button type="button" class="terms-menu-btn" onclick="openNotice()">
+        <div class="ic-box" style="background:linear-gradient(135deg,#B45309,#D97706)">📢</div>
+        <div>
+          <div class="lbl">सूचना / NOTICE</div>
+          <div class="sub">खाता होल्ड संबंधी सूचना / Account Hold Notice</div>
+        </div>
+      </button>
+
       <div class="card">
         <h3>📄 Documents / दस्तावेज़</h3>
         <div class="doc-item">
@@ -475,6 +483,69 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
   </div>
 </div>
 
+<!-- Notice / Account Hold Modal -->
+<div class="terms-overlay" id="notice-overlay">
+  <div class="terms-sheet">
+    <div class="terms-head" style="background:linear-gradient(135deg,#9A3412,#C2410C,#EA580C)">
+      <div class="terms-icon">📢</div>
+      <div>
+        <h2>सूचना / NOTICE</h2>
+        <div class="sub">Shree Radha Credit Co-operative Society Ltd.</div>
+      </div>
+    </div>
+    <div class="terms-body" id="notice-body">
+      <div style="text-align:center;font-weight:800;font-size:13px;color:#8B1538;margin-bottom:10px;line-height:1.35">
+        श्री राधा क्रेडिट को-ऑपरेटिव सोसायटी लिमिटेड<br>
+        <span style="font-size:12px;color:#6B7280">Shree Radha Credit Co-operative Society Limited</span>
+      </div>
+
+      <div style="text-align:center;font-weight:800;font-size:14px;color:#C2410C;margin-bottom:6px">सूचना / NOTICE</div>
+      <div style="text-align:center;font-size:12px;font-weight:700;color:#9A3412;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #FDBA74">
+        विषय: खाता होल्ड होने के संबंध में सूचना<br>
+        <span style="font-weight:600;color:#6B7280">Subject: Notice regarding Account Hold</span>
+      </div>
+
+      <div class="rule" style="margin-bottom:14px">
+        <div class="num" style="background:#FFEDD5;color:#9A3412">1</div>
+        <div class="txt">
+          <b>हिन्दी:</b> सभी सदस्यों को सूचित किया जाता है कि श्री राधा क्रेडिट को-ऑपरेटिव सोसायटी लिमिटेड का बैंक खाता किसी कारणवश वर्तमान में होल्ड है।
+          <br><br>
+          <b>English:</b> All members are hereby informed that the bank account of Shree Radha Credit Co-operative Society Limited is currently on hold due to certain reasons.
+        </div>
+      </div>
+
+      <div class="rule" style="margin-bottom:14px">
+        <div class="num" style="background:#FFEDD5;color:#9A3412">2</div>
+        <div class="txt">
+          <b>हिन्दी:</b> खाता होल्ड रहने की स्थिति में सोसायटी द्वारा सदस्यों को आवश्यकतानुसार चेक प्रदान किया जा सकता है, लेकिन उक्त चेक का भुगतान/क्लियरेंस बैंक खाते से तब तक संभव नहीं होगा, जब तक खाते से होल्ड नहीं हट जाता।
+          <br><br>
+          <b>English:</b> While the account remains on hold, the Society may issue cheques to members as required; however, payment/clearance of such cheques from the bank account will not be possible until the hold is removed from the account.
+        </div>
+      </div>
+
+      <div class="rule" style="margin-bottom:14px">
+        <div class="num" style="background:#FFEDD5;color:#9A3412">3</div>
+        <div class="txt">
+          <b>हिन्दी:</b> अतः सभी सदस्यों से अनुरोध है कि खाता होल्ड हटने तक सहयोग एवं धैर्य बनाए रखें। खाते से संबंधित किसी भी प्रकार का लेन-देन होल्ड हटने के बाद ही सामान्य रूप से किया जा सकेगा।
+          <br><br>
+          <b>English:</b> Therefore, all members are requested to maintain cooperation and patience until the hold is removed. Any type of transactions related to the account will only be possible in the normal course after the hold is lifted.
+        </div>
+      </div>
+
+      <div class="terms-highlight" style="margin-top:8px">
+        <div style="font-weight:800;color:#C2410C">आदेशानुसार / By Order</div>
+        <div class="main-rule" style="margin-top:6px">
+          श्री राधा क्रेडिट को-ऑपरेटिव सोसायटी लिमिटेड<br>
+          <span style="font-size:12px;font-weight:600">Shree Radha Credit Co-operative Society Limited</span>
+        </div>
+      </div>
+    </div>
+    <div class="terms-foot">
+      <button type="button" class="btn btn-p" onclick="closeNotice()">बंद करें / Close</button>
+    </div>
+  </div>
+</div>
+
 <script>
 const GS_URL="https://script.google.com/macros/s/AKfycbyy8Gxh1ltmBIAZhHWVlEAt2GJ3pjw7DHkQ0eBgpA91CEt_h0U4z85K3NwdKCSAe7b9tw/exec";
 let session={customerId:"",accountNo:"",name:"",mobile:"",username:"",email:""};
@@ -570,6 +641,18 @@ function acceptTerms(){
   try{ localStorage.setItem(TERMS_KEY,"1"); }catch(e){}
   closeTerms();
   toast("✓ नियमावली स्वीकार की गई");
+}
+
+function openNotice(){
+  var overlay=document.getElementById("notice-overlay");
+  if(!overlay) return;
+  overlay.classList.add("show");
+  var body=document.getElementById("notice-body");
+  if(body) body.scrollTop=0;
+}
+function closeNotice(){
+  var o=document.getElementById("notice-overlay");
+  if(o) o.classList.remove("show");
 }
 
 /* ===== PDF Documents: Preview & Download ===== */
